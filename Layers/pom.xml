@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>nl.inholland</groupId>
-    <artifactId>layers</artifactId>
+    <artifactId>HartfalenApp</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
@@ -27,5 +27,9 @@
             <version>${dropwizard.version}</version>
         </dependency>
     </dependencies>
+<<<<<<< HEAD
     <name>zorgVoorJeHartApi</name>
+=======
+    <name>HartfalenApp</name>
+>>>>>>> 8eea77005c319c6963c956db3695b6708c68cc56
 </project>
