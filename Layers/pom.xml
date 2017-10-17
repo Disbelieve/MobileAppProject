@@ -27,5 +27,5 @@
             <version>${dropwizard.version}</version>
         </dependency>
     </dependencies>
-    <name>Layers</name>
+    <name>zorgVoorJeHartApi</name>
 </project>
