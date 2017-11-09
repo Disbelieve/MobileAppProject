@@ -15,7 +15,7 @@ import nl.inholland.layers.persistence.ConsultantDAO;
 public class ConsultantService extends BaseService {
 
     private final ConsultantDAO consultantDAO;
-    private final ResultService resultService = new ResultService();
+
     @Inject
     public ConsultantService(ConsultantDAO consultantDAO){
         this.consultantDAO = consultantDAO;
@@ -26,15 +26,14 @@ public class ConsultantService extends BaseService {
         List<Consultant> consultants = consultantDAO.getAll();
         
         if (consultants.isEmpty())
-            resultService.requireResult(consultants, "geen consulenten");
+            requireResult(consultants, "geen consulenten");
 
         return consultants;
     }
 
     public Consultant get(String consultantId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+        return null;
 
+    }
     
 }

@@ -17,7 +17,6 @@ public class UserService extends BaseService
 {
 
     private final UserDAO userDAO;
-    private final ResultService resultService = new ResultService();
     private ObjectId objectId;
 
     @Inject
@@ -55,7 +54,7 @@ public class UserService extends BaseService
             userDAO.update(query, ops);
         }
         else
-            resultService.noValidObjectId("Gebruiker is niet geldig");
+            noValidObjectId("Gebruiker is niet geldig");
     }
     
 }

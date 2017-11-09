@@ -13,7 +13,6 @@ import nl.inholland.layers.persistence.MessageDAO;
 public class MessageService extends BaseService {
 
     private final MessageDAO messageDAO;
-    private final ResultService resultService = new ResultService();
     @Inject
     public MessageService(MessageDAO messageDAO){
         this.messageDAO = messageDAO;
@@ -30,7 +29,7 @@ public class MessageService extends BaseService {
         List<Message> messages = messageDAO.getAll();
         
         if (messages.isEmpty())
-            resultService.requireResult(messages, "Geen berichten gevonden");
+            requireResult(messages, "Geen berichten gevonden");
 
         return messages;
     }     

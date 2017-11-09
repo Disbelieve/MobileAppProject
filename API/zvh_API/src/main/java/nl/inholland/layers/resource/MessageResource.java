@@ -31,22 +31,19 @@ public class MessageResource extends BaseResource{
         this.messageService = messageService;
         this.messagePresenter = messagePresenter;
     }
-
     @GET
     public List<Message> getAll(){
         
-        List<Message> messages = messageService.getAll();
-        
-        return messagePresenter.present(messages);
-      
-    }
+        List<Message> messages = messageService.getAll();        
+        return messagePresenter.present(messages);    
+    }   
     
     @POST
     public void create(Message message)
     {
        messageService.create(message);
-
     }
+    
     //get by Id
     @GET
     @Path("/{messageId}")
@@ -55,6 +52,5 @@ public class MessageResource extends BaseResource{
         
         return messagePresenter.present(message);
     }
-
 
 }
