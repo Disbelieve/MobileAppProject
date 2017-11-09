@@ -15,7 +15,7 @@ import org.mongodb.morphia.query.Query;
 public class UserDAO extends BaseDAO<User>
 {
     private final Datastore datastore;
-    
+    private ObjectId objectId;
     @Inject
     public UserDAO(Datastore ds)
     {
@@ -25,13 +25,13 @@ public class UserDAO extends BaseDAO<User>
     
     @Override
     public List<User> getAll() {
-       List<User> users = datastore.createQuery(User.class).asList();
-       
+       List<User> users = datastore.createQuery(User.class).asList();       
        return users;
     }
 
     
     public User getById(ObjectId userId){
+        
         Query<User> query = createQuery().field("_id").equal(userId);
         return findOne(query);
     }

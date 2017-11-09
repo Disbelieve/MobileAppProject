@@ -11,17 +11,22 @@ import org.mongodb.morphia.annotations.Reference;
 @Entity(value = "users")
 public class User extends EntityModel 
 {
-    private String email;   
+    private String emailAdress;   
     private String firstname;
     private String lastname;
     
-    @Reference
-    private Consultant consultant;
+    @Reference(idOnly = true)
+    private Consultant consultantId;
+    
     private String dateOfBirth;
-    private String gender;
+    private int gender;
     private int length;
     private int weight;
- 
+    private String passwordHash;
+    private String authToken;
+    private String resetPasswordToken;
+    private String passwordTokenExpiry;
+    
     public int getweight()
     {
         return weight;
@@ -42,11 +47,11 @@ public class User extends EntityModel
     
     public Consultant getConsultant()
     {
-        return consultant;
+        return consultantId;
     }
-    public void setConsultant(Consultant consultant)
+    public void setConsultant(Consultant consultantId)
     {
-        this.consultant = consultant;
+        this.consultantId = consultantId;
     }
     
     public String getdateOfBirth()
@@ -60,12 +65,12 @@ public class User extends EntityModel
     
     public String getEmail()
     {
-        return email;
+        return emailAdress;
     }
 
     public void setEmail(String email)
     {
-        this.email = email;
+        this.emailAdress = email;
     }
     
     public String getFirstName()
@@ -77,6 +82,43 @@ public class User extends EntityModel
     {
         this.firstname = firstname;
     }
+    public String getPasswordHash()
+    {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash)
+    {
+        this.passwordHash = passwordHash;
+    }
+        public String getResetPasswordToken()
+    {
+        return resetPasswordToken;
+    }
+
+    public void setresetPasswordTokenh(String resetPasswordToken)
+    {
+        this.resetPasswordToken = resetPasswordToken;
+    }
+    
+    public String getPasswordTokenExpiry()
+    {
+        return passwordTokenExpiry;
+    }
+
+    public void setPasswordTokenExpiry(String passwordTokenExpiry)
+    {
+        this.passwordTokenExpiry = passwordTokenExpiry;
+    }
+    public String getAuthToken()
+    {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken)
+    {
+        this.authToken = authToken;
+    }
     public String getLastName()
     {
         return lastname;
@@ -87,18 +129,14 @@ public class User extends EntityModel
         this.lastname = lastname;
     }
     
-    public String getGender()
+    public int getGender()
     {
         return gender;
     }
     
-    public void setGender(String gender)
+    public void setGender(int gender)
     {
         this.gender = gender;
-    }
-
-    public Object getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

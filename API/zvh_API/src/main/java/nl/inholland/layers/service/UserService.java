@@ -18,16 +18,22 @@ public class UserService extends BaseService
 
     private final UserDAO userDAO;
     private final ResultService resultService = new ResultService();
-    
+    private ObjectId objectId;
+
     @Inject
     public UserService(UserDAO userDAO){
         this.userDAO = userDAO;
     }
     
-    public User get(ObjectId userId)
-    {
-        User user = userDAO.getById(userId);
-        return user;
+    public User get(String userId)
+    {       
+        User user = null;
+        if(ObjectId.isValid(userId)){
+             objectId = new ObjectId(userId);
+             user = userDAO.getById(objectId);
+          
+        }
+          return user;
     }
 
     public void create(User user){
@@ -38,14 +44,10 @@ public class UserService extends BaseService
     {
         List<User> users = userDAO.getAll();
         
-        if (users.isEmpty())
-            resultService.requireResult(users, "geen gebruikers");
-
         return users;
     }
 
     public void update(String userId, User user){
-        ObjectId objectId;
         if(ObjectId.isValid(userId)){
             objectId = new ObjectId(userId);
             Query query = userDAO.createQuery().field("_id").equal(objectId);

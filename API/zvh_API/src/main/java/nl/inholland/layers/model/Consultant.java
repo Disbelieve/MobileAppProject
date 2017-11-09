@@ -12,7 +12,7 @@ public class Consultant extends EntityModel
 {
     private String firstname;
     private String lastname;
-    private String gender;
+    private String emailAdress;
         
 
    public String getFirstname()
@@ -35,13 +35,13 @@ public class Consultant extends EntityModel
         this.lastname = lastname;
     }
 
-    public String getGender()
+    public String getEmailAdress()
     {
-        return gender;
+        return emailAdress;
     }
 
-    public void setGender(String gender)
+    public void setGender(String emailAdress)
     {
-        this.gender = gender;
+        this.emailAdress = emailAdress;
     }  
 }

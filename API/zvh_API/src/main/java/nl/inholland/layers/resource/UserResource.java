@@ -17,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 import nl.inholland.layers.presentation.model.UserPresenter;
 import nl.inholland.layers.service.UserService;
 import nl.inholland.layers.model.User;
-import org.bson.types.ObjectId;
 
 
 @Path("/users")
@@ -37,7 +36,7 @@ public class UserResource extends BaseResource
     
     @GET
     @Path("/{userId}")
-    public User get( @PathParam("userId") ObjectId userId){
+    public User get( @PathParam("userId") String userId){
         User user = userService.get(userId);
         
         return userPresenter.present(user);

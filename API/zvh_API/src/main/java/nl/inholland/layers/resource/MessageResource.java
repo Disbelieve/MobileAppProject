@@ -31,8 +31,7 @@ public class MessageResource extends BaseResource{
         this.messageService = messageService;
         this.messagePresenter = messagePresenter;
     }
-    
-    //get all
+
     @GET
     public List<Message> getAll(){
         
