@@ -6,9 +6,14 @@
 package nl.inholland.layers.presentation.model;
 
 import javax.inject.Singleton;
+import nl.inholland.layers.model.EntityModel;
 
 @Singleton
-public class BasePresenter
+public abstract class BasePresenter<T extends EntityModel> 
 {
-    
+    public T present(T obj)
+    {
+        return obj;
+    }
+
 }

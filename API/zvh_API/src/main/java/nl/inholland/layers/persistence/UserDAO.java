@@ -28,11 +28,10 @@ public class UserDAO extends BaseDAO<User>
        List<User> users = datastore.createQuery(User.class).asList();       
        return users;
     }
-
-    
+  
     public User getById(ObjectId userId){
         
-        Query<User> query = createQuery().field("_id").equal(userId);
+        Query<User> query = datastore.createQuery(User.class).field("_id").equal(userId);
         return findOne(query);
     }
 

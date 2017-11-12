@@ -44,7 +44,6 @@ public class MessageResource extends BaseResource{
        messageService.create(message);
     }
     
-    //get by Id
     @GET
     @Path("/{messageId}")
     public Message get( @PathParam("messageId") String messageId){

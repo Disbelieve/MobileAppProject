@@ -23,7 +23,7 @@ public class MessageDAO extends BaseDAO<Message>
     }    
 
     public List<Message> getByUser(User user){        
-        List<Message> messages = createQuery().field("user").equal(user).asList();
+        List<Message> messages = datastore.createQuery(Message.class).field("user").equal(user).asList();
         return messages;
     }
 }

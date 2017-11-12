@@ -21,7 +21,9 @@ public class ConsultantService extends BaseService {
         this.consultantDAO = consultantDAO;
     }
     
-        public List<Consultant> getAll()
+    
+    
+    public List<Consultant> getAll()
     {
         List<Consultant> consultants = consultantDAO.getAll();
         

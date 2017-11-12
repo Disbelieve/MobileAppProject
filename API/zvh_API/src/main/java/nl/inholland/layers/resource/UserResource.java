@@ -48,8 +48,7 @@ public class UserResource extends BaseResource
     
              users = userService.getAll();
             
-            return userPresenter.present(users);
-           
+            return userPresenter.present(users);          
     }    
     @POST
     public void create(User user){

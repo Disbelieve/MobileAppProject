@@ -7,6 +7,7 @@ package nl.inholland.layers.service;
 
 import java.util.List;
 import javax.inject.Inject;
+import javax.ws.rs.NotFoundException;
 import nl.inholland.layers.model.Message;
 import nl.inholland.layers.persistence.MessageDAO;
 
@@ -26,18 +27,26 @@ public class MessageService extends BaseService {
     
     public List<Message> getAll()
     {
-        List<Message> messages = messageDAO.getAll();
-        
-        if (messages.isEmpty())
-            requireResult(messages, "Geen berichten gevonden");
-
+        List<Message> messages = null;
+        try{
+         messages = messageDAO.getAll();       
+         
+        }catch(NotFoundException e)
+        {
+            e.getMessage();
+        }
         return messages;
     }     
         
 
     public void create(Message message)
-    {
+    {       
+        try{
         messageDAO.create(message);
+        }catch(Exception e){
+           
+            e.getMessage();
+        }
     }
 
 }
