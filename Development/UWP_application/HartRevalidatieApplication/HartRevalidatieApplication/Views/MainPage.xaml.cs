@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HartRevalidatieApplication.ViewModels;
+using HartRevalidatieApplication.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,6 +28,15 @@ namespace HartRevalidatieApplication
         public MainPage()
         {
             this.InitializeComponent();
+            DataContext = MainPageViewModel.SingleInstance;
+        }
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(LoginPage));
+        }
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(RegisterPage));
         }
     }
 }

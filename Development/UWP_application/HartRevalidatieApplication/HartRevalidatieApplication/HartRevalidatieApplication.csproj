@@ -135,6 +135,12 @@
     <None Include="HartRevalidatieApplication_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\home_bg.jpg" />
+    <Content Include="Assets\Logo Antonius Zorggroep.png" />
+    <Content Include="Assets\Logo_zorgvoormijnhart.png" />
+    <Content Include="Assets\meting_img1.PNG" />
+    <Content Include="Assets\meting_img2.PNG" />
+    <Content Include="Assets\MainPage_img.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

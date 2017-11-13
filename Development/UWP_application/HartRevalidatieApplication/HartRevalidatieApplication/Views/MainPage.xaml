@@ -8,6 +8,32 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="7.5*"/>
+        </Grid.RowDefinitions>
 
+        <Image Source="ms-appx:///Assets/Logo_zorgvoormijnhart.png" 
+               Stretch="Fill" Grid.Row="1"
+               HorizontalAlignment="Center"/>
+        
+        <Image Source="ms-appx:///Assets/MainPage_img.jpg" 
+               Stretch="UniformToFill" Grid.Row="2"
+               HorizontalAlignment="Right"/>
+        
+        <Border Grid.Row="0" Background="LightSeaGreen">
+            <TextBlock Text="Inloggen / Registreren" 
+                       Foreground="White"
+                       VerticalAlignment="Center"
+                       Margin="50 0 0 0"/>
+        </Border>
+
+        <Button Margin="100 0 100 0" Background="Red"
+                Foreground="White" Grid.Row="2" Click="Login_Click" 
+                HorizontalAlignment="Stretch">Inloggen</Button>
+        <Button Margin="100 100 100 0" Background="LightSeaGreen"
+                Foreground="White" Grid.Row="2" Click="Register_Click"
+                HorizontalAlignment="Stretch">Account aanmaken</Button>
     </Grid>
 </Page>
