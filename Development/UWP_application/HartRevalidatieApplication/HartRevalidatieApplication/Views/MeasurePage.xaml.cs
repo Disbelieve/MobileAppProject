@@ -20,9 +20,9 @@ namespace HartRevalidatieApplication.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MeasureNavPage : Page
+    public sealed partial class MeasurePage : Page
     {
-        public MeasureNavPage()
+        public MeasurePage()
         {
             this.InitializeComponent();
         }

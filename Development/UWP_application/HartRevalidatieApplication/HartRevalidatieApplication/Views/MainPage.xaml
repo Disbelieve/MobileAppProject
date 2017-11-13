@@ -21,19 +21,24 @@
         <Image Source="ms-appx:///Assets/MainPage_img.jpg" 
                Stretch="UniformToFill" Grid.Row="2"
                HorizontalAlignment="Right"/>
-        
-        <Border Grid.Row="0" Background="LightSeaGreen">
+
+        <Border Grid.Row="0" Background="#50D6CF">
             <TextBlock Text="Inloggen / Registreren" 
                        Foreground="White"
                        VerticalAlignment="Center"
-                       Margin="50 0 0 0"/>
+                       Margin="50 0 0 0"
+                       FontWeight="SemiBold"
+                       FontSize="20"
+                       FontFamily="Segoe UI"/>
         </Border>
 
-        <Button Margin="100 0 100 0" Background="Red"
+        <Button Margin="80 0 80 0" Background="#E84A4A"
                 Foreground="White" Grid.Row="2" Click="Login_Click" 
+                FontFamily="Segoe UI" FontSize="17"
                 HorizontalAlignment="Stretch">Inloggen</Button>
-        <Button Margin="100 100 100 0" Background="LightSeaGreen"
+        <Button Margin="80 100 80 0" Background="#50D6CF"
                 Foreground="White" Grid.Row="2" Click="Register_Click"
+                FontFamily="Segoe UI" FontSize="17"
                 HorizontalAlignment="Stretch">Account aanmaken</Button>
     </Grid>
 </Page>
