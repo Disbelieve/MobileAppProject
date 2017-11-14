@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace HartRevalidatieApplication.ViewModels
 {
-    public sealed class RegisterPageViewModel
+    public sealed class RegisterPage3ViewModel
     {
-        public static RegisterPageViewModel SingleInstance { get; } = new RegisterPageViewModel();
+        public static RegisterPage3ViewModel SingleInstance { get; } = new RegisterPage3ViewModel();
 
-        public RegisterPageViewModel()
+        public RegisterPage3ViewModel()
         {
 
         }

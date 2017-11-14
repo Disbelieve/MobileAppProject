@@ -102,6 +102,8 @@
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MeasurePageViewModel.cs" />
+    <Compile Include="ViewModels\RegisterPage2ViewModel.cs" />
+    <Compile Include="ViewModels\RegisterPage3ViewModel.cs" />
     <Compile Include="ViewModels\RegisterPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="Views\ContactPage.xaml.cs">
@@ -123,6 +125,12 @@
     </Compile>
     <Compile Include="Views\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterPage2.xaml.cs">
+      <DependentUpon>RegisterPage2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterPage3.xaml.cs">
+      <DependentUpon>RegisterPage3.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -176,6 +184,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegisterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterPage2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterPage3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

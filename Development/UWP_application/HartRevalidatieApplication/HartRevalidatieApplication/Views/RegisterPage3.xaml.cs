@@ -21,17 +21,17 @@ namespace HartRevalidatieApplication.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RegisterPage : Page
+    public sealed partial class RegisterPage3 : Page
     {
-        public RegisterPage()
+        public RegisterPage3()
         {
             this.InitializeComponent();
-            DataContext = RegisterPageViewModel.SingleInstance;
+            DataContext = RegisterPage3ViewModel.SingleInstance;
         }
 
-        private void Next_Click(object sender, RoutedEventArgs e)
+        private void Login_Click(object sender, RoutedEventArgs e)
         {
-            ((Frame)Window.Current.Content).Navigate(typeof(RegisterPage2));
+            ((Frame)Window.Current.Content).Navigate(typeof(LoginPage));
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
