@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HartRevalidatieApplication.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,19 @@ namespace HartRevalidatieApplication.Views
         public MeasurePage()
         {
             this.InitializeComponent();
+            DataContext = MeasurePageViewModel.SingleInstance;
+        }
+        private void Diary_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(DiaryPage));
+        }
+        private void Contact_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(ContactPage));
+        }
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(SettingsPage));
         }
     }
 }

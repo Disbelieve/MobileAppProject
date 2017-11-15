@@ -23,18 +23,16 @@
         </Border>
 
         <StackPanel Grid.Row="1" Margin="30">
-            <TextBox Text="Bedankt voor het registreren!" FontSize="17"
+            <TextBlock Text="Bedankt voor het registreren!" FontSize="17"
                      HorizontalAlignment="Center"
-                     FontWeight="SemiBold" BorderBrush="Transparent"/>
-            <TextBox Text="U heeft een e-mail ontvangen op:" 
-                     HorizontalAlignment="Center" Margin="0 20 0 0"
-                     BorderBrush="Transparent"/>
-            <TextBox Text="[EMAIL]" 
+                     FontWeight="SemiBold"/>
+            <TextBlock Text="U heeft een e-mail ontvangen op:" 
+                     HorizontalAlignment="Center" Margin="0 20 0 0"/>
+            <TextBlock Text="[EMAIL]" 
                      HorizontalAlignment="Center"
-                     FontWeight="SemiBold" BorderBrush="Transparent"/>
-            <TextBox Text="Hiermee kunt u uw account activeren." 
-                     HorizontalAlignment="Center" Margin="0 20 0 0"
-                     BorderBrush="Transparent"/>
+                     FontWeight="SemiBold"/>
+            <TextBlock Text="Hiermee kunt u uw account activeren." 
+                     HorizontalAlignment="Center" Margin="0 20 0 0"/>
 
             <Button Margin="50 30 50 0" Background="#E84A4A" FontSize="17"
                 Foreground="White" Grid.Row="2" Click="Login_Click" 
