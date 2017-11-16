@@ -1,4 +1,7 @@
-﻿using System;
+﻿using HartRevalidatieApplication.Helpers;
+using HartRevalidatieApplication.Models;
+using HartRevalidatieApplication.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +28,26 @@ namespace HartRevalidatieApplication.Views
         public DiaryPage()
         {
             this.InitializeComponent();
+            DataContext = DiaryPageViewModel.SingleInstance;
+        }
+
+        private void NavigateToDiaryEntryPage(object sender, ItemClickEventArgs e)
+        {
+            DiaryEntry dE = e.ClickedItem as DiaryEntry;
+            ((Frame)Window.Current.Content).Navigate(typeof(DiaryEntryPage), dE);
+        }
+
+        private void Measure_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalClickMethods.Measure_Click(sender, e);
+        }
+        private void Contact_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalClickMethods.Contact_Click(sender, e);
+        }
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalClickMethods.Settings_Click(sender, e);
         }
     }
 }

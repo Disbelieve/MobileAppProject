@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace HartRevalidatieApplication.ViewModels
 {
-    class SettingsPageViewModel
+    public sealed class SettingsPageViewModel
     {
+        public static SettingsPageViewModel SingleInstance { get; } = new SettingsPageViewModel();
+
+        public SettingsPageViewModel() { }
     }
 }

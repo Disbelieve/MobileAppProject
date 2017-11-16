@@ -1,4 +1,5 @@
-﻿using HartRevalidatieApplication.ViewModels;
+﻿using HartRevalidatieApplication.Helpers;
+using HartRevalidatieApplication.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,9 +37,7 @@ namespace HartRevalidatieApplication.Views
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame.CanGoBack)
-                rootFrame.GoBack();
+            GlobalClickMethods.Back_Click(sender, e);
         }
     }
 }

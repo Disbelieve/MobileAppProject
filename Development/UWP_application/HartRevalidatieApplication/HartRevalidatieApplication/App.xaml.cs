@@ -98,7 +98,6 @@ namespace HartRevalidatieApplication
             deferral.Complete();
         }
 
-
         protected async void OnNavigatedTo(NavigationEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;

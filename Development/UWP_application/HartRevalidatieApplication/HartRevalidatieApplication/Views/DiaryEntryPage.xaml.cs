@@ -1,4 +1,5 @@
 ﻿using HartRevalidatieApplication.Helpers;
+using HartRevalidatieApplication.Models;
 using HartRevalidatieApplication.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,12 +23,12 @@ namespace HartRevalidatieApplication.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SettingsPage : Page
+    public sealed partial class DiaryEntryPage : Page
     {
-        public SettingsPage()
+        public DiaryEntryPage()
         {
             this.InitializeComponent();
-            DataContext = SettingsPageViewModel.SingleInstance;
+            DataContext = DiaryEntryPageViewModel.SingleInstance;
         }
 
         private void Measure_Click(object sender, RoutedEventArgs e)
@@ -41,6 +42,21 @@ namespace HartRevalidatieApplication.Views
         private void Contact_Click(object sender, RoutedEventArgs e)
         {
             GlobalClickMethods.Contact_Click(sender, e);
+        }
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalClickMethods.Settings_Click(sender, e);
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalClickMethods.Back_Click(sender, e);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            DiaryEntryPageViewModel.SingleInstance.diaryEntry = e.Parameter as DiaryEntry;
+            base.OnNavigatedTo(e);
         }
     }
 }

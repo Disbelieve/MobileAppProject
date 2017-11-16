@@ -96,8 +96,11 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ObservableIncrementalLoadingCollection.cs" />
+    <Compile Include="Helpers\GlobalClickMethods.cs" />
+    <Compile Include="Models\DiaryEntry.cs" />
     <Compile Include="Models\IncrementalLoadingResponse.cs" />
     <Compile Include="ViewModels\ContactPageViewModel.cs" />
+    <Compile Include="ViewModels\DiaryEntryPageViewModel.cs" />
     <Compile Include="ViewModels\DiaryPageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
@@ -108,6 +111,9 @@
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="Views\ContactPage.xaml.cs">
       <DependentUpon>ContactPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DiaryEntryPage.xaml.cs">
+      <DependentUpon>DiaryEntryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DiaryPage.xaml.cs">
       <DependentUpon>DiaryPage.xaml</DependentUpon>
@@ -164,6 +170,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Views\ContactPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DiaryEntryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
