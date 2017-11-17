@@ -28,8 +28,7 @@
                 Foreground="White" Margin="0 2.5 0 0"></Button>
 
         <StackPanel Grid.Row="1" Margin="30">
-            <TextBox PlaceholderText="Vul uw email in"
-                     Background="#EEEEEE"/>
+            <TextBox PlaceholderText="Vul uw email in"/>
             <PasswordBox PlaceholderText="Vul uw wachtwoord in"
                      Background="#EEEEEE" Margin="0 20 0 0"/>
             <PasswordBox PlaceholderText="Herhaal uw wachtwoord"

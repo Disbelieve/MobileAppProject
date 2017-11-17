@@ -95,10 +95,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DateFormatConverter.cs" />
     <Compile Include="Helpers\ObservableIncrementalLoadingCollection.cs" />
     <Compile Include="Helpers\GlobalClickMethods.cs" />
-    <Compile Include="Models\DiaryEntry.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Measurement.cs" />
     <Compile Include="Models\IncrementalLoadingResponse.cs" />
+    <Compile Include="Models\Settings.cs" />
     <Compile Include="ViewModels\ContactPageViewModel.cs" />
     <Compile Include="ViewModels\DiaryEntryPageViewModel.cs" />
     <Compile Include="ViewModels\DiaryPageViewModel.cs" />

@@ -11,8 +11,18 @@ namespace HartRevalidatieApplication.ViewModels
     public sealed class DiaryPageViewModel
     {
         public static DiaryPageViewModel SingleInstance { get; } = new DiaryPageViewModel();
-        public ObservableIncrementalLoadingCollection<DiaryEntry> diary { get; set; } = new ObservableIncrementalLoadingCollection<DiaryEntry>();
+        public ObservableIncrementalLoadingCollection<Measurement> diary { get; set; } = new ObservableIncrementalLoadingCollection<Measurement>();
 
-        public DiaryPageViewModel() { }
+        public DiaryPageViewModel()
+        {
+            diary.Add(new Measurement());
+            diary.Add(new Measurement());
+            diary.Add(new Measurement());
+            diary.Add(new Measurement());
+            diary.Add(new Measurement());
+            diary.Add(new Measurement());
+            diary.Add(new Measurement());
+            diary.Add(new Measurement());
+        }
     }
 }

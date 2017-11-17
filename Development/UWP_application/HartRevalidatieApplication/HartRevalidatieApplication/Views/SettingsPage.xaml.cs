@@ -1,7 +1,9 @@
 ﻿using HartRevalidatieApplication.Helpers;
+using HartRevalidatieApplication.Models;
 using HartRevalidatieApplication.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -28,6 +30,31 @@ namespace HartRevalidatieApplication.Views
         {
             this.InitializeComponent();
             DataContext = SettingsPageViewModel.SingleInstance;
+
+            automaticLogin.IsOn = (bool)Settings.localSettings.Values["automaticLogin"];
+            largeFonts.IsOn = (bool)Settings.localSettings.Values["largeFonts"];
+            dailyReminders.IsOn = (bool)Settings.localSettings.Values["dailyReminders"];
+            sendMeasurements.IsOn = (bool)Settings.localSettings.Values["sendMeasurements"];
+        }
+
+        private void Toggle_AutomaticLogin(object sender, RoutedEventArgs e)
+        {
+            Settings.SetAutomaticLogin(automaticLogin.IsOn);
+        }
+
+        private void Toggle_LargeFonts(object sender, RoutedEventArgs e)
+        {
+            Settings.SetLargeFonts(largeFonts.IsOn);
+        }
+
+        private void Toggle_DailyReminders(object sender, RoutedEventArgs e)
+        {
+            Settings.SetDailyReminders(dailyReminders.IsOn);
+        }
+
+        private void Toggle_SendMeasurements(object sender, RoutedEventArgs e)
+        {
+            Settings.SetSendMeasurements(sendMeasurements.IsOn);
         }
 
         private void Measure_Click(object sender, RoutedEventArgs e)
@@ -41,6 +68,50 @@ namespace HartRevalidatieApplication.Views
         private void Contact_Click(object sender, RoutedEventArgs e)
         {
             GlobalClickMethods.Contact_Click(sender, e);
+        }
+
+        private void ChangeDataSetting_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePopUpStatus(ChangeDataPopup);
+        }
+
+        private void SaveSettings_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePopUpStatus(ChangeDataPopup);
+        }
+
+        private void CancelChangeData_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePopUpStatus(ChangeDataPopup);
+        }
+
+        private void LogoutSetting_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePopUpStatus(LogoutPopup);
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(MainPage));
+        }
+
+        private void CancelLogout_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePopUpStatus(LogoutPopup);
+        }
+
+        private void ChangePopUpStatus(Grid popup)
+        {
+            if (popup.Visibility == Visibility.Collapsed)
+            {
+                popup.Visibility = Visibility.Visible;
+                PopupSettingsBackground.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                popup.Visibility = Visibility.Collapsed;
+                PopupSettingsBackground.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

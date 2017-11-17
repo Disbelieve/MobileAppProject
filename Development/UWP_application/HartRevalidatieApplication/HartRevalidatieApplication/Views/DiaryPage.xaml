@@ -23,16 +23,52 @@
                        FontWeight="SemiBold"
                        FontSize="20"/>
         </Border>
+
         
         <ListView Grid.Row="2" ItemsSource="{Binding diary}"
-                  ItemClick="NavigateToDiaryEntryPage">
+                  ItemClick="NavigateToDiaryEntryPage" IsItemClickEnabled="True">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="0,0,0,10">
-                        <RelativePanel>
-                            <Grid>
-                            </Grid>
-                        </RelativePanel>
+                    <Border Margin="0 5 0 5">
+                        <Grid Margin="10 0 10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="9.5*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Rectangle Grid.RowSpan="3" Grid.ColumnSpan="4"
+                                           Fill="#E7F6EC"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" FontSize="14"
+                                           Text="Bloeddruk" FontWeight="SemiBold"
+                                           Margin="0 5 0 0"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="14">
+                                <Run Text="Bovendruk:"/>
+                                <Run Text="{Binding upperPressure}"/>
+                                <Run Text=" Onderdruk:"/>
+                                <Run Text="{Binding underPressure}"/>
+                            </TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="14"
+                                           Text="{Binding feedback}"
+                                           Margin="0 0 0 5"/>
+                            <TextBlock Grid.RowSpan="3" Grid.Column="2" FontSize="11"
+                                           Text="{Binding date, Converter={StaticResource DateToStringFormatConverter}}" FontWeight="SemiBold"
+                                           HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Grid.RowSpan="3" Grid.Column="3" FontSize="11" Padding="0"
+                                        FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center"
+                                        Text="&#xE76C;" HorizontalAlignment="Center"/>
+                        </Grid>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>

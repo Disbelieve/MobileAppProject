@@ -58,7 +58,7 @@
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center"
                            Grid.Row="1" Grid.Column="1" Margin="0 0 10 0"  
                            Text="Uw lengte en gewicht aanpassen"/>
-                <Button Grid.Row="1" Grid.Column="2"
+                <Button Grid.Row="1" Grid.Column="2" Click="ChangeDataSetting_Click"
                         FontFamily="Segoe MDL2 Assets" Content="&#xE76C;"
                         Background="#F8F8F8" FontSize="20"/>
 
@@ -68,18 +68,19 @@
                            Grid.Row="2" Grid.Column="1" Margin="0 0 10 0" 
                            Text="Automatisch inloggen"/>
                 <ToggleSwitch Grid.Row="2" Grid.Column="2" 
-                              OffContent="" OnContent=""/>
+                              OffContent="" OnContent=""
+                              Name="automaticLogin" Toggled="Toggle_AutomaticLogin"/>
 
                 <Rectangle Margin="0 5 0 0" Grid.Row="3" Grid.ColumnSpan="3" 
                            Fill="#F8F8F8" Stroke="#A6A6A6" MinHeight="90"/>
                 <TextBlock TextWrapping="Wrap" VerticalAlignment="Center"
                            Grid.Row="3" Grid.Column="1" Margin="0 0 10 0" 
                            Text="Uitloggen"/>
-                <Button Grid.Row="3" Grid.Column="2"
+                <Button Grid.Row="3" Grid.Column="2" Click="LogoutSetting_Click"
                         FontFamily="Segoe MDL2 Assets" Content="&#xE76C;"
                         Background="#F8F8F8" FontSize="20"/>
-                
-                
+
+
                 <Rectangle Grid.Row="4" Grid.ColumnSpan="3" 
                            Fill="#E0E0E0"/>
                 <TextBlock Grid.Row="4" Grid.Column="0"
@@ -96,7 +97,8 @@
                            Grid.Row="5" Grid.Column="1" Margin="0 0 10 0"  
                            Text="Grotere tekst"/>
                 <ToggleSwitch Grid.Row="5" Grid.Column="2" 
-                              OffContent="" OnContent=""/>
+                              OffContent="" OnContent="" 
+                              Name="largeFonts" Toggled="Toggle_LargeFonts"/>
 
                 <Rectangle Margin="0 5 0 0" Grid.Row="6" Grid.ColumnSpan="3" 
                            Fill="#F8F8F8" Stroke="#A6A6A6" MinHeight="90"/>
@@ -104,7 +106,8 @@
                            Grid.Row="6" Grid.Column="1" Margin="0 0 10 0" 
                            Text="Dagelijkse herinneringen voor uw metingen"/>
                 <ToggleSwitch Grid.Row="6" Grid.Column="2" 
-                              OffContent="" OnContent=""/>
+                              OffContent="" OnContent="" 
+                              Name="dailyReminders" Toggled="Toggle_DailyReminders"/>
 
                 <Rectangle Margin="0 5 0 0" Grid.Row="7" Grid.ColumnSpan="3" 
                            Fill="#F8F8F8" Stroke="#A6A6A6" MinHeight="90"/>
@@ -112,9 +115,10 @@
                            Grid.Row="7" Grid.Column="1" Margin="0 0 10 0" 
                            Text="Wekelijks uw metingen opsturen naar uw consulent"/>
                 <ToggleSwitch Grid.Row="7" Grid.Column="2" 
-                              OffContent="" OnContent=""/>
+                              OffContent="" OnContent="" 
+                              Name="sendMeasurements" Toggled="Toggle_SendMeasurements"/>
 
-                
+
                 <Rectangle Grid.Row="8" Grid.ColumnSpan="3" 
                            Fill="#E0E0E0"/>
                 <TextBlock Grid.Row="8" Grid.Column="0"
@@ -133,8 +137,96 @@
             </Grid>
         </ScrollViewer>
 
-        <Rectangle Name="PopupBackground" Grid.Row="1" 
+        <Rectangle Name="PopupSettingsBackground" Grid.Row="1" 
                    Fill="Black" Opacity="0.3" Visibility="Collapsed"/>
+
+        <Grid Name="ChangeDataPopup" Grid.Row="1" VerticalAlignment="Center"
+              Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.RowSpan="3" Grid.Column="1" Fill="White"/>
+
+            <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"
+                       Margin="0 20 0 20"
+                       Text="Uw lengte en gewicht opslaan"/>
+            <Grid Grid.Row="1" Grid.Column="1" Margin="0 0 0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Column="0" InputScope="Number"
+                         Margin="15 0 7.5 0" HorizontalAlignment="Stretch">
+                    <TextBox.Header>
+                        <TextBlock Text="Lengte (cm)" FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"/>
+                    </TextBox.Header>
+                </TextBox>
+                <TextBox Grid.Column="1" InputScope="Number"
+                         Margin="15 0 7.5 0" HorizontalAlignment="Stretch">
+                    <TextBox.Header>
+                        <TextBlock Text="Gewicht (kg)" FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"/>
+                    </TextBox.Header>
+                </TextBox>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="1" Margin="0 0 0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Background="#A6A6A6" Click="SaveSettings_Click"
+                    Foreground="White" FontSize="17" Margin="15 0 7.5 0"
+                    HorizontalAlignment="Stretch">Opslaan</Button>
+                <Button Grid.Column="1" Background="#E84A4A" Click="CancelChangeData_Click"
+                    Foreground="White" FontSize="17" Margin="7.5 0 15 0"
+                    HorizontalAlignment="Stretch">Annuleren</Button>
+            </Grid>
+        </Grid>
+
+        <Grid Name="LogoutPopup" Grid.Row="1" VerticalAlignment="Center"
+              Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.RowSpan="3" Grid.Column="1" Fill="White"/>
+
+            <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"
+                       Margin="0 20 0 40"
+                       Text="Weet u zeker dat u wilt uitloggen?"/>
+            <Grid Grid.Row="1" Grid.Column="1" Margin="0 0 0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Background="#A6A6A6" Click="Logout_Click"
+                    Foreground="White" FontSize="17" Margin="15 0 7.5 0"
+                    HorizontalAlignment="Stretch">Uitloggen</Button>
+                <Button Grid.Column="1" Background="#E84A4A" Click="CancelLogout_Click"
+                    Foreground="White" FontSize="17" Margin="7.5 0 15 0"
+                    HorizontalAlignment="Stretch">Annuleren</Button>
+            </Grid>
+        </Grid>
+
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

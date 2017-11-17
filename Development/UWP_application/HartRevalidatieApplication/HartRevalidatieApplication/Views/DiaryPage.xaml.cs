@@ -33,7 +33,7 @@ namespace HartRevalidatieApplication.Views
 
         private void NavigateToDiaryEntryPage(object sender, ItemClickEventArgs e)
         {
-            DiaryEntry dE = e.ClickedItem as DiaryEntry;
+            Measurement dE = e.ClickedItem as Measurement;
             ((Frame)Window.Current.Content).Navigate(typeof(DiaryEntryPage), dE);
         }
 

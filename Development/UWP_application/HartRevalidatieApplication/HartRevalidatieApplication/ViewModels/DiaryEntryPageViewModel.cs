@@ -10,7 +10,7 @@ namespace HartRevalidatieApplication.ViewModels
     public sealed class DiaryEntryPageViewModel
     {
         public static DiaryEntryPageViewModel SingleInstance { get; } = new DiaryEntryPageViewModel();
-        public DiaryEntry diaryEntry { get; set; }
+        public Measurement diaryEntry { get; set; }
 
         public DiaryEntryPageViewModel() { }
     }

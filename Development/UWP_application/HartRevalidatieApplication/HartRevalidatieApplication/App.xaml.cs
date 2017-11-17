@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HartRevalidatieApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,6 +32,8 @@ namespace HartRevalidatieApplication
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            Settings.LoadSettings();
         }
 
         /// <summary>

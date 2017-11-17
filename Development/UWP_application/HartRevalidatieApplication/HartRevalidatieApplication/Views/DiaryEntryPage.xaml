@@ -10,8 +10,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="10*"/>
             <RowDefinition Height="1.5*"/>
         </Grid.RowDefinitions>
 
@@ -28,6 +27,73 @@
                 Content="&#xE112;" FontWeight="SemiBold" FontSize="20"
                 Background="Transparent" Click="Back_Click"
                 Foreground="White" Margin="0 2.5 0 0"></Button>
+
+        <Grid Grid.Row="1" Margin="10 10 10 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="9.5*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.RowSpan="3" Grid.ColumnSpan="4"
+                                           Fill="#E7F6EC"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" FontSize="14"
+                                           Text="Bloeddruk" FontWeight="SemiBold"
+                                           Margin="0 5 0 0"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="14">
+                                <Run Text="Bovendruk:"/>
+                                <Run Text="{Binding diaryEntry.upperPressure}"/>
+                                <Run Text=" Onderdruk:"/>
+                                <Run Text="{Binding diaryEntry.underPressure}"/>
+            </TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="14"
+                       Margin="0 0 0 5">
+                <Run Text="{Binding diaryEntry.feedback}"/>
+            </TextBlock>
+            <TextBlock Grid.RowSpan="3" Grid.Column="2" FontSize="11"
+                       HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Run Text="{Binding diaryEntry.date, Converter={StaticResource DateToStringFormatConverter}}" FontWeight="SemiBold"/>
+            </TextBlock>
+
+            <TextBlock Grid.Row="3" Grid.Column="1" 
+                       Grid.ColumnSpan="3" Margin="0 40 0 10"
+                       FontWeight="SemiBold" FontSize="17"
+                       Text="Gezondheisklachten"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" 
+                       Grid.ColumnSpan="3" FontSize="14"
+                       Text="Kortademigheid"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" 
+                       Grid.ColumnSpan="3" FontSize="14"
+                       Text="Onregelmatige hartslag"/>
+            
+            <Grid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
+                  Margin="0 40 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Background="#A6A6A6" 
+                    Foreground="White" FontSize="17" 
+                    Margin="0 0 7.5 0"
+                    HorizontalAlignment="Stretch">Bewerken</Button>
+                <Button Grid.Column="1" Background="#E84A4A" 
+                    Foreground="White" FontSize="17" Click="Back_Click" 
+                    Margin="7.5 0 0 0"
+                    HorizontalAlignment="Stretch">Terug</Button>
+            </Grid>
+        </Grid>
+
 
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
