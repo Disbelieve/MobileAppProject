@@ -96,22 +96,25 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DateFormatConverter.cs" />
-    <Compile Include="Helpers\ObservableIncrementalLoadingCollection.cs" />
     <Compile Include="Helpers\GlobalClickMethods.cs" />
-    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Consultant.cs" />
+    <Compile Include="Models\HealthIssue.cs" />
+    <Compile Include="Models\RegisterUser.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Measurement.cs" />
-    <Compile Include="Models\IncrementalLoadingResponse.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="ViewModels\ContactFinishedPageViewModel.cs" />
     <Compile Include="ViewModels\ContactPageViewModel.cs" />
     <Compile Include="ViewModels\DiaryEntryPageViewModel.cs" />
     <Compile Include="ViewModels\DiaryPageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MeasurePageViewModel.cs" />
-    <Compile Include="ViewModels\RegisterPage2ViewModel.cs" />
-    <Compile Include="ViewModels\RegisterPage3ViewModel.cs" />
     <Compile Include="ViewModels\RegisterPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
+    <Compile Include="Views\ContactFinishedPage.xaml.cs">
+      <DependentUpon>ContactFinishedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ContactPage.xaml.cs">
       <DependentUpon>ContactPage.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,18 @@
     <Compile Include="Services\APIconnection.cs" />
     <Compile Include="Views\MeasurePage.xaml.cs">
       <DependentUpon>MeasurePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\navigationBar.xaml.cs">
+      <DependentUpon>navigationBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewMeasurementFinishedPage.xaml.cs">
+      <DependentUpon>NewMeasurementFinishedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewMeasurementPage1.xaml.cs">
+      <DependentUpon>NewMeasurementPage1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewMeasurementPage2.xaml.cs">
+      <DependentUpon>NewMeasurementPage2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
@@ -172,6 +187,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\ContactFinishedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ContactPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -193,6 +212,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MeasurePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\navigationBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewMeasurementFinishedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewMeasurementPage1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewMeasurementPage2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -27,7 +27,7 @@ namespace HartRevalidatieApplication.Views
         public RegisterPage3()
         {
             this.InitializeComponent();
-            DataContext = RegisterPage3ViewModel.SingleInstance;
+            DataContext = RegisterPageViewModel.SingleInstance;
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)

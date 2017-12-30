@@ -34,4 +34,8 @@ namespace HartRevalidatieApplication.Helpers
                 rootFrame.GoBack();
         }
     }
+
+    //usercontrol ; properties
+
+    //navbar in Frame;
 }

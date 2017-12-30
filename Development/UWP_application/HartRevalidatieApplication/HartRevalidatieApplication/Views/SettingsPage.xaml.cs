@@ -77,6 +77,7 @@ namespace HartRevalidatieApplication.Views
 
         private void SaveSettings_Click(object sender, RoutedEventArgs e)
         {
+            SettingsPageViewModel.SingleInstance.UpdateUser(Convert.ToInt16(LengthTextBox.Text), Convert.ToInt16(WeightTextBox.Text));
             ChangePopUpStatus(ChangeDataPopup);
         }
 
@@ -92,6 +93,7 @@ namespace HartRevalidatieApplication.Views
 
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
+            SettingsPageViewModel.SingleInstance.Logout();
             ((Frame)Window.Current.Content).Navigate(typeof(MainPage));
         }
 

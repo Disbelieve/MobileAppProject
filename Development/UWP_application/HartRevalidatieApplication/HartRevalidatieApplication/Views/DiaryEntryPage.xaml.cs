@@ -27,8 +27,8 @@ namespace HartRevalidatieApplication.Views
     {
         public DiaryEntryPage()
         {
-            this.InitializeComponent();
             DataContext = DiaryEntryPageViewModel.SingleInstance;
+            this.InitializeComponent();
         }
 
         private void Measure_Click(object sender, RoutedEventArgs e)
@@ -52,7 +52,6 @@ namespace HartRevalidatieApplication.Views
         {
             GlobalClickMethods.Back_Click(sender, e);
         }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             DiaryEntryPageViewModel.SingleInstance.diaryEntry = e.Parameter as Measurement;

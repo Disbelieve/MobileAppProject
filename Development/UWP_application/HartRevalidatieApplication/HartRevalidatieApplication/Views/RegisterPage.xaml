@@ -27,17 +27,28 @@
                 Foreground="White" Margin="0 2.5 0 0"></Button>
 
         <StackPanel Grid.Row="1" Margin="30">
-            <TextBox PlaceholderText="Vul uw naam in"/>
-            <CalendarDatePicker Margin="0 20 0 0" HorizontalAlignment="Stretch"
+            <TextBox Name="NameTextBox" PlaceholderText="Vul uw naam in"/>
+            <CalendarDatePicker Name="BirthDateTextBox" Margin="0 20 0 0" HorizontalAlignment="Stretch"
                      PlaceholderText="Uw geboortedatum"
                      Background="#EEEEEE"/>
-            <ComboBox Margin="0 20 0 0" HorizontalAlignment="Stretch"
-                     PlaceholderText="Selecteer uw consulent"
-                     Background="#EEEEEE"/>
+            <ComboBox Name="ConsultantTextBox" Margin="0 20 0 0" HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding consultants}"
+                      SelectedValuePath="_id"
+                      PlaceholderText="Selecteer uw consulent"
+                      Background="#EEEEEE">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding firstname}"/>
+                            <Run Text="{Binding lastname}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <TextBlock Text="Geslacht bij geboorte" Margin="0 25 0 0"
                      FontWeight="SemiBold"/>
-            <RadioButton Margin="30 0 0 0" Content="Man"/>
-            <RadioButton Margin="30 0 0 0" Content="Vrouw"/>
+            <RadioButton Name="IsMale" Margin="30 0 0 0" Content="Man"/>
+            <RadioButton Name="IsFemale" Margin="30 0 0 0" Content="Vrouw"/>
 
             <Button Margin="50 30 50 0" Background="#50D6CF" FontSize="17"
                 Foreground="White" Grid.Row="2" Click="Next_Click" 

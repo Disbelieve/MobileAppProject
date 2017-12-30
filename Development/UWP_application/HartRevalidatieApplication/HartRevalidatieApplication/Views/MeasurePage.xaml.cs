@@ -42,5 +42,9 @@ namespace HartRevalidatieApplication.Views
         {
             GlobalClickMethods.Settings_Click(sender, e);
         }
+        private void Next_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(NewMeasurementPage1));
+        }
     }
 }

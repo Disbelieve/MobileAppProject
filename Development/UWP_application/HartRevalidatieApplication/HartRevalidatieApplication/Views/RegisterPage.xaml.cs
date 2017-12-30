@@ -24,6 +24,8 @@ namespace HartRevalidatieApplication.Views
     /// </summary>
     public sealed partial class RegisterPage : Page
     {
+        private int selectedGender = 0;
+
         public RegisterPage()
         {
             this.InitializeComponent();
@@ -32,6 +34,15 @@ namespace HartRevalidatieApplication.Views
 
         private void Next_Click(object sender, RoutedEventArgs e)
         {
+            if (IsMale.IsChecked == true)
+                selectedGender = 1;
+            else if (IsFemale.IsChecked == true)
+                selectedGender = 2;
+
+
+            RegisterPageViewModel.SingleInstance.SetFirstRegisterPageUserData(NameTextBox.Text, BirthDateTextBox.Date.ToString(), 
+                ConsultantTextBox.SelectedValue.ToString(), selectedGender);
+
             ((Frame)Window.Current.Content).Navigate(typeof(RegisterPage2));
         }
 

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace HartRevalidatieApplication.Models
 {
-    public sealed class IncrementalLoadingResponse<T>
+    public class Consultant
     {
-        public int NextId { get; set; }
-        public IEnumerable<T> Items { get; set; }
+        public string _id { get; set; }
+        public string firstname { get; set; }
+        public string lastname { get; set; }
     }
 }

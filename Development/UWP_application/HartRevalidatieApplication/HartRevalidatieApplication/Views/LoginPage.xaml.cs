@@ -1,9 +1,11 @@
 ﻿using HartRevalidatieApplication.Helpers;
+using HartRevalidatieApplication.Services;
 using HartRevalidatieApplication.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -29,8 +31,9 @@ namespace HartRevalidatieApplication.Views
             this.InitializeComponent();
             DataContext = LoginPageViewModel.SingleInstance;
         }
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private async void Login_Click(object sender, RoutedEventArgs e)
         {
+            await LoginPageViewModel.SingleInstance.Login(EmailTextBox.Text, PasswordBox.Password);
             ((Frame)Window.Current.Content).Navigate(typeof(MeasurePage));
         }
 

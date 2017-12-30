@@ -5,26 +5,39 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Windows.UI.Popups;
+using HartRevalidatieApplication.Models;
+using Newtonsoft.Json.Linq;
 
 namespace HartRevalidatieApplication.Services
 {
     public static class APIconnection
     {
-        private const string BASE_URL = "http://placeholder.com/api/";
+        private const string BASE_URL = "https://zvh-api.herokuapp.com/";
 
-        public static async Task<HttpResponseMessage> ConnectToAPI(HttpMethod type, string apiURL)
+        public static async Task<HttpResponseMessage> ConnectToAPI(HttpMethod type, string apiURL, dynamic content = null)
         {
             try
             {
                 using (var client = new HttpClient())
                 {
-                    return await client.SendAsync(new HttpRequestMessage(type, BASE_URL + apiURL));
+                    client.DefaultRequestHeaders.TryAddWithoutValidation("x-authtoken", User.SingleInstance.authToken);
+                    var request = new HttpRequestMessage(type, BASE_URL + apiURL);
+
+
+                    if (content != null)
+                    {
+                        request.Content = new StringContent(content,
+                                    Encoding.UTF8,
+                                    "application/json");
+                            }
+                    
+
+                    return await client.SendAsync(request);
                 }
             }
 
             catch (Exception ex)
             {
-                var dialog = new MessageDialog(ex.Message);
                 return null;
             }
         }

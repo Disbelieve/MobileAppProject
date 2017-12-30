@@ -29,6 +29,11 @@ namespace HartRevalidatieApplication.Views
             this.InitializeComponent();
             DataContext = ContactPageViewModel.SingleInstance;
         }
+        private async void Send_Click(object sender, RoutedEventArgs e)
+        {
+            await ContactPageViewModel.SingleInstance.SendMessage(SubjectTextBox.Text, MessageTextBox.Text);
+            ((Frame)Window.Current.Content).Navigate(typeof(ContactFinishedPage));
+        }
 
         private void Measure_Click(object sender, RoutedEventArgs e)
         {

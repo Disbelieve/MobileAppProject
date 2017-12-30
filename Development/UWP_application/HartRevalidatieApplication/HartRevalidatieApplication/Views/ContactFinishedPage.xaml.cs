@@ -22,24 +22,29 @@ namespace HartRevalidatieApplication.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RegisterPage2 : Page
+    public sealed partial class ContactFinishedPage : Page
     {
-        public RegisterPage2()
+        public ContactFinishedPage()
         {
             this.InitializeComponent();
-            DataContext = RegisterPageViewModel.SingleInstance;
+            DataContext = ContactFinishedPageViewModel.SingleInstance;
         }
 
-        private async void Next_Click(object sender, RoutedEventArgs e)
+        private void Measure_Click(object sender, RoutedEventArgs e)
         {
-            RegisterPageViewModel.SingleInstance.SetSecondRegisterPageUserData(EmailTextBox.Text, PasswordBox.Password, RepeatPasswordBox.Password);
-            await RegisterPageViewModel.SingleInstance.Register();
-            ((Frame)Window.Current.Content).Navigate(typeof(RegisterPage3));
+            GlobalClickMethods.Measure_Click(sender, e);
         }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void Diary_Click(object sender, RoutedEventArgs e)
         {
-            GlobalClickMethods.Back_Click(sender, e);
+            GlobalClickMethods.Diary_Click(sender, e);
+        }
+        private void Contact_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalClickMethods.Contact_Click(sender, e);
+        }
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalClickMethods.Settings_Click(sender, e);
         }
     }
 }

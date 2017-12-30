@@ -28,8 +28,17 @@ namespace HartRevalidatieApplication
         public MainPage()
         {
             this.InitializeComponent();
+            CheckIfLoggedIn();
             DataContext = MainPageViewModel.SingleInstance;
         }
+
+        public async void CheckIfLoggedIn()
+        {
+            if (await LoginPageViewModel.SingleInstance.IsAutomaticallyLoggedIn())
+                ((Frame)Window.Current.Content).Navigate(typeof(MeasurePage));
+        }
+
+
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             ((Frame)Window.Current.Content).Navigate(typeof(LoginPage));
