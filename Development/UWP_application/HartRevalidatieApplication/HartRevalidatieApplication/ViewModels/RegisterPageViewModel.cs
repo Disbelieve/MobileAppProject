@@ -20,26 +20,21 @@ namespace HartRevalidatieApplication.ViewModels
 
         public static RegisterPageViewModel SingleInstance { get; } = new RegisterPageViewModel();
 
-        private RegisterUser newUser;
+        public RegisterUser newUser { get; private set; }
 
-        public ObservableCollection<Consultant> consultants { get; set; }
+        public ObservableCollection<Consultant> consultants { get; set; } = new ObservableCollection<Consultant>();
 
         public RegisterPageViewModel()
         {
             LoadData();
         }
-
-        public async void LoadData()
-        {
-            await GetConsultants();
-        }
-
-        public void SetFirstRegisterPageUserData(string name, string birthDate, string consultantId, int gender)
+        
+        public void SetFirstRegisterPageUserData(string firstName, string lastName, string birthDate, string consultantId, int gender)
         {
             newUser = new RegisterUser();
 
-            newUser.firstname = name;
-            newUser.lastname = name;
+            newUser.firstname = firstName;
+            newUser.lastname = lastName;
             newUser.dateOfBirth = birthDate;
             newUser.consultantId = consultantId;
             newUser.gender = gender;
@@ -53,8 +48,7 @@ namespace HartRevalidatieApplication.ViewModels
 
         private async Task<int> GetConsultants()
         {
-            var response = await APIconnection.ConnectToAPI(HttpMethod.Get, "consultants");
-            consultants = JsonConvert.DeserializeObject<ObservableCollection<Consultant>>(await response.Content.ReadAsStringAsync());
+            consultants = await ApiData.SingleInstance.GetConsultants();
             OnPropertyChanged(nameof(consultants));
 
             return 1;
@@ -81,5 +75,10 @@ namespace HartRevalidatieApplication.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public async void LoadData()
+        {
+            await GetConsultants();
+        }            
     }
 }

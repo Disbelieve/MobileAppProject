@@ -27,16 +27,38 @@
                 Background="Transparent" Click="Back_Click"
                 Foreground="White" Margin="0 2.5 0 0"></Button>
 
-        <StackPanel Grid.Row="1" Margin="30">
-            <TextBox Name="EmailTextBox" PlaceholderText="Vul uw email in"/>
-            <PasswordBox Name="PasswordBox" PlaceholderText="Vul uw wachtwoord in"
-                     Background="#EEEEEE" Margin="0 20 0 0"/>
-            <PasswordBox Name="RepeatPasswordBox" PlaceholderText="Herhaal uw wachtwoord"
-                     Background="#EEEEEE" Margin="0 20 0 0"/>
+        <Grid Grid.Row="1" Margin="30 0 30 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-            <Button Margin="50 30 50 0" Background="#50D6CF" FontSize="17"
-                Foreground="White" Grid.Row="2" Click="Next_Click" 
-                HorizontalAlignment="Stretch">Registratie afronden</Button>
-        </StackPanel>
+            <TextBlock Grid.Row="0" Margin="0 10 0 0"
+                       Name="EmailError"
+                       Foreground="Red" Visibility="Collapsed"/>
+            <TextBox Grid.Row="0" Name="EmailTextBox" Margin="0 30 0 0" 
+                     PlaceholderText="Vul uw email in" TextChanged="EmailTextBox_TextChanged"/>
+
+            <TextBlock Grid.Row="1" Margin="0 10 0 0"
+                       Name="PasswordError"
+                       Foreground="Red" Visibility="Collapsed"/>
+            <PasswordBox Grid.Row="1" Name="PasswordBox" 
+                         PlaceholderText="Vul uw wachtwoord in"
+                         Background="#EEEEEE" Margin="0 30 0 0" PasswordChanged="PasswordBox_PasswordChanged"/>
+
+            <TextBlock Grid.Row="2" Margin="0 10 0 0"
+                       Name="RepeatPasswordError"
+                       Foreground="Red" Visibility="Collapsed"/>
+            <PasswordBox Grid.Row="2" Name="RepeatPasswordBox" 
+                         PlaceholderText="Herhaal uw wachtwoord"
+                         Background="#EEEEEE" Margin="0 30 0 0" PasswordChanged="RepeatPasswordBox_PasswordChanged"/>
+
+            <Button Grid.Row="3" Margin="50 30 50 0" 
+                    Background="#50D6CF" FontSize="17"
+                    Foreground="White" Click="Next_Click" 
+                    HorizontalAlignment="Stretch">Registratie afronden</Button>
+        </Grid>
     </Grid>
 </Page>

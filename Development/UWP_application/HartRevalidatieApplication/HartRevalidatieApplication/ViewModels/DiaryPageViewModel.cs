@@ -21,8 +21,10 @@ namespace HartRevalidatieApplication.ViewModels
 
 
         public static DiaryPageViewModel SingleInstance { get; } = new DiaryPageViewModel();
-        public ObservableCollection<Measurement> diary { get; set; }
-        public List<HealthIssue> healthIssues { get; set; }
+        public List<Measurement> fullDiary { get; set; }
+        public ObservableCollection<Measurement> diary { get; set; } = new ObservableCollection<Measurement>();
+        public ObservableCollection<HealthIssue> healthIssues { get; set; }
+        public Measurement diaryEntry { get; set; }
 
         public DiaryPageViewModel()
         {
@@ -34,20 +36,30 @@ namespace HartRevalidatieApplication.ViewModels
             await GetHealthIssues();
             await InitMeasurements();
             SetMeasurementHealthIssues();
+
+            SetDiaryWeekly();
+        }
+
+        public void SetDiaryEntry(Measurement dE)
+        {
+            diaryEntry = dE;
+
+            OnPropertyChanged(nameof(diaryEntry.healthIssues));
+        }
+
+        private async Task<int> GetHealthIssues()
+        {
+            healthIssues = await ApiData.SingleInstance.GetHealthIssues();
+
+            OnPropertyChanged(nameof(healthIssues));
+
+            return 1;
         }
 
         private async Task<int> InitMeasurements()
         {
-            var response = await APIconnection.ConnectToAPI(HttpMethod.Get, "measurements");
-            diary = JsonConvert.DeserializeObject<ObservableCollection<Measurement>>(await response.Content.ReadAsStringAsync());
-            OnPropertyChanged(nameof(diary));
-
-            return 1;
-        }
-        private async Task<int> GetHealthIssues()
-        {
-            var response = await APIconnection.ConnectToAPI(HttpMethod.Get, "healthissues");
-            healthIssues = JsonConvert.DeserializeObject< List <HealthIssue>>(await response.Content.ReadAsStringAsync());
+            fullDiary = await ApiData.SingleInstance.InitMeasurements();
+            OnPropertyChanged(nameof(fullDiary));
             OnPropertyChanged(nameof(diary));
 
             return 1;
@@ -55,22 +67,32 @@ namespace HartRevalidatieApplication.ViewModels
 
         private void SetMeasurementHealthIssues()
         {
-            foreach (Measurement m in diary)
+            foreach (Measurement m in fullDiary)
             {
                 m.healthIssues = new List<string>();
-                if (m.healthIssueIds != null)
+                if (m.healthIssueIds != null && m.healthIssueIds.Count != 0 || !string.IsNullOrWhiteSpace(m.healthIssueOther))
                 {
-                    foreach (string healthIssueID in m.healthIssueIds)
+                    try
                     {
-                        foreach (HealthIssue hE in healthIssues)
+                        foreach (string healthIssueID in m.healthIssueIds)
                         {
-                            if (hE._id == healthIssueID)
+                            foreach (HealthIssue hE in healthIssues)
                             {
-                                m.healthIssues.Add(hE.name);
-                                break;
+                                if (hE._id == healthIssueID)
+                                {
+                                    m.healthIssues.Add(hE.name);
+                                    break;
+                                }
                             }
                         }
                     }
+                    catch { }
+
+                    try
+                    {
+                        m.healthIssues.Add(m.healthIssueOther);
+                    }
+                    catch { }
                 }
                 else
                 {
@@ -82,6 +104,24 @@ namespace HartRevalidatieApplication.ViewModels
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void SetDiaryWeekly()
+        {
+            List<Measurement> tempDiary = fullDiary.Take(7).ToList();
+
+            diary.Clear();
+            foreach (Measurement m in tempDiary)
+                diary.Add(m);
+        }
+
+        private void SetDiaryMonthly()
+        {
+            List<Measurement> tempDiary = fullDiary.Take(30).ToList();
+
+            diary.Clear();
+            foreach (Measurement m in tempDiary)
+                diary.Add(m);
         }
     }
 }

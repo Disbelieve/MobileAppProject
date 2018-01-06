@@ -8,9 +8,10 @@ namespace HartRevalidatieApplication.Models
 {
     public class Measurement
     {
+        public string _id { get; set; }
         public int bloodPressureUpper { get; set; }
         public int bloodPressureLower { get; set; }
-        public DateTime measurementDateTime { get; set; }
+        public DateTime measurementDateTime { get; set; } = DateTime.Now;
         public List<string> healthIssueIds { get; set; }
         public List<string> healthIssues { get; set; }
         public string healthIssueOther { get; set; }

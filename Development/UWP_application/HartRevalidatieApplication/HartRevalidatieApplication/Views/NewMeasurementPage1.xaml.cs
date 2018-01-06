@@ -1,4 +1,5 @@
 ﻿using HartRevalidatieApplication.Helpers;
+using HartRevalidatieApplication.Models;
 using HartRevalidatieApplication.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -50,9 +52,129 @@ namespace HartRevalidatieApplication.Views
 
         private void Next_Click(object sender, RoutedEventArgs e)
         {
-            MeasurePageViewModel.SingleInstance.SetFirstMeasurementPageMeasureData(Convert.ToInt32(bloodPressureUpperTextBox.Text), 
-                Convert.ToInt32(bloodPressureLowerTextBox.Text));
+            if(UpperPressure_IsValidInput() & LowerPressure_IsValidInput())
+                MeasurePageViewModel.SingleInstance.SetFirstMeasurementPageMeasureData(Convert.ToInt32(bloodPressureUpperTextBox.Text), 
+                    Convert.ToInt32(bloodPressureLowerTextBox.Text));
             ((Frame)Window.Current.Content).Navigate(typeof(NewMeasurementPage2));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            MeasurePageViewModel.SingleInstance.StartNewMeasurement(e.Parameter as Measurement);
+
+            MeasurePageViewModel.SingleInstance.RemoveNotification();
+            
+            if (MeasurePageViewModel.SingleInstance.UserDataUpdateRequired())
+            {
+                ChangePopUpStatus(ChangeDataPopup);
+            }
+
+
+            base.OnNavigatedTo(e);
+        }
+
+        private void ChangePopUpStatus(Grid popup)
+        {
+            if (popup.Visibility == Visibility.Collapsed)
+            {
+                popup.Visibility = Visibility.Visible;
+                PopupBackground.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                popup.Visibility = Visibility.Collapsed;
+                PopupBackground.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private async void SaveSettings_Click(object sender, RoutedEventArgs e)
+        {
+            await SettingsPageViewModel.SingleInstance.UpdateUser(Convert.ToInt16(LengthTextBox.Text), Convert.ToInt16(WeightTextBox.Text));
+            ChangePopUpStatus(ChangeDataPopup);
+        }
+
+        private void CancelChangeData_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalClickMethods.Measure_Click(sender, e);
+            ChangePopUpStatus(ChangeDataPopup);
+        }
+
+        private void bloodPressureUpperTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpperPressure_IsValidInput();
+        }
+
+        private void bloodPressureLowerTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LowerPressure_IsValidInput();
+        }
+
+        private bool UpperPressure_IsValidInput()
+        {
+            int tempVar;
+
+            if (string.IsNullOrWhiteSpace(bloodPressureUpperTextBox.Text))
+            {
+                SetErrorUI(UpperPressureError, bloodPressureUpperTextBox, true, "Waarde kan niet leeg zijn");
+
+                return false;
+            }
+
+            else if (!int.TryParse(bloodPressureUpperTextBox.Text, out tempVar))
+            {
+                SetErrorUI(UpperPressureError, bloodPressureUpperTextBox, true, "Alleen nummers toegestaan");
+
+                return false;
+            }
+
+            else
+            {
+                SetErrorUI(UpperPressureError, bloodPressureUpperTextBox, false, "");
+
+                return true;
+            }
+        }
+
+        private bool LowerPressure_IsValidInput()
+        {
+            int tempVar;
+
+            if (string.IsNullOrWhiteSpace(bloodPressureLowerTextBox.Text))
+            {
+                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, true, "Waarde kan niet leeg zijn");
+
+                return false;
+            }
+            else if (!int.TryParse(bloodPressureLowerTextBox.Text, out tempVar))
+            {
+                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, true, "Alleen nummers toegestaan");
+
+                return false;
+            }
+
+            else
+            {
+                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, true, "");
+
+                return true;
+            }
+        }
+
+        private void SetErrorUI(TextBlock errorTextBlock, TextBox inputTextBox, bool isError, string errorText)
+        {
+            errorTextBlock.Text = errorText;
+            if (isError)
+            {
+
+                inputTextBox.BorderThickness = new Thickness(1);
+                inputTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                errorTextBlock.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                inputTextBox.BorderThickness = new Thickness(0);
+                errorTextBlock.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

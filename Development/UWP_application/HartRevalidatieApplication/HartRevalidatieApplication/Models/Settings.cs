@@ -43,5 +43,15 @@ namespace HartRevalidatieApplication.Models
         {
             localSettings.Values["sendMeasurements"] = newValue;
         }
+
+        public static void SetUserDataUpdateTime()
+        {
+            localSettings.Values["lastWeightAndLengthUpdate"] = DateTimeOffset.Now;
+        }
+
+        public static void SetLastMeasurementUpdate(DateTime measurementTime)
+        {
+            localSettings.Values["lastMeasurementUpdate"] = (DateTimeOffset)measurementTime;            
+        }
     }
 }

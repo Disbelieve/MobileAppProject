@@ -1,4 +1,5 @@
 ﻿using HartRevalidatieApplication.Helpers;
+using HartRevalidatieApplication.Models;
 using HartRevalidatieApplication.Services;
 using HartRevalidatieApplication.ViewModels;
 using System;
@@ -9,6 +10,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -33,13 +35,101 @@ namespace HartRevalidatieApplication.Views
         }
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
-            await LoginPageViewModel.SingleInstance.Login(EmailTextBox.Text, PasswordBox.Password);
-            ((Frame)Window.Current.Content).Navigate(typeof(MeasurePage));
+            if (Email_IsValidInput() & Password_IsValidInput())
+            {
+                await LoginPageViewModel.SingleInstance.Login(EmailTextBox.Text, PasswordBox.Password);
+                Settings.SetAutomaticLogin(AutoLoginCheckBox.IsChecked.Value);
+                ((Frame)Window.Current.Content).Navigate(typeof(MeasurePage));
+            }
+        }
+        private void RememberPassword_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePopUpStatus(RememberPasswordPopup);
+        }
+
+        private void ChangePopUpStatus(Grid popup)
+        {
+            if (popup.Visibility == Visibility.Collapsed)
+            {
+                popup.Visibility = Visibility.Visible;
+                PopupBackground.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                popup.Visibility = Visibility.Collapsed;
+                PopupBackground.Visibility = Visibility.Collapsed;
+            }
+        }
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePopUpStatus(RememberPasswordPopup);
+        }
+        private async void RequestRecoveryMail_Click(object sender, RoutedEventArgs e)
+        {
+            await LoginPageViewModel.SingleInstance.RequestRecoveryMail(RecoverMailTextBox.Text);
+            ChangePopUpStatus(RememberPasswordPopup);
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            GlobalClickMethods.Back_Click(sender, e);
+            ((Frame)Window.Current.Content).Navigate(typeof(MainPage));
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            AutoLoginCheckBox.IsChecked = (bool)Settings.localSettings.Values["automaticLogin"];
+            base.OnNavigatedTo(e);
+        }
+
+        private void EmailTextBox_TextChanged(object sender, RoutedEventArgs e)
+        {
+            Email_IsValidInput();
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            Password_IsValidInput();
+        }
+
+        private bool Email_IsValidInput()
+        {
+            if (string.IsNullOrWhiteSpace(EmailTextBox.Text))
+            {
+                EmailTextBox.BorderThickness = new Thickness(1);
+                EmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                EmailError.Visibility = Visibility.Visible;
+                EmailError.Text = "Email kan niet leeg zijn";
+
+                return false;
+            }
+
+            else
+            {
+                EmailTextBox.BorderThickness = new Thickness(0);
+                EmailError.Visibility = Visibility.Collapsed;
+
+                return true;
+            }
+        }
+
+        private bool Password_IsValidInput()
+        {
+            if (string.IsNullOrWhiteSpace(PasswordBox.Password))
+            {
+                PasswordBox.BorderThickness = new Thickness(1);
+                PasswordBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                PasswordError.Visibility = Visibility.Visible;
+                PasswordError.Text = "Wachtwoord kan niet leeg zijn";
+
+                return false;
+            }
+
+            else
+            {
+                PasswordBox.BorderThickness = new Thickness(0);
+                PasswordError.Visibility = Visibility.Collapsed;
+
+                return true;
+            }
         }
     }
 }

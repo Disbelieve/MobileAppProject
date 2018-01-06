@@ -36,6 +36,22 @@ namespace HartRevalidatieApplication.ViewModels
                 return false;
             }
         }
+        
+        public async Task<bool> RequestRecoveryMail(string email)
+        {
+            try
+            {
+                var response = await APIconnection.ConnectToAPI(HttpMethod.Post, "Users/forgotPassword?emailAddress=" + email);
+                var str = await response.Content.ReadAsStringAsync();
+
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
         public void StoreLoginCredentials(string email, string password)
         {

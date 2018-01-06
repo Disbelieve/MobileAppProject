@@ -27,7 +27,7 @@ namespace HartRevalidatieApplication.Views
     {
         public DiaryEntryPage()
         {
-            DataContext = DiaryEntryPageViewModel.SingleInstance;
+            DataContext = DiaryPageViewModel.SingleInstance;
             this.InitializeComponent();
         }
 
@@ -54,9 +54,14 @@ namespace HartRevalidatieApplication.Views
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            DiaryEntryPageViewModel.SingleInstance.diaryEntry = e.Parameter as Measurement;
-            if (DiaryEntryPageViewModel.SingleInstance.diaryEntry == null) return;
+            DiaryPageViewModel.SingleInstance.SetDiaryEntry(e.Parameter as Measurement);
+            if (DiaryPageViewModel.SingleInstance.diaryEntry == null) return;
             base.OnNavigatedTo(e);
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(NewMeasurementPage1), DiaryPageViewModel.SingleInstance.diaryEntry);
         }
     }
 }

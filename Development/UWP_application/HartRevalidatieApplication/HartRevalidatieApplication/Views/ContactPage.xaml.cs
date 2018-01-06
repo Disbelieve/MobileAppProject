@@ -7,6 +7,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -31,8 +33,11 @@ namespace HartRevalidatieApplication.Views
         }
         private async void Send_Click(object sender, RoutedEventArgs e)
         {
-            await ContactPageViewModel.SingleInstance.SendMessage(SubjectTextBox.Text, MessageTextBox.Text);
-            ((Frame)Window.Current.Content).Navigate(typeof(ContactFinishedPage));
+            if (Subject_IsValidInput() && Message_IsValidInput())
+            {
+                await ContactPageViewModel.SingleInstance.SendMessage(SubjectTextBox.Text, MessageTextBox.Text);
+                ((Frame)Window.Current.Content).Navigate(typeof(ContactFinishedPage));
+            }
         }
 
         private void Measure_Click(object sender, RoutedEventArgs e)
@@ -46,6 +51,56 @@ namespace HartRevalidatieApplication.Views
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             GlobalClickMethods.Settings_Click(sender, e);
+        }
+
+        private void SubjectTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Subject_IsValidInput();
+        }
+
+        private void MessageTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Message_IsValidInput();
+        }
+
+        private bool Subject_IsValidInput()
+        {
+            if (string.IsNullOrWhiteSpace(SubjectTextBox.Text))
+            {
+                SubjectTextBox.BorderThickness = new Thickness(1);
+                SubjectTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                SubjectError.Visibility = Visibility.Visible;
+
+                return false;
+            }
+
+            else
+            {
+                SubjectTextBox.BorderThickness = new Thickness(0);
+                SubjectError.Visibility = Visibility.Collapsed;
+
+                return true;
+            }
+        }
+
+        private bool Message_IsValidInput()
+        {
+            if (string.IsNullOrWhiteSpace(MessageTextBox.Text))
+            {
+                MessageTextBox.BorderThickness = new Thickness(1);
+                MessageTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                MessageError.Visibility = Visibility.Visible;
+
+                return false;
+            }
+
+            else
+            {
+                MessageTextBox.BorderThickness = new Thickness(0);
+                MessageError.Visibility = Visibility.Collapsed;
+
+                return true;
+            }
         }
     }
 }

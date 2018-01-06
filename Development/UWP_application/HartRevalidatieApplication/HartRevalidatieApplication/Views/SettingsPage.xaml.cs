@@ -30,11 +30,6 @@ namespace HartRevalidatieApplication.Views
         {
             this.InitializeComponent();
             DataContext = SettingsPageViewModel.SingleInstance;
-
-            automaticLogin.IsOn = (bool)Settings.localSettings.Values["automaticLogin"];
-            largeFonts.IsOn = (bool)Settings.localSettings.Values["largeFonts"];
-            dailyReminders.IsOn = (bool)Settings.localSettings.Values["dailyReminders"];
-            sendMeasurements.IsOn = (bool)Settings.localSettings.Values["sendMeasurements"];
         }
 
         private void Toggle_AutomaticLogin(object sender, RoutedEventArgs e)
@@ -75,10 +70,15 @@ namespace HartRevalidatieApplication.Views
             ChangePopUpStatus(ChangeDataPopup);
         }
 
-        private void SaveSettings_Click(object sender, RoutedEventArgs e)
+        private async void SaveSettings_Click(object sender, RoutedEventArgs e)
         {
-            SettingsPageViewModel.SingleInstance.UpdateUser(Convert.ToInt16(LengthTextBox.Text), Convert.ToInt16(WeightTextBox.Text));
-            ChangePopUpStatus(ChangeDataPopup);
+            try
+            {
+                await SettingsPageViewModel.SingleInstance.UpdateUser(Convert.ToInt16(LengthTextBox.Text), Convert.ToInt16(WeightTextBox.Text));
+                ChangePopUpStatus(ChangeDataPopup);
+            }
+
+            catch { }
         }
 
         private void CancelChangeData_Click(object sender, RoutedEventArgs e)
@@ -114,6 +114,19 @@ namespace HartRevalidatieApplication.Views
                 popup.Visibility = Visibility.Collapsed;
                 PopupSettingsBackground.Visibility = Visibility.Collapsed;
             }
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            SetSettingsUI();
+            base.OnNavigatedTo(e);
+        }
+
+        private void SetSettingsUI()
+        {
+            automaticLogin.IsOn = (bool)Settings.localSettings.Values["automaticLogin"];
+            largeFonts.IsOn = (bool)Settings.localSettings.Values["largeFonts"];
+            dailyReminders.IsOn = (bool)Settings.localSettings.Values["dailyReminders"];
+            sendMeasurements.IsOn = (bool)Settings.localSettings.Values["sendMeasurements"];
         }
     }
 }

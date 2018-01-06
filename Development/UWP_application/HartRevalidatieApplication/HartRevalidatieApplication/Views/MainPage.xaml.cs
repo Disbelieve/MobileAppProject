@@ -28,8 +28,8 @@ namespace HartRevalidatieApplication
         public MainPage()
         {
             this.InitializeComponent();
-            CheckIfLoggedIn();
             DataContext = MainPageViewModel.SingleInstance;
+            CheckIfLoggedIn();
         }
 
         public async void CheckIfLoggedIn()

@@ -15,12 +15,9 @@ namespace HartRevalidatieApplication.ViewModels
     public sealed class SettingsPageViewModel
     {
         public static SettingsPageViewModel SingleInstance { get; } = new SettingsPageViewModel();
-        public User user { get; set; }
+        public User user { get; set; } = User.SingleInstance;
 
-        public SettingsPageViewModel()
-        {
-            user = User.SingleInstance;
-        }
+        public SettingsPageViewModel() { }
         public void Logout()
         {
             var loginCredential = LoginPageViewModel.SingleInstance.GetCredentialFromLocker();
@@ -35,21 +32,25 @@ namespace HartRevalidatieApplication.ViewModels
             }
         }
 
-        public async void UpdateUser(int length, int weight)
+        public async Task<bool> UpdateUser(int length, int weight)
         {
-            user.length = length;
-            user.weight = weight;
 
             try
             {
                 string parameters = "{\"length\":\"" + length + "\",\"weight\":\"" + weight + "\"}";
                 var response = await APIconnection.ConnectToAPI(HttpMethod.Put, "Users", parameters);
                 var str = await response.Content.ReadAsStringAsync();
+
+                user.length = length;
+                user.weight = weight;
+                Settings.SetUserDataUpdateTime();
             }
 
             catch (Exception ex)
             {
             }
+
+            return true;
         }
     }
 }

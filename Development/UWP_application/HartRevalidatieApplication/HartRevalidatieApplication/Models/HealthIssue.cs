@@ -10,5 +10,6 @@ namespace HartRevalidatieApplication.Models
     {
         public string _id { get; set; }
         public string name { get; set; }
+        public bool isSelected { get; set; } = false;
     }
 }

@@ -24,6 +24,8 @@
         </Border>
 
         <StackPanel Grid.Row="1" Margin="30" VerticalAlignment="Center">
+            <Image Source="ms-appx:///Assets/img_Checkmark.png"
+                   Height="100" Width="100" Margin="0 0 0 30"/>
             <TextBlock Text="Uw bericht is vezonden!" FontSize="17"
                      HorizontalAlignment="Center"
                      FontWeight="SemiBold"/>

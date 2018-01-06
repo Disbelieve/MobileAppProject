@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -45,6 +46,22 @@ namespace HartRevalidatieApplication.Views
         private void Next_Click(object sender, RoutedEventArgs e)
         {
             ((Frame)Window.Current.Content).Navigate(typeof(NewMeasurementPage1));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (MeasurePageViewModel.SingleInstance.DailyMeasurementFinished())
+            {
+                NewMeasureButton.IsEnabled = false;
+                NewMeasureText.Text = "U heeft vandaag al een meting gedaan.";
+            }
+            else
+            {
+                NewMeasureButton.IsEnabled = true;
+                NewMeasureText.Text = "Voer uw meting in";
+            }
+
+            base.OnNavigatedTo(e);
         }
     }
 }

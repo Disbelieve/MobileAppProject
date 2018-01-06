@@ -22,17 +22,19 @@
                        FontFamily="Segoe UI"/>
         </Border>
 
-        <StackPanel Grid.Row="1" Margin="30">
+        <StackPanel Grid.RowSpan="2" Margin="30 0 30 0" VerticalAlignment="Center">
+            <Image Source="ms-appx:///Assets/img_Checkmark.png"
+                   Height="100" Width="100" Margin="0 0 0 30"/>
             <TextBlock Text="Bedankt voor het registreren!" FontSize="17"
                      HorizontalAlignment="Center"
                      FontWeight="SemiBold"/>
             <TextBlock Text="U heeft een e-mail ontvangen op:" 
-                     HorizontalAlignment="Center" Margin="0 20 0 0"/>
-            <TextBlock Text="[EMAIL]" 
+                     HorizontalAlignment="Center" Margin="0 30 0 0"/>
+            <TextBlock Text="{Binding newUser.emailAddress}" 
                      HorizontalAlignment="Center"
                      FontWeight="SemiBold"/>
             <TextBlock Text="Hiermee kunt u uw account activeren." 
-                     HorizontalAlignment="Center" Margin="0 20 0 0"/>
+                     HorizontalAlignment="Center" Margin="0 30 0 0"/>
 
             <Button Margin="50 30 50 0" Background="#E84A4A" FontSize="17"
                 Foreground="White" Grid.Row="2" Click="Login_Click" 

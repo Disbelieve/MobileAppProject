@@ -35,7 +35,11 @@
             <TextBlock Text="Goedemiddag, "
                        VerticalAlignment="Center"
                        FontSize="20"/>
-            <TextBlock Text="{Binding user.firstname}"
+            <TextBlock Text="{Binding salutation}"
+                       VerticalAlignment="Center"
+                       FontSize="20"
+                       Margin="5 0 0 0"/>
+            <TextBlock Text="{Binding user.lastname}"
                        VerticalAlignment="Center"
                        FontSize="20"
                        Margin="5 0 0 0"/>
@@ -47,8 +51,8 @@
 
         <Rectangle Grid.Row="3" Grid.Column="1" Fill="White"/>
         <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">
-            <TextBlock Text="Voer uw eerste meting in" HorizontalAlignment="Center"/>
-            <Button Background="#E84A4A" Foreground="White" Click="Next_Click"
+            <TextBlock Name="NewMeasureText" Text="Voer uw meting in" HorizontalAlignment="Center"/>
+            <Button Name="NewMeasureButton" Background="#E84A4A" Foreground="White" Click="Next_Click"
                 FontFamily="Segoe UI" FontSize="17" HorizontalAlignment="Stretch" 
                 Margin="20 20 20 0">Start nieuwe meting</Button>
         </StackPanel>

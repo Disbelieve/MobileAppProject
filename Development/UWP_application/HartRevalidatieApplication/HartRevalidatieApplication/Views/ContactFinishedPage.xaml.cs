@@ -27,7 +27,7 @@ namespace HartRevalidatieApplication.Views
         public ContactFinishedPage()
         {
             this.InitializeComponent();
-            DataContext = ContactFinishedPageViewModel.SingleInstance;
+            DataContext = ContactPageViewModel.SingleInstance;
         }
 
         private void Measure_Click(object sender, RoutedEventArgs e)

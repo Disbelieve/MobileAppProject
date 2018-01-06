@@ -44,18 +44,43 @@ namespace HartRevalidatieApplication.Views
         }
         private async void Next_Click(object sender, RoutedEventArgs e)
         {
-            //UPDATE NEWMEASUREMENT
-            MeasurePageViewModel.SingleInstance.SetSecondMeasurementPageMeasureData();
-
-            //POST MEASUREMENT
+            MeasurePageViewModel.SingleInstance.SetSecondMeasurementPageMeasureData(HealthIssueOtherTextBox.Text);
+         
             await MeasurePageViewModel.SingleInstance.SendMeasurement();
 
+            MeasurePageViewModel.SingleInstance.SetNotification();
+
+            MeasurePageViewModel.SingleInstance.ClearSelectedHealthIssues();
             ((Frame)Window.Current.Content).Navigate(typeof(NewMeasurementFinishedPage));
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             GlobalClickMethods.Back_Click(sender, e);
+        }
+
+        private void noComplaints_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if ((bool)noComplaints.IsChecked)
+                    healthIssuesPanel.Visibility = Visibility.Collapsed;
+                else
+                    healthIssuesPanel.Visibility = Visibility.Visible;
+            }
+            catch { }
+        }
+
+        private void yesComplaints_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if ((bool)yesComplaints.IsChecked)
+                    healthIssuesPanel.Visibility = Visibility.Visible;
+                else
+                    healthIssuesPanel.Visibility = Visibility.Collapsed;
+            }
+            catch { }
         }
     }
 }

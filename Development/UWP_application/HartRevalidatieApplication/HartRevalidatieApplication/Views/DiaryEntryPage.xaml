@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Background="#50D6CF">
-            <TextBlock Text="Mijn dagboek" 
+            <TextBlock Text="Meting details" 
                        Foreground="White"
                        VerticalAlignment="Center"
                        Margin="50 0 0 0"
@@ -30,7 +30,6 @@
 
         <Grid Grid.Row="1" Margin="10 10 10 0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -79,7 +78,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Grid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
+            <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
                   Margin="0 40 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -88,7 +87,7 @@
 
                 <Button Grid.Column="0" Background="#A6A6A6" 
                     Foreground="White" FontSize="17" 
-                    Margin="0 0 7.5 0"
+                    Margin="0 0 7.5 0"  Click="Edit_Click"
                     HorizontalAlignment="Stretch">Bewerken</Button>
                 <Button Grid.Column="1" Background="#E84A4A" 
                     Foreground="White" FontSize="17" Click="Back_Click" 
