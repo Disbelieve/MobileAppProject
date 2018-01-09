@@ -26,8 +26,11 @@
                 Background="Transparent" Click="Back_Click"
                 Foreground="White" Margin="0 2.5 0 0"></Button>
 
-        <Grid Grid.Row="1" Margin="30 0 30 0">
+        <ScrollViewer Grid.Row="1">
+            <Grid Margin="30 0 30 0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -38,51 +41,51 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             
-            <TextBlock Grid.Row="0" Margin="0 10 0 0"
+            <TextBlock Grid.Row="0" Margin="0 10 0 0" FontSize="18"
+                       Text="Persoonsgegevens" FontWeight="SemiBold"/>
+            
+            <TextBlock Grid.Row="1" Margin="0 10 0 0"
                        Name="FirstNameError" Text="Voornaam kan niet leeg zijn"
                        Foreground="Red" Visibility="Collapsed"/>
-            <TextBox Grid.Row="0" Margin="0 30 0 0"
+            <TextBox Grid.Row="1" Margin="0 30 0 0"
                      Name="FirstNameTextBox" PlaceholderText="Vul uw voornaam in" TextChanged="FirstNameTextBox_TextChanged"/>
 
-            <TextBlock Grid.Row="1" Margin="0 10 0 0"
+            <TextBlock Grid.Row="2" Margin="0 10 0 0"
                        Name="LastNameError" Text="Achternaam kan niet leeg zijn"
                        Foreground="Red" Visibility="Collapsed"/>
-            <TextBox Grid.Row="1" 
+                <TextBox Grid.Row="2"
                      Name="LastNameTextBox" PlaceholderText="Vul uw achternaam in" Margin="0 30 0 0" TextChanged="LastNameTextBox_TextChanged"/>
 
-            <TextBlock Grid.Row="2" Margin="0 10 0 0"
+            <TextBlock Grid.Row="3" Margin="0 10 0 0"
                        Name="BirthDateError" Text="Geboortedatum kan niet leeg zijn"
                        Foreground="Red" Visibility="Collapsed"/>
-            <CalendarDatePicker Grid.Row="2" DateChanged="BirthDateTextBox_Changed"
+            <CalendarDatePicker Grid.Row="3" DateChanged="BirthDateTextBox_Changed"
                      Name="BirthDateTextBox" Margin="0 30 0 0" HorizontalAlignment="Stretch"
                      PlaceholderText="Uw geboortedatum"
                      Background="#EEEEEE"/>
 
-            <TextBlock Grid.Row="3" Margin="0 10 0 0"
-                       Name="ConsultantError" Text="Consulent kan niet leeg zijn"
+            <TextBlock Grid.Row="4" Margin="0 10 0 0"
+                       Name="WeightError" Text="gewicht kan niet leeg zijn"
                        Foreground="Red" Visibility="Collapsed"/>
-            <ComboBox Grid.Row="3" Name="ConsultantTextBox" Margin="0 30 0 0" HorizontalAlignment="Stretch"
-                      ItemsSource="{Binding consultants}"
-                      SelectedValuePath="_id"
-                      PlaceholderText="Selecteer uw consulent"
-                      Background="#EEEEEE" SelectionChanged="ConsultantTextBox_SelectionChanged">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock>
-                            <Run Text="{Binding firstname}"/>
-                            <Run Text="{Binding lastname}"/>
-                        </TextBlock>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <TextBlock Grid.Row="4" Text="Geslacht bij geboorte" Margin="0 30 0 0"
-                     FontWeight="SemiBold"/>
-            <RadioButton Grid.Row="5" Name="IsMale" Margin="30 0 0 0" Content="Man" IsChecked="True"/>
-            <RadioButton Grid.Row="6" Name="IsFemale" Margin="30 0 0 0" Content="Vrouw"/>
+                <TextBox Grid.Row="4" Margin="0 30 0 0" InputScope="Number"
+                     Name="WeightTextBox" PlaceholderText="Vul uw gewicht (kg) in" TextChanged="WeightTextBox_TextChanged"/>
 
-            <Button Grid.Row="7" Margin="50 30 50 0" Background="#50D6CF" FontSize="17"
+
+            <TextBlock Grid.Row="5" Margin="0 10 0 0"
+                       Name="LengthError" Text="lengte kan niet leeg zijn"
+                       Foreground="Red" Visibility="Collapsed"/>
+                <TextBox Grid.Row="5" Margin="0 30 0 0" InputScope="Number"
+                     Name="LengthTextBox" PlaceholderText="Vul uw lengte (cm) in" TextChanged="LengthTextBox_TextChanged"/>
+
+            <TextBlock Grid.Row="6" Text="Geslacht bij geboorte" Margin="0 30 0 0"
+                     FontWeight="SemiBold"/>
+            <RadioButton Grid.Row="7" Name="IsMale" Margin="30 0 0 0" Content="Man" IsChecked="True"/>
+            <RadioButton Grid.Row="8" Name="IsFemale" Margin="30 0 0 0" Content="Vrouw"/>
+
+            <Button Grid.Row="9" Margin="50 30 50 0" Background="#50D6CF" FontSize="17"
                 Foreground="White" Click="Next_Click" 
                 HorizontalAlignment="Stretch">Volgende</Button>
         </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

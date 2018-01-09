@@ -10,6 +10,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -31,6 +32,17 @@ namespace HartRevalidatieApplication.Views
         {
             this.InitializeComponent();
             DataContext = DiaryPageViewModel.SingleInstance;
+            LoadData();
+        }
+
+        private async void LoadData()
+        {
+            try
+            {
+                await DiaryPageViewModel.SingleInstance.LoadData();
+                WeekButton_Click(null, null);
+            }
+            catch { }
         }
 
         private void NavigateToDiaryEntryPage(object sender, ItemClickEventArgs e)
@@ -50,6 +62,39 @@ namespace HartRevalidatieApplication.Views
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             GlobalClickMethods.Settings_Click(sender, e);
+        }
+
+        private void WeekButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (WeekCheckmark.Visibility == Visibility.Collapsed)
+                {
+                    DiaryPageViewModel.SingleInstance.SetDiaryWeekly();
+                    WeekBorder.Background = new SolidColorBrush(Color.FromArgb(255, 224, 224, 224));
+                    MonthBorder.Background = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+                    WeekCheckmark.Visibility = Visibility.Visible;
+                    MonthCheckmark.Visibility = Visibility.Collapsed;
+                }
+            }
+            catch { }
+        }
+
+        private void MonthButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (MonthCheckmark.Visibility == Visibility.Collapsed)
+                {
+                    DiaryPageViewModel.SingleInstance.SetDiaryMonthly();
+                    MonthBorder.Background = new SolidColorBrush(Color.FromArgb(255, 224, 224, 224));
+                    WeekBorder.Background = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+                    MonthCheckmark.Visibility = Visibility.Visible;
+                    WeekCheckmark.Visibility = Visibility.Collapsed;
+                }
+            }
+
+            catch { }
         }
     }
 }

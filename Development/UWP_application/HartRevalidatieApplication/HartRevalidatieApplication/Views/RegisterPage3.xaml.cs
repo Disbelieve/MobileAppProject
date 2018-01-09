@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,14 +31,50 @@ namespace HartRevalidatieApplication.Views
             DataContext = RegisterPageViewModel.SingleInstance;
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private async void Register_Click(object sender, RoutedEventArgs e)
         {
-            ((Frame)Window.Current.Content).Navigate(typeof(LoginPage));
+            if (Consultant_IsValidInput())
+            {
+                RegisterPageViewModel.SingleInstance.SetThirdRegisterPageUserData(ConsultantTextBox.SelectedValue.ToString());
+                await RegisterPageViewModel.SingleInstance.Register();
+
+                ((Frame)Window.Current.Content).Navigate(typeof(RegisterPageFinished));
+            }
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             GlobalClickMethods.Back_Click(sender, e);
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalClickMethods.Back_Click(sender, e);
+        }
+
+        private void ConsultantTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Consultant_IsValidInput();
+        }
+
+        private bool Consultant_IsValidInput()
+        {
+            if (ConsultantTextBox.SelectedValue == null)
+            {
+                ConsultantTextBox.BorderThickness = new Thickness(1);
+                ConsultantTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                ConsultantError.Visibility = Visibility.Visible;
+
+                return false;
+            }
+
+            else
+            {
+                ConsultantTextBox.BorderThickness = new Thickness(0);
+                ConsultantError.Visibility = Visibility.Collapsed;
+
+                return true;
+            }
         }
     }
 }

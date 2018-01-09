@@ -28,16 +28,19 @@ namespace HartRevalidatieApplication.ViewModels
 
         public DiaryPageViewModel()
         {
-            LoadData();
         }
 
-        public async void LoadData()
+        public async Task<int> LoadData()
         {
-            await GetHealthIssues();
-            await InitMeasurements();
-            SetMeasurementHealthIssues();
+            try
+            {
+                await GetHealthIssues();
+                await InitMeasurements();
+                SetMeasurementHealthIssues();
+            }
+            catch { }
 
-            SetDiaryWeekly();
+            return 1;
         }
 
         public void SetDiaryEntry(Measurement dE)
@@ -106,7 +109,7 @@ namespace HartRevalidatieApplication.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetDiaryWeekly()
+        public void SetDiaryWeekly()
         {
             List<Measurement> tempDiary = fullDiary.Take(7).ToList();
 
@@ -115,7 +118,7 @@ namespace HartRevalidatieApplication.ViewModels
                 diary.Add(m);
         }
 
-        private void SetDiaryMonthly()
+        public void SetDiaryMonthly()
         {
             List<Measurement> tempDiary = fullDiary.Take(30).ToList();
 

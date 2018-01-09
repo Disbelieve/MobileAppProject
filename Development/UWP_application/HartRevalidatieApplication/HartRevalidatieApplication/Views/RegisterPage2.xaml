@@ -38,7 +38,8 @@
             <TextBlock Grid.Row="0" Margin="0 10 0 0"
                        Name="EmailError"
                        Foreground="Red" Visibility="Collapsed"/>
-            <TextBox Grid.Row="0" Name="EmailTextBox" Margin="0 30 0 0" 
+            <TextBox Grid.Row="0" Name="EmailTextBox"
+                     Margin="0 30 0 0" InputScope="EmailNameOrAddress"
                      PlaceholderText="Vul uw email in" TextChanged="EmailTextBox_TextChanged"/>
 
             <TextBlock Grid.Row="1" Margin="0 10 0 0"
@@ -58,7 +59,7 @@
             <Button Grid.Row="3" Margin="50 30 50 0" 
                     Background="#50D6CF" FontSize="17"
                     Foreground="White" Click="Next_Click" 
-                    HorizontalAlignment="Stretch">Registratie afronden</Button>
+                    HorizontalAlignment="Stretch">Volgende</Button>
         </Grid>
     </Grid>
 </Page>

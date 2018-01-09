@@ -8,6 +8,7 @@
 
     <Application.Resources>
         <conv:DateFormatConverter x:Key="DateToStringFormatConverter"/>
+        <conv:BrushColorConverter x:Key="FeedbackToBackgroundColorConverter"/>
         <Style TargetType="TextBox">
             <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
             <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}"/>
@@ -1070,6 +1071,49 @@
                                 </Border>
                             </Popup>
                         </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ListViewItem">
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+            <Setter Property="TabNavigation" Value="Local"/>
+            <Setter Property="IsHoldingEnabled" Value="True"/>
+            <Setter Property="Padding" Value="12,0,12,0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}"/>
+            <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <ListViewItemPresenter
+          ContentTransitions="{TemplateBinding ContentTransitions}"
+          SelectionCheckMarkVisualEnabled="False"
+          CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+          CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+          DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+          DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+          FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+          FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+          PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+          PointerOverBackground="Transparent"
+          PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+          SelectedBackground="Transparent"
+          SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+          SelectedPointerOverBackground="Transparent"
+          PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
+          SelectedPressedBackground="{ThemeResource SystemControlHighlightListAccentHighBrush}"
+          DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+          DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+          ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+          ContentMargin="{TemplateBinding Padding}"
+          CheckMode="Inline"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

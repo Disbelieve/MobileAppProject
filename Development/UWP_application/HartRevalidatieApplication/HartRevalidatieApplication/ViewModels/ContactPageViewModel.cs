@@ -1,4 +1,5 @@
-﻿using HartRevalidatieApplication.Services;
+﻿using HartRevalidatieApplication.Models;
+using HartRevalidatieApplication.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,9 @@ namespace HartRevalidatieApplication.ViewModels
     public sealed class ContactPageViewModel
     {
         public static ContactPageViewModel SingleInstance { get; } = new ContactPageViewModel();
+        public Consultant consultant { get; set; } = User.SingleInstance.consultant;
 
-        public ContactPageViewModel() { }
+        public ContactPageViewModel() { }        
 
         public async Task<bool> SendMessage(string subject, string message)
         {

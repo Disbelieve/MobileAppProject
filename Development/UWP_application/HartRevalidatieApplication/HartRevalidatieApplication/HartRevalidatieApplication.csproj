@@ -95,17 +95,20 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BrushColorConverter.cs" />
     <Compile Include="Helpers\DateFormatConverter.cs" />
     <Compile Include="Helpers\GlobalClickMethods.cs" />
     <Compile Include="Models\ApiData.cs" />
     <Compile Include="Models\Consultant.cs" />
     <Compile Include="Models\HealthIssue.cs" />
+    <Compile Include="Models\QA.cs" />
     <Compile Include="Models\RegisterUser.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Measurement.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="ViewModels\ContactPageViewModel.cs" />
     <Compile Include="ViewModels\DiaryPageViewModel.cs" />
+    <Compile Include="ViewModels\FAQPageViewModel.cs" />
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MeasurePageViewModel.cs" />
@@ -122,6 +125,9 @@
     </Compile>
     <Compile Include="Views\DiaryPage.xaml.cs">
       <DependentUpon>DiaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FAQPage.xaml.cs">
+      <DependentUpon>FAQPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -155,6 +161,9 @@
     <Compile Include="Views\RegisterPage3.xaml.cs">
       <DependentUpon>RegisterPage3.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RegisterPageFinished.xaml.cs">
+      <DependentUpon>RegisterPageFinished.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -187,7 +196,9 @@
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
     <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\splashscreen_image.png" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
     <Content Include="Assets\Square150x150Logo.scale-125.png" />
     <Content Include="Assets\Square150x150Logo.scale-150.png" />
@@ -211,7 +222,6 @@
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
@@ -236,6 +246,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DiaryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FAQPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -279,6 +293,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\RegisterPageFinished.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -295,7 +313,11 @@
       <Version>10.0.3</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.15063.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

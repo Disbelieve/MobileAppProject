@@ -17,7 +17,9 @@ namespace HartRevalidatieApplication.ViewModels
         public static SettingsPageViewModel SingleInstance { get; } = new SettingsPageViewModel();
         public User user { get; set; } = User.SingleInstance;
 
-        public SettingsPageViewModel() { }
+        public SettingsPageViewModel()
+        {
+        }
         public void Logout()
         {
             var loginCredential = LoginPageViewModel.SingleInstance.GetCredentialFromLocker();
@@ -34,7 +36,6 @@ namespace HartRevalidatieApplication.ViewModels
 
         public async Task<bool> UpdateUser(int length, int weight)
         {
-
             try
             {
                 string parameters = "{\"length\":\"" + length + "\",\"weight\":\"" + weight + "\"}";

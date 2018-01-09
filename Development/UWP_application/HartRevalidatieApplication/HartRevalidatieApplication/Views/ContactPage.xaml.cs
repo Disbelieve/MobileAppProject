@@ -33,7 +33,7 @@ namespace HartRevalidatieApplication.Views
         }
         private async void Send_Click(object sender, RoutedEventArgs e)
         {
-            if (Subject_IsValidInput() && Message_IsValidInput())
+            if (Subject_IsValidInput() & Message_IsValidInput())
             {
                 await ContactPageViewModel.SingleInstance.SendMessage(SubjectTextBox.Text, MessageTextBox.Text);
                 ((Frame)Window.Current.Content).Navigate(typeof(ContactFinishedPage));

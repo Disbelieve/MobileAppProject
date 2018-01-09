@@ -36,8 +36,7 @@ namespace HartRevalidatieApplication.Views
             if (Email_IsValidInput() & Password_IsValidInput() & RepeatPassword_IsValidInput())
             {
                 RegisterPageViewModel.SingleInstance.SetSecondRegisterPageUserData(EmailTextBox.Text, PasswordBox.Password, RepeatPasswordBox.Password);
-                await RegisterPageViewModel.SingleInstance.Register();
-
+                
                 ((Frame)Window.Current.Content).Navigate(typeof(RegisterPage3));
             }
         }

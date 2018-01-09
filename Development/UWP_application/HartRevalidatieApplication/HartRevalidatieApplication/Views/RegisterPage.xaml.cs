@@ -35,16 +35,14 @@ namespace HartRevalidatieApplication.Views
 
         private void Next_Click(object sender, RoutedEventArgs e)
         {
-
-
-            if (FirstName_IsValidInput() & LastName_IsValidInput() & BirthDate_IsValidInput() & Consultant_IsValidInput())
+            if (FirstName_IsValidInput() & LastName_IsValidInput() & BirthDate_IsValidInput() & Weight_IsValidInput() & Length_IsValidInput())
             {
                 if (IsMale.IsChecked == true)
                     selectedGender = 1;
                 else if (IsFemale.IsChecked == true)
                     selectedGender = 2;
                 RegisterPageViewModel.SingleInstance.SetFirstRegisterPageUserData(FirstNameTextBox.Text, LastNameTextBox.Text,
-                BirthDateTextBox.Date.ToString(), ConsultantTextBox.SelectedValue.ToString(), selectedGender);
+                BirthDateTextBox.Date.ToString(), selectedGender, WeightTextBox.Text, LengthTextBox.Text);
 
                 ((Frame)Window.Current.Content).Navigate(typeof(RegisterPage2));
             }
@@ -68,11 +66,6 @@ namespace HartRevalidatieApplication.Views
         private void BirthDateTextBox_Changed(object sender, CalendarDatePickerDateChangedEventArgs e)
         {
             BirthDate_IsValidInput();
-        }
-
-        private void ConsultantTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Consultant_IsValidInput();
         }
 
         private bool FirstName_IsValidInput()
@@ -135,21 +128,55 @@ namespace HartRevalidatieApplication.Views
             }
         }
 
-        private bool Consultant_IsValidInput()
+        private void WeightTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (ConsultantTextBox.SelectedValue == null)
+            Weight_IsValidInput();
+        }
+
+        private void LengthTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Length_IsValidInput();
+        }
+
+        private bool Weight_IsValidInput()
+        {
+            int tempVar;
+
+            if (string.IsNullOrWhiteSpace(WeightTextBox.Text) || !int.TryParse(WeightTextBox.Text, out tempVar))
             {
-                ConsultantTextBox.BorderThickness = new Thickness(1);
-                ConsultantTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                ConsultantError.Visibility = Visibility.Visible;
+                WeightTextBox.BorderThickness = new Thickness(1);
+                WeightTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                WeightError.Visibility = Visibility.Visible;
 
                 return false;
             }
 
             else
             {
-                ConsultantTextBox.BorderThickness = new Thickness(0);
-                ConsultantError.Visibility = Visibility.Collapsed;
+                WeightTextBox.BorderThickness = new Thickness(0);
+                WeightError.Visibility = Visibility.Collapsed;
+
+                return true;
+            }
+        }
+
+        private bool Length_IsValidInput()
+        {
+            int tempVar;
+
+            if (string.IsNullOrWhiteSpace(LengthTextBox.Text) || !int.TryParse(LengthTextBox.Text, out tempVar))
+            {
+                LengthTextBox.BorderThickness = new Thickness(1);
+                LengthTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                LengthError.Visibility = Visibility.Visible;
+
+                return false;
+            }
+
+            else
+            {
+                LengthTextBox.BorderThickness = new Thickness(0);
+                LengthError.Visibility = Visibility.Collapsed;
 
                 return true;
             }

@@ -24,27 +24,41 @@
                        FontSize="20"/>
         </Border>
 
-        <Grid Grid.Row="1" Margin="30 30 30 10">
+        <Grid Grid.Row="1" Margin="20 10 20 0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="Stuur een bericht naar uw consulent."/>
-            <TextBlock Grid.Row="1" Margin="0 10 0 0"
+            <TextBlock Grid.Row="0" Text="Heeft u vragen of wilt u een afspraak maken? Dan kunt u via dit formulier een bericht sturen naar uw consulent. In geval van spoed kunt u het beste telefonisch contact opnemen met het ziekenhuis of 112 bellen."
+                       TextWrapping="Wrap" FontSize="13"/>
+
+            <TextBlock Grid.Row="1" FontSize="14" FontWeight="Bold">
+                                <Run Text="Uw Consulent:"/>
+                                <Run Text="{Binding consultant.firstname}"/>
+                                <Run Text="{Binding consultant.lastname}"/>
+            </TextBlock>
+            <TextBlock Grid.Row="2" FontSize="14" FontWeight="Bold">
+                                <Run Text="E-mail:"/>
+                                <Run Text="{Binding consultant.emailAddress}"/>
+            </TextBlock>
+
+            <TextBlock Grid.Row="3" Margin="0 10 0 0"
                        Name="SubjectError" Text="Onderwerp kan niet leeg zijn"
                        Foreground="Red" Visibility="Collapsed"/>
-            <TextBox Grid.Row="1" Margin="0 30 0 0"
+            <TextBox Grid.Row="3" Margin="0 30 0 0"
                 Name="SubjectTextBox" TextChanged="SubjectTextBox_TextChanged">
                 <TextBox.Header>
                     <TextBlock Text="Onderwerp" FontWeight="SemiBold"/>
                 </TextBox.Header>
             </TextBox>
-            <TextBlock Grid.Row="2" Margin="0 10 0 0"
+            <TextBlock Grid.Row="4" Margin="0 10 0 0"
                        Name="MessageError" Text="Bericht kan niet leeg zijn"
                        Foreground="Red" Visibility="Collapsed"/>
-            <TextBox Grid.Row="2" Margin="0 30 0 0" VerticalAlignment="Stretch"
+            <TextBox Grid.Row="4" Margin="0 30 0 0" VerticalAlignment="Stretch"
                      Name="MessageTextBox" TextChanged="MessageTextBox_TextChanged">
                 <TextBox.Header>
                     <TextBlock Text="Bericht" FontWeight="SemiBold"/>

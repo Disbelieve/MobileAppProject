@@ -23,12 +23,18 @@ namespace HartRevalidatieApplication.ViewModels
             {
                 string parameters = "{\"emailAddress\":\"" + email + "\",\"password\":\""+password + "\"}";
                 var response = await APIconnection.ConnectToAPI(HttpMethod.Post, "Users/login/", parameters);
-                var str = await response.Content.ReadAsStringAsync();
 
-                User.SetUser(JsonConvert.DeserializeObject<User>(str));
-                StoreLoginCredentials(email, password);
+                if (response.StatusCode.ToString() == "OK")
+                {
+                    User.SetUser(JsonConvert.DeserializeObject<User>(await response.Content.ReadAsStringAsync()));
+                    StoreLoginCredentials(email, password);
 
-                return true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             catch (Exception ex)
@@ -68,9 +74,7 @@ namespace HartRevalidatieApplication.ViewModels
                 loginCredential.RetrievePassword();
                 string email = loginCredential.UserName;
                 string password = loginCredential.Password;
-                await Login(email, password);
-
-                return true;
+                return await Login(email, password);
             }
 
             return false;

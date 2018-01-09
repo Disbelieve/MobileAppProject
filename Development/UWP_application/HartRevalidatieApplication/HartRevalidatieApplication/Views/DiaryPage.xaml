@@ -24,12 +24,71 @@
                        FontSize="20"/>
         </Border>
 
-        
+        <Grid Grid.Row="1" Margin="15 0 15 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button  Name="WeekButton" Grid.Column="0" Margin="0 25 5 25" 
+                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     Click="WeekButton_Click" Background="Transparent" 
+                     BorderThickness="0" Padding="0"
+                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Border Name="WeekBorder" CornerRadius="25" BorderThickness="1" BorderBrush="Black"
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                          Margin="10 0 10 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Week overzicht"/>
+                        <TextBlock Name="WeekCheckmark"  Grid.Column="1" VerticalAlignment="Center"
+                                   FontWeight="Bold" FontSize="18"
+                                   FontFamily="Segoe MDL2 Assets" Text="&#xE73E;"
+                                   TextAlignment="Center" Visibility="Collapsed"/>
+                    </Grid>
+                </Border>
+            </Button>
+            <Button  Name="MonthButton" Grid.Column="1" Margin="5 25 0 25" 
+                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     Click="MonthButton_Click" Background="Transparent" 
+                     BorderThickness="0" Padding="0"
+                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Border Name="MonthBorder" CornerRadius="25" BorderThickness="1" BorderBrush="Black"
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10 0 10 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Maand overzicht"/>
+                            <TextBlock Name="MonthCheckmark"  Grid.Column="1" VerticalAlignment="Center"
+                                   FontWeight="Bold" FontSize="18"
+                                   FontFamily="Segoe MDL2 Assets" Text="&#xE73E;"
+                                   TextAlignment="Center" Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+            </Button>
+        </Grid>
+
+
         <ListView Grid.Row="2" ItemsSource="{Binding diary}"
                   ItemClick="NavigateToDiaryEntryPage" IsItemClickEnabled="True">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <ListViewItemPresenter
+                                            SelectionCheckMarkVisualEnabled="False"
+                                            PointerOverBackground="Transparent"
+                                            SelectedBackground="Transparent"
+                                            SelectedPointerOverBackground="Transparent"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
@@ -49,19 +108,22 @@
                             </Grid.ColumnDefinitions>
 
                             <Rectangle Grid.RowSpan="3" Grid.ColumnSpan="4"
-                                           Fill="#E7F6EC"/>
+                                       Fill="{Binding feedback, ConverterParameter=background, 
+                                       Converter={StaticResource FeedbackToBackgroundColorConverter}}"/>
                             <TextBlock Grid.Row="0" Grid.Column="1" FontSize="14"
                                            Text="Bloeddruk" FontWeight="SemiBold"
                                            Margin="0 5 0 0"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="14">
+                            <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontSize="13">
                                 <Run Text="Bovendruk:"/>
                                 <Run Text="{Binding bloodPressureUpper}"/>
                                 <Run Text=" Onderdruk:"/>
                                 <Run Text="{Binding bloodPressureLower}"/>
                             </TextBlock>
-                            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="14"
-                                           Text="[FEEDBACK]"
-                                           Margin="0 0 0 5"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="13"
+                                       Text="{Binding feedback}" TextWrapping="Wrap"
+                                       Margin="0 0 0 5"
+                                       Foreground="{Binding feedback, ConverterParameter=foreground, 
+                                       Converter={StaticResource FeedbackToBackgroundColorConverter}}"/>
                             <TextBlock Grid.RowSpan="3" Grid.Column="2" FontSize="11"
                                            Text="{Binding measurementDateTime, Converter={StaticResource DateToStringFormatConverter}}" FontWeight="SemiBold"
                                            HorizontalAlignment="Right" VerticalAlignment="Center"/>

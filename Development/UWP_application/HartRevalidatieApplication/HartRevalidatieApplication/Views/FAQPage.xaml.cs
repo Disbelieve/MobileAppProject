@@ -7,7 +7,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,14 +22,18 @@ namespace HartRevalidatieApplication.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MeasurePage : Page
+    public sealed partial class FAQPage : Page
     {
-        public MeasurePage()
+        public FAQPage()
         {
             this.InitializeComponent();
-            DataContext = MeasurePageViewModel.SingleInstance;
+            DataContext = FAQPageViewModel.SingleInstance;
         }
 
+        private void Measure_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalClickMethods.Measure_Click(sender, e);
+        }
         private void Diary_Click(object sender, RoutedEventArgs e)
         {
             GlobalClickMethods.Diary_Click(sender, e);
@@ -43,25 +46,22 @@ namespace HartRevalidatieApplication.Views
         {
             GlobalClickMethods.Settings_Click(sender, e);
         }
-        private void Next_Click(object sender, RoutedEventArgs e)
+        
+        private void Listview_ItemClicked(object sender, ItemClickEventArgs e)
         {
-            ((Frame)Window.Current.Content).Navigate(typeof(NewMeasurementPage1));
+            ListView lv = sender as ListView;
+            ListViewItem item = (lv.ContainerFromItem(e.ClickedItem) as ListViewItem);
+            
+
+            if (item.ContentTemplate.Equals(Resources["NoSelectDataTemplate"] as DataTemplate))
+                item.ContentTemplate = Resources["SelectDataTemplate"] as DataTemplate;
+            else
+                item.ContentTemplate = Resources["NoSelectDataTemplate"] as DataTemplate;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (MeasurePageViewModel.SingleInstance.DailyMeasurementFinished())
-            {
-                NewMeasureButton.IsEnabled = false;
-                NewMeasureText.Text = "U heeft vandaag al een meting gedaan";
-            }
-            else
-            {
-                NewMeasureButton.IsEnabled = true;
-                NewMeasureText.Text = "Voer uw meting in";
-            }
-
-            base.OnNavigatedTo(e);
+            //can't run if I don't have a SelectionChanged in Listview for some reason
         }
     }
 }

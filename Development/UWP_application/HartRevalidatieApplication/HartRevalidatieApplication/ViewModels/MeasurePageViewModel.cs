@@ -44,7 +44,12 @@ namespace HartRevalidatieApplication.ViewModels
 
         public async void LoadData()
         {
-           await GetHealthIssues();
+            try
+            {
+                await GetHealthIssues();
+            }
+
+            catch { }
         }
         private async Task<int> GetHealthIssues()
         {
@@ -74,7 +79,6 @@ namespace HartRevalidatieApplication.ViewModels
             newMeasurement.bloodPressureLower = bloodPressureLower;
         }
 
-        //unfinished
         public void SetSecondMeasurementPageMeasureData(string healthIssueOther)
         {
             SetMeasurementSelectedHealthIssues();
@@ -136,11 +140,17 @@ namespace HartRevalidatieApplication.ViewModels
 
             try
             {
-                string parameters = JsonConvert.SerializeObject(newMeasurement);
+                string parameters = JsonConvert.SerializeObject(newMeasurement,
+                            new JsonSerializerSettings
+                            {
+                                NullValueHandling = NullValueHandling.Ignore
+                            });
+
                 var response = await APIconnection.ConnectToAPI(methodType, "measurements", parameters);
                 var str = await response.Content.ReadAsStringAsync();
 
-                Settings.SetLastMeasurementUpdate(newMeasurement.measurementDateTime);
+                if (newMeasurement.measurementDateTime.Date == DateTime.Now.Date)
+                    Settings.SetLastMeasurementUpdate(newMeasurement.measurementDateTime);
                 return true;
             }
 
@@ -193,8 +203,9 @@ namespace HartRevalidatieApplication.ViewModels
             Windows.Data.Xml.Dom.XmlElement audio = toastXml.CreateElement("audio");
             audio.SetAttribute("src", "ms-winsoundevent:Notification.SMS");
 
-            DateTime notifierDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1, 20, 0, 0);
-            
+            DateTime dayTomorrow = DateTime.Now.AddDays(1);
+            DateTime notifierDateTime = new DateTime(dayTomorrow.Year, dayTomorrow.Month, dayTomorrow.Day, 20, 0, 0);
+
             ScheduledToastNotification toast = new ScheduledToastNotification(toastXml, notifierDateTime);
             toastNotifier.AddToSchedule(toast);
         }

@@ -39,7 +39,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
@@ -49,21 +49,21 @@
                        Text="1. Vul uw bloeddruk in (mmHg)" FontWeight="Bold"/>
 
             <Image Source="ms-appx:///Assets/meting_img1.png"  Grid.Row="2" Grid.Column="0"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" Margin="0 25 0 0"
+            <TextBlock Grid.Row="2" Grid.Column="1" Margin="0 20 0 0"
                        Name="UpperPressureError" Text="Kan niet leeg zijn"
                        Foreground="Red" Visibility="Collapsed"/>
             <TextBox Grid.Row="2" Grid.Column="1" Header="Bovendruk / SYS"
-                     PlaceholderText="0" Text="{Binding newMeasurement.bloodPressureUpper}"
-                     TextAlignment="Center" MaxHeight="60"
+                     Text="{Binding newMeasurement.bloodPressureUpper}"
+                     TextAlignment="Center" MaxHeight="60" PlaceholderText="0"
                      InputScope="Number" Name="bloodPressureUpperTextBox" TextChanged="bloodPressureUpperTextBox_TextChanged"/>
 
             <Image Source="ms-appx:///Assets/meting_img2.png" Grid.Row="3" Grid.Column="0"/>
-            <TextBlock Grid.Row="3" Grid.Column="1" Margin="0 25 0 0"
+            <TextBlock Grid.Row="3" Grid.Column="1" Margin="0 20 0 0"
                        Name="LowerPressureError" Text="Kan niet leeg zijn"
                        Foreground="Red" Visibility="Collapsed"/>
             <TextBox Grid.Row="3" Grid.Column="1" Header="Onderdruk / DIA"
-                     PlaceholderText="0"  Text="{Binding newMeasurement.bloodPressureLower}"
-                     TextAlignment="Center" MaxHeight="60"
+                     Text="{Binding newMeasurement.bloodPressureLower}"
+                     TextAlignment="Center" MaxHeight="60" PlaceholderText="0"
                      InputScope="Number" Name="bloodPressureLowerTextBox" TextChanged="bloodPressureLowerTextBox_TextChanged"/>
 
 

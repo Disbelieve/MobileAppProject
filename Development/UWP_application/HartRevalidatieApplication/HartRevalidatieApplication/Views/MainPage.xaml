@@ -14,13 +14,9 @@
             <RowDefinition Height="7.5*"/>
         </Grid.RowDefinitions>
 
-        <Image Source="ms-appx:///Assets/Logo_zorgvoormijnhart.png" 
-               Stretch="Fill" Grid.Row="1"
+        <Image Source="ms-appx:///Assets/splashscreen_image.png" 
+               Stretch="UniformToFill" Grid.Row="1" Grid.RowSpan="2"
                HorizontalAlignment="Center"/>
-        
-        <Image Source="ms-appx:///Assets/MainPage_img.jpg" 
-               Stretch="UniformToFill" Grid.Row="2"
-               HorizontalAlignment="Right"/>
 
         <Border Grid.Row="0" Background="#50D6CF">
             <TextBlock Text="Inloggen / Registreren" 

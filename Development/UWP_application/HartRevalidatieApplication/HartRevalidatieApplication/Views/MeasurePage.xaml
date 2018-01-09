@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="8*"/>
             <ColumnDefinition Width="1*"/>            
         </Grid.ColumnDefinitions>
 
@@ -32,7 +32,7 @@
         </Border>
 
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3" Grid.Row="1" Margin="50 0 0 0">
-            <TextBlock Text="Goedemiddag, "
+            <TextBlock Text="Goeiedag,"
                        VerticalAlignment="Center"
                        FontSize="20"/>
             <TextBlock Text="{Binding salutation}"
@@ -45,7 +45,7 @@
                        Margin="5 0 0 0"/>
         </StackPanel>
 
-        <Image Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="3" Source="ms-appx:///Assets/home_bg.jpg"
+        <Image Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="3" Source="ms-appx:///Assets/MainPage_img.jpg"
                Stretch="UniformToFill" HorizontalAlignment="Center"/>
         <Rectangle Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="3"  Fill="Black" Opacity="0.3"/>
 

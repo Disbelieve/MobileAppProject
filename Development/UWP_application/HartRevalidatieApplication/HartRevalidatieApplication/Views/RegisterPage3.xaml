@@ -13,32 +13,54 @@
             <RowDefinition Height="11.5*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="#50D6CF">
-            <TextBlock Text="Registratie afgerond" 
+            <TextBlock Text="Registreren stap 3 van 3" 
                        Foreground="White"
                        VerticalAlignment="Center"
                        Margin="50 0 0 0"
                        FontWeight="SemiBold"
-                       FontSize="20"
-                       FontFamily="Segoe UI"/>
+                       FontSize="20"/>
         </Border>
 
-        <StackPanel Grid.RowSpan="2" Margin="30 0 30 0" VerticalAlignment="Center">
-            <Image Source="ms-appx:///Assets/img_Checkmark.png"
-                   Height="100" Width="100" Margin="0 0 0 30"/>
-            <TextBlock Text="Bedankt voor het registreren!" FontSize="17"
-                     HorizontalAlignment="Center"
-                     FontWeight="SemiBold"/>
-            <TextBlock Text="U heeft een e-mail ontvangen op:" 
-                     HorizontalAlignment="Center" Margin="0 30 0 0"/>
-            <TextBlock Text="{Binding newUser.emailAddress}" 
-                     HorizontalAlignment="Center"
-                     FontWeight="SemiBold"/>
-            <TextBlock Text="Hiermee kunt u uw account activeren." 
-                     HorizontalAlignment="Center" Margin="0 30 0 0"/>
+        <Button Grid.Row="0" FontFamily="Segoe MDL2 Assets" 
+                Content="&#xE112;" FontWeight="SemiBold" FontSize="20"
+                Background="Transparent" Click="Back_Click"
+                Foreground="White" Margin="0 2.5 0 0"></Button>
 
-            <Button Margin="50 30 50 0" Background="#E84A4A" FontSize="17"
-                Foreground="White" Grid.Row="2" Click="Login_Click" 
-                HorizontalAlignment="Stretch">Inloggen</Button>
-        </StackPanel>
+        <Grid Grid.Row="1" Margin="30 0 30 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Margin="0 10 0 0" FontSize="18"
+                       Text="Consulent" FontWeight="SemiBold"/>
+            <TextBlock Grid.Row="1" Margin="0 10 0 0"
+                       Text="Uw consulent bij het St. Antonius Ziekenhuis"
+                       TextWrapping="Wrap"/>
+            
+            <TextBlock Grid.Row="2" Margin="0 10 0 0"
+                       Name="ConsultantError" Text="Consulent kan niet leeg zijn"
+                       Foreground="Red" Visibility="Collapsed"/>
+            <ComboBox Grid.Row="2" Name="ConsultantTextBox" Margin="0 30 0 0" HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding consultants}"
+                      SelectedValuePath="_id"
+                      PlaceholderText="Selecteer uw consulent"
+                      Background="#EEEEEE" SelectionChanged="ConsultantTextBox_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding firstname}"/>
+                            <Run Text="{Binding lastname}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Button Grid.Row="3" Margin="50 30 50 0" Background="#50D6CF" FontSize="17"
+                Foreground="White" Click="Register_Click" 
+                HorizontalAlignment="Stretch">Registreren</Button>
+        </Grid>
     </Grid>
 </Page>

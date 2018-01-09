@@ -30,16 +30,22 @@ namespace HartRevalidatieApplication.Views
     {
         public LoginPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             DataContext = LoginPageViewModel.SingleInstance;
         }
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
             if (Email_IsValidInput() & Password_IsValidInput())
             {
-                await LoginPageViewModel.SingleInstance.Login(EmailTextBox.Text, PasswordBox.Password);
-                Settings.SetAutomaticLogin(AutoLoginCheckBox.IsChecked.Value);
-                ((Frame)Window.Current.Content).Navigate(typeof(MeasurePage));
+                if (await LoginPageViewModel.SingleInstance.Login(EmailTextBox.Text, PasswordBox.Password))
+                {
+                    Settings.SetAutomaticLogin(AutoLoginCheckBox.IsChecked.Value);
+                    ((Frame)Window.Current.Content).Navigate(typeof(MeasurePage));
+                }
+                else
+                {
+                    LoginFailError.Visibility = Visibility.Visible;
+                }
             }
         }
         private void RememberPassword_Click(object sender, RoutedEventArgs e)

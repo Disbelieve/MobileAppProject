@@ -14,6 +14,8 @@ namespace HartRevalidatieApplication.Models
         public string consultantId { get; set; }
         public string dateOfBirth { get; set; }
         public int gender { get; set; }
-        public string password { get; set; } 
+        public string password { get; set; }
+        public string weight { get; set; }
+        public string length { get; set; }
     }
 }

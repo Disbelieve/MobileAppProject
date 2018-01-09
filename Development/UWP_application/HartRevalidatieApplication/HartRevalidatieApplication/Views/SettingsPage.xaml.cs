@@ -72,10 +72,14 @@ namespace HartRevalidatieApplication.Views
 
         private async void SaveSettings_Click(object sender, RoutedEventArgs e)
         {
+            int tempVar;
             try
             {
-                await SettingsPageViewModel.SingleInstance.UpdateUser(Convert.ToInt16(LengthTextBox.Text), Convert.ToInt16(WeightTextBox.Text));
-                ChangePopUpStatus(ChangeDataPopup);
+                if (int.TryParse(LengthTextBox.Text, out tempVar) && int.TryParse(WeightTextBox.Text, out tempVar))
+                { 
+                    await SettingsPageViewModel.SingleInstance.UpdateUser(Convert.ToInt16(LengthTextBox.Text), Convert.ToInt16(WeightTextBox.Text));
+                    ChangePopUpStatus(ChangeDataPopup);
+                }
             }
 
             catch { }
@@ -100,6 +104,11 @@ namespace HartRevalidatieApplication.Views
         private void CancelLogout_Click(object sender, RoutedEventArgs e)
         {
             ChangePopUpStatus(LogoutPopup);
+        }
+
+        private void FAQPage_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(FAQPage));
         }
 
         private void ChangePopUpStatus(Grid popup)

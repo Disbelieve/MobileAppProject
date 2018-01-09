@@ -20,30 +20,40 @@ namespace HartRevalidatieApplication.ViewModels
 
         public static RegisterPageViewModel SingleInstance { get; } = new RegisterPageViewModel();
 
-        public RegisterUser newUser { get; private set; }
+        public RegisterUser newUser { get; set; }
 
         public ObservableCollection<Consultant> consultants { get; set; } = new ObservableCollection<Consultant>();
 
         public RegisterPageViewModel()
         {
-            LoadData();
+            try
+            {
+                LoadData();
+            }
+            catch { }
         }
         
-        public void SetFirstRegisterPageUserData(string firstName, string lastName, string birthDate, string consultantId, int gender)
+        public void SetFirstRegisterPageUserData(string firstName, string lastName, string birthDate, int gender, string weight, string length)
         {
             newUser = new RegisterUser();
 
             newUser.firstname = firstName;
             newUser.lastname = lastName;
             newUser.dateOfBirth = birthDate;
-            newUser.consultantId = consultantId;
             newUser.gender = gender;
+            newUser.weight = weight;
+            newUser.length = length;
         }
 
         public void SetSecondRegisterPageUserData(string email, string password, string repeatPassword)
         {
             newUser.emailAddress = email;
             newUser.password = password;
+        }
+
+        public void SetThirdRegisterPageUserData(string consultantId)
+        {
+            newUser.consultantId = consultantId;
         }
 
         private async Task<int> GetConsultants()
@@ -78,7 +88,11 @@ namespace HartRevalidatieApplication.ViewModels
 
         public async void LoadData()
         {
-            await GetConsultants();
+            try
+            {
+                await GetConsultants();
+            }
+            catch { }
         }            
     }
 }

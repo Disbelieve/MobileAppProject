@@ -30,7 +30,7 @@ namespace HartRevalidatieApplication.Services
                                     Encoding.UTF8,
                                     "application/json");
                             }
-                    
+
 
                     return await client.SendAsync(request);
                 }

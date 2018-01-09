@@ -17,8 +17,8 @@ namespace HartRevalidatieApplication.Models
         public static ApiData SingleInstance { get; } = new ApiData();
         
         private ObservableCollection<Consultant> consultants { get; set; }
-
         private ObservableCollection<HealthIssue> healthIssues { get; set; }
+        private ObservableCollection<QA> faq { get; set; }
 
         public List<Measurement> diary { get; set; }
 
@@ -54,6 +54,17 @@ namespace HartRevalidatieApplication.Models
             }
 
             return healthIssues;
+        }
+
+        public async Task<ObservableCollection<QA>> GetFAQ()
+        {
+            if (faq == null)
+            {
+                var response = await APIconnection.ConnectToAPI(HttpMethod.Get, "faq");
+                faq = JsonConvert.DeserializeObject<ObservableCollection<QA>>(await response.Content.ReadAsStringAsync());
+            }
+
+            return faq;
         }
     }
 }

@@ -52,15 +52,24 @@ namespace HartRevalidatieApplication.Views
 
         private void Next_Click(object sender, RoutedEventArgs e)
         {
-            if(UpperPressure_IsValidInput() & LowerPressure_IsValidInput())
-                MeasurePageViewModel.SingleInstance.SetFirstMeasurementPageMeasureData(Convert.ToInt32(bloodPressureUpperTextBox.Text), 
+            if (UpperPressure_IsValidInput() & LowerPressure_IsValidInput())
+            {
+                MeasurePageViewModel.SingleInstance.SetFirstMeasurementPageMeasureData(Convert.ToInt32(bloodPressureUpperTextBox.Text),
                     Convert.ToInt32(bloodPressureLowerTextBox.Text));
-            ((Frame)Window.Current.Content).Navigate(typeof(NewMeasurementPage2));
+                ((Frame)Window.Current.Content).Navigate(typeof(NewMeasurementPage2));
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            MeasurePageViewModel.SingleInstance.StartNewMeasurement(e.Parameter as Measurement);
+            Measurement m = e.Parameter as Measurement;
+            if (m != null)
+                MeasurePageViewModel.SingleInstance.StartNewMeasurement(m);
+            else
+            {
+                bloodPressureUpperTextBox.Text = "";
+                bloodPressureLowerTextBox.Text = "";
+            }
 
             MeasurePageViewModel.SingleInstance.RemoveNotification();
             
@@ -89,8 +98,12 @@ namespace HartRevalidatieApplication.Views
 
         private async void SaveSettings_Click(object sender, RoutedEventArgs e)
         {
-            await SettingsPageViewModel.SingleInstance.UpdateUser(Convert.ToInt16(LengthTextBox.Text), Convert.ToInt16(WeightTextBox.Text));
-            ChangePopUpStatus(ChangeDataPopup);
+            int tempVar;
+            if (int.TryParse(LengthTextBox.Text, out tempVar) && int.TryParse(WeightTextBox.Text, out tempVar))
+            {
+                await SettingsPageViewModel.SingleInstance.UpdateUser(Convert.ToInt16(LengthTextBox.Text), Convert.ToInt16(WeightTextBox.Text));
+                ChangePopUpStatus(ChangeDataPopup);
+            }
         }
 
         private void CancelChangeData_Click(object sender, RoutedEventArgs e)
@@ -154,7 +167,7 @@ namespace HartRevalidatieApplication.Views
 
             else
             {
-                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, true, "");
+                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, false, "");
 
                 return true;
             }
