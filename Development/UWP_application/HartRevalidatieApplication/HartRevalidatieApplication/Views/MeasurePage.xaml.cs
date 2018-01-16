@@ -50,15 +50,14 @@ namespace HartRevalidatieApplication.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            greetingText.Text = MeasurePageViewModel.SingleInstance.GetGreeting();
             if (MeasurePageViewModel.SingleInstance.DailyMeasurementFinished())
             {
-                NewMeasureButton.IsEnabled = false;
-                NewMeasureText.Text = "U heeft vandaag al een meting gedaan";
+                NewMeasureText.Text = "U heeft vandaag al een meting gedaan, wilt u er nog een doen?";
             }
             else
             {
-                NewMeasureButton.IsEnabled = true;
-                NewMeasureText.Text = "Voer uw meting in";
+                NewMeasureText.Text = "Start hier een nieuwe meting";
             }
 
             base.OnNavigatedTo(e);

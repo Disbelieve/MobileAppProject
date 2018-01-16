@@ -65,29 +65,54 @@ namespace HartRevalidatieApplication.Views
             GlobalClickMethods.Contact_Click(sender, e);
         }
 
-        private void ChangeDataSetting_Click(object sender, RoutedEventArgs e)
+        private void ChangeLengthSetting_Click(object sender, RoutedEventArgs e)
         {
-            ChangePopUpStatus(ChangeDataPopup);
+            ChangePopUpStatus(ChangeLengthPopup);
         }
 
-        private async void SaveSettings_Click(object sender, RoutedEventArgs e)
+        private void ChangeWeightSetting_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePopUpStatus(ChangeWeightPopup);
+        }
+
+        private async void SaveLengthSettings_Click(object sender, RoutedEventArgs e)
         {
             int tempVar;
             try
             {
-                if (int.TryParse(LengthTextBox.Text, out tempVar) && int.TryParse(WeightTextBox.Text, out tempVar))
+                if (int.TryParse(LengthTextBox.Text, out tempVar))
                 { 
                     await SettingsPageViewModel.SingleInstance.UpdateUser(Convert.ToInt16(LengthTextBox.Text), Convert.ToInt16(WeightTextBox.Text));
-                    ChangePopUpStatus(ChangeDataPopup);
+                    ChangePopUpStatus(ChangeLengthPopup);
                 }
             }
 
             catch { }
         }
 
-        private void CancelChangeData_Click(object sender, RoutedEventArgs e)
+        private async void SaveWeightSettings_Click(object sender, RoutedEventArgs e)
         {
-            ChangePopUpStatus(ChangeDataPopup);
+            int tempVar;
+            try
+            {
+                if (int.TryParse(WeightTextBox.Text, out tempVar))
+                {
+                    await SettingsPageViewModel.SingleInstance.UpdateUser(Convert.ToInt16(LengthTextBox.Text), Convert.ToInt16(WeightTextBox.Text));
+                    ChangePopUpStatus(ChangeWeightPopup);
+                }
+            }
+
+            catch { }
+        }
+
+        private void CancelChangeLength_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePopUpStatus(ChangeLengthPopup);
+        }
+
+        private void CancelChangeWeight_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePopUpStatus(ChangeWeightPopup);
         }
 
         private void LogoutSetting_Click(object sender, RoutedEventArgs e)

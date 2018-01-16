@@ -108,7 +108,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Rectangle Grid.RowSpan="3" Grid.ColumnSpan="4"
-                                       Fill="{Binding feedback, ConverterParameter=background, 
+                                       Fill="{Binding result, ConverterParameter=background, 
                                        Converter={StaticResource FeedbackToBackgroundColorConverter}}"/>
                             <TextBlock Grid.Row="0" Grid.Column="1" FontSize="14"
                                            Text="Bloeddruk" FontWeight="SemiBold"
@@ -122,10 +122,10 @@
                             <TextBlock Grid.Row="2" Grid.Column="1" FontSize="13"
                                        Text="{Binding feedback}" TextWrapping="Wrap"
                                        Margin="0 0 0 5"
-                                       Foreground="{Binding feedback, ConverterParameter=foreground, 
+                                       Foreground="{Binding result, ConverterParameter=foreground, 
                                        Converter={StaticResource FeedbackToBackgroundColorConverter}}"/>
                             <TextBlock Grid.RowSpan="3" Grid.Column="2" FontSize="11"
-                                           Text="{Binding measurementDateTime, Converter={StaticResource DateToStringFormatConverter}}" FontWeight="SemiBold"
+                                           Text="{Binding measurementDateTime, Converter={StaticResource DateToStringFormatConverter}, ConverterParameter=shortDate}" FontWeight="SemiBold"
                                            HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBlock Grid.RowSpan="3" Grid.Column="3" FontSize="11" Padding="0"
                                         FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center"

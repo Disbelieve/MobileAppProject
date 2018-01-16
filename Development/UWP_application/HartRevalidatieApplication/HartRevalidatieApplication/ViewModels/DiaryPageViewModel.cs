@@ -93,13 +93,24 @@ namespace HartRevalidatieApplication.ViewModels
 
                     try
                     {
-                        m.healthIssues.Add(m.healthIssueOther);
+                        if (!string.IsNullOrWhiteSpace(m.healthIssueOther))
+                        {
+                            if (m.healthIssueIds != null && m.healthIssueIds.Count != 0)
+                            {
+                                m.healthIssues.Add("");
+                                m.healthIssues.Add("Overige klachten:");
+                            }
+
+                            m.healthIssues.Add(m.healthIssueOther);
+                        }
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 else
                 {
-                    m.healthIssues.Add("Geen");
+                    m.healthIssues.Add("Geen bijzondere klachten");
                 }
             }
         }

@@ -46,7 +46,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Rectangle Grid.RowSpan="3" Grid.ColumnSpan="4"
-                           Fill="{Binding diaryEntry.feedback, ConverterParameter=background, 
+                           Fill="{Binding diaryEntry.result, ConverterParameter=background, 
                            Converter={StaticResource FeedbackToBackgroundColorConverter}}"/>
                 <TextBlock Grid.Row="0" Grid.Column="1" FontSize="14"
                                            Text="Bloeddruk" FontWeight="SemiBold"
@@ -59,13 +59,13 @@
                 </TextBlock>
                 <TextBlock Grid.Row="2" Grid.Column="1" FontSize="13"
                        Margin="0 0 0 5" TextWrapping="Wrap"
-                       Foreground="{Binding diaryEntry.feedback, ConverterParameter=foreground, 
+                       Foreground="{Binding diaryEntry.result, ConverterParameter=foreground, 
                        Converter={StaticResource FeedbackToBackgroundColorConverter}}">
                 <Run Text="{Binding diaryEntry.feedback}"/>
                 </TextBlock>
                 <TextBlock Grid.RowSpan="3" Grid.Column="2" FontSize="11"
                        HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Run Text="{Binding diaryEntry.measurementDateTime, Converter={StaticResource DateToStringFormatConverter}}" FontWeight="SemiBold"/>
+                <Run Text="{Binding diaryEntry.measurementDateTime, Converter={StaticResource DateToStringFormatConverter}, ConverterParameter=shortDate}" FontWeight="SemiBold"/>
                 </TextBlock>
 
                 <TextBlock Grid.Row="3" Grid.Column="1" 
@@ -74,10 +74,29 @@
                        Text="Gezondheisklachten"/>
                 <ListView Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" 
                       ItemsSource="{Binding diaryEntry.healthIssues}">
-
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Margin" Value="0 0 0 5"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="MinHeight" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <ListViewItemPresenter
+                                            SelectionCheckMarkVisualEnabled="False"
+                                            PointerOverBackground="Transparent"
+                                            SelectedBackground="Transparent"
+                                            SelectedPointerOverBackground="Transparent"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" FontSize="14"/>
+                            <TextBlock Text="{Binding}" FontSize="14" Margin="0" Padding="0"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

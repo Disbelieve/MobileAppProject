@@ -54,9 +54,12 @@ namespace HartRevalidatieApplication.Views
         {
             if (UpperPressure_IsValidInput() & LowerPressure_IsValidInput())
             {
-                MeasurePageViewModel.SingleInstance.SetFirstMeasurementPageMeasureData(Convert.ToInt32(bloodPressureUpperTextBox.Text),
+                if (IsLogicalInput())
+                {
+                    MeasurePageViewModel.SingleInstance.SetFirstMeasurementPageMeasureData(Convert.ToInt32(bloodPressureUpperTextBox.Text),
                     Convert.ToInt32(bloodPressureLowerTextBox.Text));
-                ((Frame)Window.Current.Content).Navigate(typeof(NewMeasurementPage2));
+                    ((Frame)Window.Current.Content).Navigate(typeof(NewMeasurementPage2));
+                }
             }
         }
 
@@ -128,14 +131,14 @@ namespace HartRevalidatieApplication.Views
 
             if (string.IsNullOrWhiteSpace(bloodPressureUpperTextBox.Text))
             {
-                SetErrorUI(UpperPressureError, bloodPressureUpperTextBox, true, "Waarde kan niet leeg zijn");
+                SetErrorUI(UpperPressureError, bloodPressureUpperTextBox, true, "Bovendruk kan niet leeg zijn");
 
                 return false;
             }
 
             else if (!int.TryParse(bloodPressureUpperTextBox.Text, out tempVar))
             {
-                SetErrorUI(UpperPressureError, bloodPressureUpperTextBox, true, "Alleen nummers toegestaan");
+                SetErrorUI(UpperPressureError, bloodPressureUpperTextBox, true, "Alleen cijfers zijn toegestaan");
 
                 return false;
             }
@@ -154,13 +157,13 @@ namespace HartRevalidatieApplication.Views
 
             if (string.IsNullOrWhiteSpace(bloodPressureLowerTextBox.Text))
             {
-                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, true, "Waarde kan niet leeg zijn");
+                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, true, "Onderdruk kan niet leeg zijn");
 
                 return false;
             }
             else if (!int.TryParse(bloodPressureLowerTextBox.Text, out tempVar))
             {
-                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, true, "Alleen nummers toegestaan");
+                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, true, "Alleen cijfers zijn toegestaan");
 
                 return false;
             }
@@ -169,6 +172,22 @@ namespace HartRevalidatieApplication.Views
             {
                 SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, false, "");
 
+                return true;
+            }
+        }
+
+        private bool IsLogicalInput()
+        {
+            if (Convert.ToInt16(bloodPressureLowerTextBox.Text) > Convert.ToInt16(bloodPressureUpperTextBox.Text))
+            {
+                valuesComparedError.Text = "Onderdruk moet kleiner dan bovendruk zijn";
+                valuesComparedError.Visibility = Visibility.Visible;
+                return false;
+            }
+            else
+            {
+                valuesComparedError.Text = "";
+                valuesComparedError.Visibility = Visibility.Collapsed;
                 return true;
             }
         }

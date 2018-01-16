@@ -32,7 +32,7 @@ namespace HartRevalidatieApplication.Services
                             }
 
 
-                    return await client.SendAsync(request);
+                    return await client.SendAsync(request);  //bij deze regel code was de error op school
                 }
             }
 

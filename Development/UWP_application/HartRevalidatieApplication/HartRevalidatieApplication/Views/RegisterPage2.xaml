@@ -13,7 +13,7 @@
             <RowDefinition Height="11.5*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="#50D6CF">
-            <TextBlock Text="Registreren stap 2 van 2" 
+            <TextBlock Text="Registreren stap 2 van 3" 
                        Foreground="White"
                        VerticalAlignment="Center"
                        Margin="50 0 0 0"

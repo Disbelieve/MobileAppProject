@@ -15,6 +15,7 @@ namespace HartRevalidatieApplication.Models
         public List<string> healthIssueIds { get; set; }
         public List<string> healthIssues { get; set; }
         public string healthIssueOther { get; set; }
+        public int result { get; set; }
         public string feedback { get; set; }
     }
 }

@@ -34,12 +34,24 @@ namespace HartRevalidatieApplication.ViewModels
             LoadData();
         }
 
-        private void SetSalutation()
+        public void SetSalutation()
         {
             if (user.gender == 1)
                 salutation = "meneer";
             else
                 salutation = "mevrouw";
+        }
+
+        public string GetGreeting()
+        {
+            int currentHour = DateTime.Now.Hour;
+
+            if (currentHour >= 6 && currentHour < 12)
+                return "Goedemorgen,";
+            else if (currentHour >= 12 && currentHour < 18)
+                return "Goedemiddag,";
+            else
+                return "Goedeavond,";
         }
 
         public async void LoadData()

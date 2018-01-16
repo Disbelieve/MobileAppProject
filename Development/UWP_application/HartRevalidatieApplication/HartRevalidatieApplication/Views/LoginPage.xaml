@@ -73,10 +73,10 @@
                     Content="Wachtwoord vergeten?" Width="200"/>
         </Grid>
 
-        <Rectangle Name="PopupBackground" Grid.Row="1" 
+        <Rectangle Name="PopupBackground" Grid.Row="1" Grid.RowSpan="2"
                    Fill="Black" Opacity="0.3" Visibility="Collapsed"/>
 
-        <Grid Name="RememberPasswordPopup" Grid.Row="1" VerticalAlignment="Center"
+        <Grid Name="RememberPasswordPopup" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center"
               Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>

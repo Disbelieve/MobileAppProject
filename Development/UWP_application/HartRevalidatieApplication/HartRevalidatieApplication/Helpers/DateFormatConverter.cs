@@ -16,9 +16,15 @@ namespace HartRevalidatieApplication.Helpers
                 return null;
 
             CultureInfo dutch = new CultureInfo("nl-NL");
-
             DateTime dt = DateTime.Parse(value.ToString());
-            return dt.ToString("ddd, dd MMM yyyy", dutch);
+
+            if (parameter as string == "shortDate")
+                return dt.ToString("ddd, dd MMM yyyy", dutch);
+            else if (parameter as string == "longDate")
+                return dt.ToString("dddd, dd MMMM yyyy", dutch);
+
+            else
+                return dt.ToString("ddd, dd MMM yyyy", dutch);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

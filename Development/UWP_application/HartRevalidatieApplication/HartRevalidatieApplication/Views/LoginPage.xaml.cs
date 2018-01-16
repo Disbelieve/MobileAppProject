@@ -103,7 +103,7 @@ namespace HartRevalidatieApplication.Views
                 EmailTextBox.BorderThickness = new Thickness(1);
                 EmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
                 EmailError.Visibility = Visibility.Visible;
-                EmailError.Text = "Email kan niet leeg zijn";
+                EmailError.Text = "E-mail kan niet leeg zijn";
 
                 return false;
             }
