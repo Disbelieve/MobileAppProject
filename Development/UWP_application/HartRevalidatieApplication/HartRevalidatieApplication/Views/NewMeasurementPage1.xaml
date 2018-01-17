@@ -42,8 +42,10 @@
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="1" Grid.ColumnSpan="2"
-                       Text="{Binding newMeasurement.measurementDateTime, Converter={StaticResource DateToStringFormatConverter}, ConverterParameter=longDate}"/>
+            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap">
+                <Run Text="Datum van de meting:"/>
+                <Run Text="{Binding newMeasurement.measurementDateTime, Converter={StaticResource DateToStringFormatConverter}, ConverterParameter=longDate}"/>
+            </TextBlock>
 
             <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Margin="0"
                        Text="Vul uw bloeddruk in" FontWeight="Bold"/>

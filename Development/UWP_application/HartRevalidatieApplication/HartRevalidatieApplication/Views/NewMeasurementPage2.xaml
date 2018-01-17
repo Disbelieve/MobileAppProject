@@ -43,10 +43,12 @@
                        Text="Heeft u regelmatig last van één of meer van de volgende gezondheidsklachten?" 
                        FontWeight="SemiBold" TextWrapping="Wrap"/>
 
-            <TextBlock Grid.Row="1"
-                       Text="{Binding newMeasurement.measurementDateTime, Converter={StaticResource DateToStringFormatConverter}, ConverterParameter=longDate}"/>
-
-            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 5 0 0">
+                <TextBlock Grid.Row="1" TextWrapping="Wrap">
+                <Run Text="Datum van de meting:"/>
+                <Run Text="{Binding newMeasurement.measurementDateTime, Converter={StaticResource DateToStringFormatConverter}, ConverterParameter=longDate}"/>
+                </TextBlock>
+            
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 5 0 0">
                 <RadioButton Name="noComplaints" Content="Nee"
                              Checked="noComplaints_Checked"/>
                 <RadioButton Name="yesComplaints"
