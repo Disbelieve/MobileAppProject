@@ -30,7 +30,8 @@
                 Foreground="White" Margin="0 2.5 0 0"></Button>
 
 
-        <Grid Grid.Row="1" Margin="15 5 15 0">
+        <ScrollViewer Grid.Row="1">
+        <Grid Margin="15 5 15 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -46,7 +47,7 @@
                        Text="{Binding newMeasurement.measurementDateTime, Converter={StaticResource DateToStringFormatConverter}, ConverterParameter=longDate}"/>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 5 0 0">
-                <RadioButton Name="noComplaints" Content="Nee"   IsChecked="True"
+                <RadioButton Name="noComplaints" Content="Nee"
                              Checked="noComplaints_Checked"/>
                 <RadioButton Name="yesComplaints"
                              Content="Ja, namelijk" Checked="yesComplaints_Checked"/>
@@ -73,7 +74,7 @@
                 </ListView>
 
                 
-                <TextBox Grid.Row="2" Name="HealthIssueOtherTextBox"
+                <TextBox Grid.Row="2" Name="HealthIssueOtherTextBox" MaxLength="1000"
                          Text="{Binding newMeasurement.healthIssueOther}"
                          TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                          AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -84,6 +85,7 @@
                 </TextBox>
             </Grid>
         </Grid>
+        </ScrollViewer>
 
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="30 0 30 0">

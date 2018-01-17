@@ -52,18 +52,13 @@ namespace HartRevalidatieApplication.Views
             GlobalClickMethods.Back_Click(sender, e);
         }
 
-        private void ConsultantTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Consultant_IsValidInput();
-        }
-
         private bool Consultant_IsValidInput()
         {
             if (ConsultantTextBox.SelectedValue == null)
             {
                 ConsultantTextBox.BorderThickness = new Thickness(1);
                 ConsultantTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                ConsultantError.Visibility = Visibility.Visible;
+                ConsultantTextBox.Header = "Consulent kan niet leeg zijn";
 
                 return false;
             }
@@ -71,7 +66,7 @@ namespace HartRevalidatieApplication.Views
             else
             {
                 ConsultantTextBox.BorderThickness = new Thickness(0);
-                ConsultantError.Visibility = Visibility.Collapsed;
+                ConsultantTextBox.Header = " ";
 
                 return true;
             }

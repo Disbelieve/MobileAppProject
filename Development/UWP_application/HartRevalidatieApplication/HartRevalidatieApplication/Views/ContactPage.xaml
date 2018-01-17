@@ -45,21 +45,13 @@
                                 <Run Text="E-mail:"/>
                                 <Run Text="{Binding consultant.emailAddress}"/>
             </TextBlock>
-
-            <TextBlock Grid.Row="3" Margin="0 10 0 0"
-                       Name="SubjectError" Text="Onderwerp kan niet leeg zijn"
-                       Foreground="Red" Visibility="Collapsed"/>
-            <TextBox Grid.Row="3" Margin="0 30 0 0"
-                Name="SubjectTextBox" TextChanged="SubjectTextBox_TextChanged"
-                     PlaceholderText="Onderwerp">
+            <TextBox Grid.Row="3" MaxLength="50"
+                Name="SubjectTextBox" PlaceholderText="Onderwerp" Header=" ">
             </TextBox>
-            <TextBlock Grid.Row="4" Margin="0 10 0 0"
-                       Name="MessageError" Text="Bericht kan niet leeg zijn"
-                       Foreground="Red" Visibility="Collapsed"/>
-            <TextBox Grid.Row="4" Margin="0 30 0 0" VerticalAlignment="Stretch"
-                     Name="MessageTextBox" TextChanged="MessageTextBox_TextChanged" TextWrapping="Wrap"
+            <TextBox Grid.Row="4" VerticalAlignment="Stretch" MaxLength="1000"
+                     Name="MessageTextBox" TextWrapping="Wrap"
                      AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Visible"
-                     PlaceholderText="Bericht">
+                     PlaceholderText="Bericht" Header=" ">
             </TextBox>
         </Grid>
 

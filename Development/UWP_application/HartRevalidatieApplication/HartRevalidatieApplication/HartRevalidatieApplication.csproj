@@ -140,9 +140,6 @@
     <Compile Include="Views\MeasurePage.xaml.cs">
       <DependentUpon>MeasurePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\navigationBar.xaml.cs">
-      <DependentUpon>navigationBar.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\NewMeasurementFinishedPage.xaml.cs">
       <DependentUpon>NewMeasurementFinishedPage.xaml</DependentUpon>
     </Compile>
@@ -262,10 +259,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MeasurePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\navigationBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

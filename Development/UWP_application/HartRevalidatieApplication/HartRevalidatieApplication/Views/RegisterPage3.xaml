@@ -40,14 +40,11 @@
                        Text="Uw consulent bij het St. Antonius Ziekenhuis"
                        TextWrapping="Wrap"/>
             
-            <TextBlock Grid.Row="2" Margin="0 10 0 0"
-                       Name="ConsultantError" Text="Consulent kan niet leeg zijn"
-                       Foreground="Red" Visibility="Collapsed"/>
-            <ComboBox Grid.Row="2" Name="ConsultantTextBox" Margin="0 30 0 0" HorizontalAlignment="Stretch"
+            <ComboBox Grid.Row="2" Name="ConsultantTextBox" HorizontalAlignment="Stretch"
                       ItemsSource="{Binding consultants}"
-                      SelectedValuePath="_id"
+                      SelectedValuePath="_id" Header=" "
                       PlaceholderText="Selecteer uw consulent"
-                      Background="#EEEEEE" SelectionChanged="ConsultantTextBox_SelectionChanged">
+                      Background="#EEEEEE">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>

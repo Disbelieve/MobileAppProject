@@ -49,10 +49,10 @@
                Stretch="UniformToFill" HorizontalAlignment="Center"/>
         <Rectangle Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="3"  Fill="Black" Opacity="0.3"/>
 
-        <Rectangle Grid.Row="3" Grid.Column="1" Fill="White"/>
+        <Rectangle Grid.Row="3" Grid.Column="1" Fill="White" Opacity="0.8"/>
         <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">
-            <TextBlock Name="NewMeasureText" Text="Start hier een nieuwe meting" HorizontalAlignment="Center"
-                       TextWrapping="Wrap"/>
+            <TextBlock Name="NewMeasureText" Text="Start hier een nieuwe meting" TextAlignment="Center"
+                       TextWrapping="Wrap" Margin="20 0 20 0"/>
             <Button Name="NewMeasureButton" Background="#E84A4A" Foreground="White" Click="Next_Click"
                 FontFamily="Segoe UI" FontSize="17" HorizontalAlignment="Stretch" 
                 Margin="20 20 20 0">Start nieuwe meting</Button>

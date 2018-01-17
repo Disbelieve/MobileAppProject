@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -77,10 +78,9 @@ namespace HartRevalidatieApplication.Views
 
         private async void SaveLengthSettings_Click(object sender, RoutedEventArgs e)
         {
-            int tempVar;
             try
             {
-                if (int.TryParse(LengthTextBox.Text, out tempVar))
+                if (Length_IsValidInput())
                 { 
                     await SettingsPageViewModel.SingleInstance.UpdateUser(Convert.ToInt16(LengthTextBox.Text), Convert.ToInt16(WeightTextBox.Text));
                     ChangePopUpStatus(ChangeLengthPopup);
@@ -92,10 +92,9 @@ namespace HartRevalidatieApplication.Views
 
         private async void SaveWeightSettings_Click(object sender, RoutedEventArgs e)
         {
-            int tempVar;
             try
             {
-                if (int.TryParse(WeightTextBox.Text, out tempVar))
+                if (Weight_IsValidInput())
                 {
                     await SettingsPageViewModel.SingleInstance.UpdateUser(Convert.ToInt16(LengthTextBox.Text), Convert.ToInt16(WeightTextBox.Text));
                     ChangePopUpStatus(ChangeWeightPopup);
@@ -103,6 +102,68 @@ namespace HartRevalidatieApplication.Views
             }
 
             catch { }
+        }
+
+        private bool Length_IsValidInput()
+        {
+            int tempVar;
+
+            if (string.IsNullOrWhiteSpace(LengthTextBox.Text) || !int.TryParse(LengthTextBox.Text, out tempVar))
+            {
+                LengthTextBox.BorderThickness = new Thickness(1);
+                LengthTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                LengthTextBox.Header = "Lengte kan niet leeg zijn";
+
+                return false;
+            }
+
+            else if (Convert.ToInt32(LengthTextBox.Text) > 250 || Convert.ToInt32(LengthTextBox.Text) < 100)
+            {
+                LengthTextBox.BorderThickness = new Thickness(1);
+                LengthTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                LengthTextBox.Header = "De gekozen lengte is niet toegestaan";
+
+                return false;
+            }
+
+            else
+            {
+                LengthTextBox.BorderThickness = new Thickness(0);
+                LengthTextBox.Header = " ";
+
+                return true;
+            }
+        }
+
+        private bool Weight_IsValidInput()
+        {
+            int tempVar;
+
+            if (string.IsNullOrWhiteSpace(WeightTextBox.Text) || !int.TryParse(WeightTextBox.Text, out tempVar))
+            {
+                WeightTextBox.BorderThickness = new Thickness(1);
+                WeightTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                WeightTextBox.Header = "Gewicht kan niet leeg zijn";
+
+                return false;
+            }
+
+            else if (Convert.ToInt32(WeightTextBox.Text) > 300 || Convert.ToInt32(WeightTextBox.Text) < 30)
+            {
+                WeightTextBox.BorderThickness = new Thickness(1);
+                WeightTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                WeightTextBox.Header = "Het gekozen gewicht is niet toegestaan";
+
+                return false;
+            }
+
+            else
+            {
+                WeightTextBox.BorderThickness = new Thickness(0);
+                WeightTextBox.Header = " ";
+
+                return true;
+            }
         }
 
         private void CancelChangeLength_Click(object sender, RoutedEventArgs e)

@@ -9,11 +9,17 @@ using Windows.Security.Credentials;
 using HartRevalidatieApplication.Services;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace HartRevalidatieApplication.ViewModels
 {
-    public sealed class SettingsPageViewModel
+    public sealed class SettingsPageViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void RaiseProperty(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+
         public static SettingsPageViewModel SingleInstance { get; } = new SettingsPageViewModel();
         public User user { get; set; } = User.SingleInstance;
 
@@ -44,6 +50,7 @@ namespace HartRevalidatieApplication.ViewModels
 
                 user.length = length;
                 user.weight = weight;
+                OnPropertyChanged(nameof(user));
                 Settings.SetUserDataUpdateTime();
             }
 
@@ -52,6 +59,12 @@ namespace HartRevalidatieApplication.ViewModels
             }
 
             return true;
+        }
+
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

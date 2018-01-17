@@ -66,13 +66,7 @@ namespace HartRevalidatieApplication.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Measurement m = e.Parameter as Measurement;
-            if (m != null)
-                MeasurePageViewModel.SingleInstance.StartNewMeasurement(m);
-            else
-            {
-                bloodPressureUpperTextBox.Text = "";
-                bloodPressureLowerTextBox.Text = "";
-            }
+            MeasurePageViewModel.SingleInstance.StartNewMeasurement(m);
 
             MeasurePageViewModel.SingleInstance.RemoveNotification();
             
@@ -83,6 +77,13 @@ namespace HartRevalidatieApplication.Views
 
 
             base.OnNavigatedTo(e);
+            if (m == null)
+            {
+                bloodPressureUpperTextBox.Text = "";
+                bloodPressureLowerTextBox.Text = "";
+                SetErrorUI(UpperPressureError, bloodPressureUpperTextBox, false, " ");
+                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, false, " ");
+            }
         }
 
         private void ChangePopUpStatus(Grid popup)
@@ -115,16 +116,6 @@ namespace HartRevalidatieApplication.Views
             ChangePopUpStatus(ChangeDataPopup);
         }
 
-        private void bloodPressureUpperTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            UpperPressure_IsValidInput();
-        }
-
-        private void bloodPressureLowerTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            LowerPressure_IsValidInput();
-        }
-
         private bool UpperPressure_IsValidInput()
         {
             int tempVar;
@@ -143,9 +134,16 @@ namespace HartRevalidatieApplication.Views
                 return false;
             }
 
+            else if (Convert.ToInt32(bloodPressureUpperTextBox.Text) > 300 || Convert.ToInt32(bloodPressureUpperTextBox.Text) < 30)
+            {
+                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, true, "De gekozen bovendruk is niet toegestaan");
+
+                return false;
+            }
+
             else
             {
-                SetErrorUI(UpperPressureError, bloodPressureUpperTextBox, false, "");
+                SetErrorUI(UpperPressureError, bloodPressureUpperTextBox, false, " ");
 
                 return true;
             }
@@ -168,9 +166,16 @@ namespace HartRevalidatieApplication.Views
                 return false;
             }
 
+            else if (Convert.ToInt32(bloodPressureLowerTextBox.Text) > 300 || Convert.ToInt32(bloodPressureLowerTextBox.Text) < 30)
+            {
+                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, true, "De gekozen onderdruk is niet toegestaan");
+
+                return false;
+            }
+
             else
             {
-                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, false, "");
+                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, false, " ");
 
                 return true;
             }

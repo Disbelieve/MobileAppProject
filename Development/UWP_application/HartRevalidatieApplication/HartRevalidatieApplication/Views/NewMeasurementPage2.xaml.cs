@@ -82,5 +82,14 @@ namespace HartRevalidatieApplication.Views
             }
             catch { }
         }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if ((MeasurePageViewModel.SingleInstance.newMeasurement.healthIssues != null && MeasurePageViewModel.SingleInstance.healthIssues.Count > 0) ||
+                (MeasurePageViewModel.SingleInstance.newMeasurement.healthIssueOther != null && MeasurePageViewModel.SingleInstance.newMeasurement.healthIssueOther == ""))
+                yesComplaints.IsChecked = true;
+            else
+                noComplaints.IsChecked = true;
+            base.OnNavigatedTo(e);
+        }
     }
 }

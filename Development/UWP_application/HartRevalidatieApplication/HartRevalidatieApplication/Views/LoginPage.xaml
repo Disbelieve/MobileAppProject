@@ -32,7 +32,7 @@
                 Background="Transparent" Click="Back_Click"
                 Foreground="White" Margin="0 2.5 0 0"></Button>
 
-        <Grid Grid.Row="2" Margin="30 0 30 0">
+        <Grid Grid.Row="2" Margin="15 0 15 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -43,34 +43,27 @@
             </Grid.RowDefinitions>
 
 
-
-            <TextBlock Grid.Row="0" Margin="0 10 0 0"
-                       Name="EmailError"
-                       Foreground="Red" Visibility="Collapsed"/>
             <TextBox Grid.Row="0" Name="EmailTextBox" InputScope="EmailNameOrAddress"
-                     PlaceholderText="Voer uw emailadres in"
-                     Margin="0 30 0 0" TextChanged="EmailTextBox_TextChanged"/>
+                     PlaceholderText="Voer uw emailadres in" Header=" "
+                     MaxLength="30"/>
 
-            <TextBlock Grid.Row="1" Margin="0 10 0 0"
-                       Name="PasswordError" 
-                       Foreground="Red" Visibility="Collapsed"/>
-            <PasswordBox Grid.Row="1" Name="PasswordBox" Margin="0 30 0 0" 
-                     PlaceholderText="Voer uw wachtwoord in" PasswordChanged="PasswordBox_PasswordChanged"/> 
+            <PasswordBox Grid.Row="1" Name="PasswordBox" Header=" "
+                     PlaceholderText="Voer uw wachtwoord in"/> 
             <CheckBox Grid.Row="2"  FontFamily="Segoe UI" IsChecked="True"
                       Name="AutoLoginCheckBox">Ingelogd blijven</CheckBox>
 
-            <TextBlock Grid.Row="3" Margin="50 20 0 0"
-                       Name="LoginFailError" Text="Onjuist email en/of wachtwoord"
-                       Foreground="Red" Visibility="Collapsed"/>
-            <Button Grid.Row="3"  Margin="50 40 50 0" Background="#E84A4A" FontSize="20"
-                Foreground="White" Click="Login_Click" 
+            <TextBlock Grid.Row="3" Margin="0 20 0 0" TextAlignment="Center"
+                       Name="LoginFailError" Text=" "
+                       Foreground="Red"/>
+            <Button Grid.Row="4"  Margin="50 0 50 0" Background="#E84A4A" FontSize="20"
+                Foreground="White" Click="Login_Click"
                 HorizontalAlignment="Stretch">Inloggen</Button>
 
-            <Button Grid.Row="4" FontWeight="SemiBold"
-                    HorizontalContentAlignment="Right" 
-                    Margin="50 0 50 0" Padding="0"
-                    Background="White" Click="RememberPassword_Click"
-                    Content="Wachtwoord vergeten?" Width="200"/>
+            <Button Grid.Row="5" FontWeight="SemiBold"
+                    HorizontalAlignment="Center"
+                    Margin="50 40 50 0" Padding="0"
+                    Background="Transparent" Click="RememberPassword_Click"
+                    Content="Wachtwoord vergeten?" MinWidth="200" MinHeight="40"/>
         </Grid>
 
         <Rectangle Name="PopupBackground" Grid.Row="1" Grid.RowSpan="2"
@@ -90,7 +83,7 @@
 
             <Rectangle Grid.RowSpan="2" Grid.Column="1" Fill="White"/>
 
-            <TextBox Name="RecoverMailTextBox" Grid.Row="0" Grid.Column="1" Margin="20"
+            <TextBox Name="RecoverMailTextBox" Grid.Row="0" Grid.Column="1" Margin="20" MaxLength="3"
                      HorizontalAlignment="Stretch" PlaceholderText="Vul uw email in">
                 <TextBox.Header>
                     <TextBlock Text="Wachtwoord opvragen" FontWeight="SemiBold"

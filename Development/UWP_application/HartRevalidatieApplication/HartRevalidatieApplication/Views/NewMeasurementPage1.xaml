@@ -29,12 +29,12 @@
                 Foreground="White" Margin="0 2.5 0 0"></Button>
 
 
-        <Grid Grid.Row="1" Margin="30 10 30 0">
+        <Grid Grid.Row="1" Margin="15 10 15 0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="3.5*"/>
+                <RowDefinition Height="3.5*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -42,30 +42,31 @@
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+            <TextBlock Grid.Row="1" Grid.ColumnSpan="2"
                        Text="{Binding newMeasurement.measurementDateTime, Converter={StaticResource DateToStringFormatConverter}, ConverterParameter=longDate}"/>
 
-            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Margin="0 20 0 0"
-                       Text="1. Vul uw bloeddruk in (mmHg)" FontWeight="Bold"/>
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Margin="0"
+                       Text="Vul uw bloeddruk in" FontWeight="Bold"/>
 
             <Image Source="ms-appx:///Assets/meting_img1.png"  Grid.Row="2" Grid.Column="0"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" Margin="0 20 0 0"
-                       Name="UpperPressureError" Text="Bovendruk Kan niet leeg zijn"
-                       Foreground="Red" Visibility="Collapsed"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Header="Bovendruk / SYS"
+            <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
+            <TextBlock Name="UpperPressureError" Text=" " Foreground="Red" TextWrapping="Wrap"/>
+            <TextBox Header="Bovendruk / SYS" MaxLength="3"
                      Text="{Binding newMeasurement.bloodPressureUpper}"
-                     TextAlignment="Center" MaxHeight="60" PlaceholderText="0"
-                     InputScope="Number" Name="bloodPressureUpperTextBox" TextChanged="bloodPressureUpperTextBox_TextChanged"/>
+                     TextAlignment="Center" PlaceholderText="0"
+                     InputScope="Number" Name="bloodPressureUpperTextBox"/>
+            </StackPanel>
 
             <Image Source="ms-appx:///Assets/meting_img2.png" Grid.Row="3" Grid.Column="0"/>
-            <TextBlock Grid.Row="3" Grid.Column="1" Margin="0 20 0 0"
-                       Name="LowerPressureError" Text="Onderdruk Kan niet leeg zijn"
-                       Foreground="Red" Visibility="Collapsed"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Header="Onderdruk / DIA"
-                     Text="{Binding newMeasurement.bloodPressureLower}"
-                     TextAlignment="Center" MaxHeight="60" PlaceholderText="0"
-                     InputScope="Number" Name="bloodPressureLowerTextBox" TextChanged="bloodPressureLowerTextBox_TextChanged"/>
-
+            
+            <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Name="LowerPressureError" Text=" " Foreground="Red" TextWrapping="Wrap"/>
+                <TextBox Header="Onderdruk / DIA" MaxLength="3"
+                         Text="{Binding newMeasurement.bloodPressureLower}"
+                         TextAlignment="Center" MaxHeight="60" PlaceholderText="0"
+                         InputScope="Number" Name="bloodPressureLowerTextBox"/>
+            </StackPanel>
+            
             <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="0 10 0 0" HorizontalAlignment="Right"
                        Name="valuesComparedError"
                        Foreground="Red" Visibility="Collapsed"/>

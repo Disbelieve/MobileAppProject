@@ -44,7 +44,7 @@ namespace HartRevalidatieApplication.Views
                 }
                 else
                 {
-                    LoginFailError.Visibility = Visibility.Visible;
+                    LoginFailError.Text = "Onjuist email en/of wachtwoord";
                 }
             }
         }
@@ -86,24 +86,13 @@ namespace HartRevalidatieApplication.Views
             base.OnNavigatedTo(e);
         }
 
-        private void EmailTextBox_TextChanged(object sender, RoutedEventArgs e)
-        {
-            Email_IsValidInput();
-        }
-
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            Password_IsValidInput();
-        }
-
         private bool Email_IsValidInput()
         {
             if (string.IsNullOrWhiteSpace(EmailTextBox.Text))
             {
                 EmailTextBox.BorderThickness = new Thickness(1);
                 EmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                EmailError.Visibility = Visibility.Visible;
-                EmailError.Text = "E-mail kan niet leeg zijn";
+                EmailTextBox.Header = "E-mail kan niet leeg zijn";
 
                 return false;
             }
@@ -111,7 +100,7 @@ namespace HartRevalidatieApplication.Views
             else
             {
                 EmailTextBox.BorderThickness = new Thickness(0);
-                EmailError.Visibility = Visibility.Collapsed;
+                EmailTextBox.Header = " ";
 
                 return true;
             }
@@ -123,8 +112,7 @@ namespace HartRevalidatieApplication.Views
             {
                 PasswordBox.BorderThickness = new Thickness(1);
                 PasswordBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                PasswordError.Visibility = Visibility.Visible;
-                PasswordError.Text = "Wachtwoord kan niet leeg zijn";
+                PasswordBox.Header = "Wachtwoord kan niet leeg zijn";
 
                 return false;
             }
@@ -132,7 +120,7 @@ namespace HartRevalidatieApplication.Views
             else
             {
                 PasswordBox.BorderThickness = new Thickness(0);
-                PasswordError.Visibility = Visibility.Collapsed;
+                PasswordBox.Header = " ";
 
                 return true;
             }

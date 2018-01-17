@@ -53,28 +53,13 @@ namespace HartRevalidatieApplication.Views
             GlobalClickMethods.Back_Click(sender, e);
         }
 
-        private void FirstNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            FirstName_IsValidInput();
-        }
-
-        private void LastNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            LastName_IsValidInput();
-        }
-
-        private void BirthDateTextBox_Changed(object sender, CalendarDatePickerDateChangedEventArgs e)
-        {
-            BirthDate_IsValidInput();
-        }
-
         private bool FirstName_IsValidInput()
         {
             if (string.IsNullOrWhiteSpace(FirstNameTextBox.Text))
             {
                 FirstNameTextBox.BorderThickness = new Thickness(1);
                 FirstNameTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                FirstNameError.Visibility = Visibility.Visible;
+                FirstNameTextBox.Header = "Voornaam kan niet leeg zijn";
 
                 return false;
             }
@@ -82,7 +67,7 @@ namespace HartRevalidatieApplication.Views
             else
             {
                 FirstNameTextBox.BorderThickness = new Thickness(0);
-                FirstNameError.Visibility = Visibility.Collapsed;
+                FirstNameTextBox.Header = " ";
 
                 return true;
             }
@@ -94,7 +79,7 @@ namespace HartRevalidatieApplication.Views
             {
                 LastNameTextBox.BorderThickness = new Thickness(1);
                 LastNameTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                LastNameError.Visibility = Visibility.Visible;
+                LastNameTextBox.Header = "Achternaam kan niet leeg zijn";
 
                 return false;
             }
@@ -102,7 +87,7 @@ namespace HartRevalidatieApplication.Views
             else
             {
                 LastNameTextBox.BorderThickness = new Thickness(0);
-                LastNameError.Visibility = Visibility.Collapsed;
+                LastNameTextBox.Header = " ";
 
                 return true;
             }
@@ -114,7 +99,16 @@ namespace HartRevalidatieApplication.Views
             {
                 BirthDateTextBox.BorderThickness = new Thickness(1);
                 BirthDateTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                BirthDateError.Visibility = Visibility.Visible;
+                BirthDateTextBox.Header = "Geboortedatum kan niet leeg zijn";
+
+                return false;
+            }
+
+            else if (BirthDateTextBox.Date > DateTime.Now.AddYears(-16) || BirthDateTextBox.Date < DateTime.Now.AddYears(-130))
+            {
+                BirthDateTextBox.BorderThickness = new Thickness(1);
+                BirthDateTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                BirthDateTextBox.Header = "De gekozen geboortedatum is niet toegestaan";
 
                 return false;
             }
@@ -122,31 +116,39 @@ namespace HartRevalidatieApplication.Views
             else
             {
                 BirthDateTextBox.BorderThickness = new Thickness(0);
-                BirthDateError.Visibility = Visibility.Collapsed;
+                BirthDateTextBox.Header = " ";
 
                 return true;
             }
-        }
-
-        private void WeightTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Weight_IsValidInput();
-        }
-
-        private void LengthTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Length_IsValidInput();
         }
 
         private bool Weight_IsValidInput()
         {
             int tempVar;
 
-            if (string.IsNullOrWhiteSpace(WeightTextBox.Text) || !int.TryParse(WeightTextBox.Text, out tempVar))
+            if (string.IsNullOrWhiteSpace(WeightTextBox.Text))
             {
                 WeightTextBox.BorderThickness = new Thickness(1);
                 WeightTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                WeightError.Visibility = Visibility.Visible;
+                WeightTextBox.Header = "Gewicht kan niet leeg zijn";
+
+                return false;
+            }
+
+            else if (!int.TryParse(WeightTextBox.Text, out tempVar))
+            {
+                WeightTextBox.BorderThickness = new Thickness(1);
+                WeightTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                WeightTextBox.Header = "Alleen cijfers zijn toegestaan";
+
+                return false;
+            }
+
+            else if (Convert.ToInt32(WeightTextBox.Text) > 300 || Convert.ToInt32(WeightTextBox.Text) < 30)
+            {
+                WeightTextBox.BorderThickness = new Thickness(1);
+                WeightTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                WeightTextBox.Header = "Het gekozen gewicht is niet toegestaan";
 
                 return false;
             }
@@ -154,7 +156,7 @@ namespace HartRevalidatieApplication.Views
             else
             {
                 WeightTextBox.BorderThickness = new Thickness(0);
-                WeightError.Visibility = Visibility.Collapsed;
+                WeightTextBox.Header = " ";
 
                 return true;
             }
@@ -164,11 +166,29 @@ namespace HartRevalidatieApplication.Views
         {
             int tempVar;
 
-            if (string.IsNullOrWhiteSpace(LengthTextBox.Text) || !int.TryParse(LengthTextBox.Text, out tempVar))
+            if (string.IsNullOrWhiteSpace(LengthTextBox.Text))
             {
                 LengthTextBox.BorderThickness = new Thickness(1);
                 LengthTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                LengthError.Visibility = Visibility.Visible;
+                LengthTextBox.Header = "Lengte kan niet leeg zijn";
+
+                return false;
+            }
+
+            else if (!int.TryParse(LengthTextBox.Text, out tempVar))
+            {
+                LengthTextBox.BorderThickness = new Thickness(1);
+                LengthTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                LengthTextBox.Header = "Alleen cijfers zijn toegestaan";
+
+                return false;
+            }
+
+            else if (Convert.ToInt32(LengthTextBox.Text) > 250 || Convert.ToInt32(LengthTextBox.Text) < 100)
+            {
+                LengthTextBox.BorderThickness = new Thickness(1);
+                LengthTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                LengthTextBox.Header = "De gekozen lengte is niet toegestaan";
 
                 return false;
             }
@@ -176,7 +196,7 @@ namespace HartRevalidatieApplication.Views
             else
             {
                 LengthTextBox.BorderThickness = new Thickness(0);
-                LengthError.Visibility = Visibility.Collapsed;
+                LengthTextBox.Header = " ";
 
                 return true;
             }

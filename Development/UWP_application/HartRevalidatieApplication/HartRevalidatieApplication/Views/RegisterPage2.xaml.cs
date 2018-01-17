@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -46,29 +47,22 @@ namespace HartRevalidatieApplication.Views
             GlobalClickMethods.Back_Click(sender, e);
         }
 
-        private void EmailTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Email_IsValidInput();
-        }
-
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            Password_IsValidInput();
-        }
-
-        private void RepeatPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            RepeatPassword_IsValidInput();
-        }
-
         private bool Email_IsValidInput()
         {
             if (string.IsNullOrWhiteSpace(EmailTextBox.Text))
             {
                 EmailTextBox.BorderThickness = new Thickness(1);
                 EmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                EmailError.Visibility = Visibility.Visible;
-                EmailError.Text = "Email kan niet leeg zijn";
+                EmailTextBox.Header = "E-mail kan niet leeg zijn";
+
+                return false;
+            }
+
+            else if (!IsValidEmailAddress(EmailTextBox.Text))
+            {
+                EmailTextBox.BorderThickness = new Thickness(1);
+                EmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                EmailTextBox.Header = "Geen geldig e-mail adres";
 
                 return false;
             }
@@ -76,9 +70,21 @@ namespace HartRevalidatieApplication.Views
             else
             {
                 EmailTextBox.BorderThickness = new Thickness(0);
-                EmailError.Visibility = Visibility.Collapsed;
+                EmailTextBox.Header = " ";
 
                 return true;
+            }
+        }
+        
+        private bool IsValidEmailAddress(string email)
+        {
+            try
+            {
+                return Regex.IsMatch(email, @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
+            }
+            catch
+            {
+                return false;
             }
         }
 
@@ -88,8 +94,7 @@ namespace HartRevalidatieApplication.Views
             {
                 PasswordBox.BorderThickness = new Thickness(1);
                 PasswordBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                PasswordError.Visibility = Visibility.Visible;
-                PasswordError.Text = "Wachtwoord kan niet leeg zijn";
+                PasswordBox.Header = "Wachtwoord kan niet leeg zijn";
 
                 return false;
             }
@@ -97,7 +102,7 @@ namespace HartRevalidatieApplication.Views
             else
             {
                 PasswordBox.BorderThickness = new Thickness(0);
-                PasswordError.Visibility = Visibility.Collapsed;
+                PasswordBox.Header = " ";
 
                 return true;
             }
@@ -109,8 +114,7 @@ namespace HartRevalidatieApplication.Views
             {
                 RepeatPasswordBox.BorderThickness = new Thickness(1);
                 RepeatPasswordBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                RepeatPasswordError.Visibility = Visibility.Visible;
-                RepeatPasswordError.Text = "Wachtwoord komt niet overeen";
+                RepeatPasswordBox.Header = "Wachtwoord komt niet overeen";
 
                 return false;
             }
@@ -118,7 +122,7 @@ namespace HartRevalidatieApplication.Views
             else
             {
                 RepeatPasswordBox.BorderThickness = new Thickness(0);
-                RepeatPasswordError.Visibility = Visibility.Collapsed;
+                RepeatPasswordBox.Header = " ";
 
                 return true;
             }

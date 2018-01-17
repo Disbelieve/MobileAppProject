@@ -53,23 +53,13 @@ namespace HartRevalidatieApplication.Views
             GlobalClickMethods.Settings_Click(sender, e);
         }
 
-        private void SubjectTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Subject_IsValidInput();
-        }
-
-        private void MessageTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Message_IsValidInput();
-        }
-
         private bool Subject_IsValidInput()
         {
             if (string.IsNullOrWhiteSpace(SubjectTextBox.Text))
             {
                 SubjectTextBox.BorderThickness = new Thickness(1);
                 SubjectTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                SubjectError.Visibility = Visibility.Visible;
+                SubjectTextBox.Header = "Onderwerp kan niet leeg zijn";
 
                 return false;
             }
@@ -77,7 +67,8 @@ namespace HartRevalidatieApplication.Views
             else
             {
                 SubjectTextBox.BorderThickness = new Thickness(0);
-                SubjectError.Visibility = Visibility.Collapsed;
+                //SubjectError.Visibility = Visibility.Collapsed;
+                SubjectTextBox.Header = " ";
 
                 return true;
             }
@@ -89,7 +80,7 @@ namespace HartRevalidatieApplication.Views
             {
                 MessageTextBox.BorderThickness = new Thickness(1);
                 MessageTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                MessageError.Visibility = Visibility.Visible;
+                MessageTextBox.Header = "Bericht kan niet leeg zijn";
 
                 return false;
             }
@@ -97,7 +88,7 @@ namespace HartRevalidatieApplication.Views
             else
             {
                 MessageTextBox.BorderThickness = new Thickness(0);
-                MessageError.Visibility = Visibility.Collapsed;
+                MessageTextBox.Header = " ";
 
                 return true;
             }
