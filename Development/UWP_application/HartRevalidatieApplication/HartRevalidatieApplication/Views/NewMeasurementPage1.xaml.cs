@@ -191,7 +191,7 @@ namespace HartRevalidatieApplication.Views
 
             else if (Convert.ToInt32(bloodPressureUpperTextBox.Text) > 300 || Convert.ToInt32(bloodPressureUpperTextBox.Text) < 30)
             {
-                SetErrorUI(LowerPressureError, bloodPressureLowerTextBox, true, "De gekozen bovendruk is niet toegestaan");
+                SetErrorUI(UpperPressureError, bloodPressureLowerTextBox, true, "De gekozen bovendruk is niet toegestaan");
 
                 return false;
             }

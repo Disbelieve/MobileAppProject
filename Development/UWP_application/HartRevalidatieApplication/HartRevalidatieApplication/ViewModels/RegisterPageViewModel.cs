@@ -73,7 +73,10 @@ namespace HartRevalidatieApplication.ViewModels
 
 
                 if (response.StatusCode.ToString() == "OK")
+                {
+                    Settings.SetUserDataUpdateTime(newUser.emailAddress);
                     return true;
+                }
                 else
                     return false;
             }
