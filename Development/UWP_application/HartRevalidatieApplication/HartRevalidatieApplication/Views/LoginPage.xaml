@@ -45,7 +45,7 @@
 
             <TextBox Grid.Row="0" Name="EmailTextBox" InputScope="EmailNameOrAddress"
                      PlaceholderText="Voer uw emailadres in" Header=" "
-                     MaxLength="30"/>
+                     MaxLength="50"/>
 
             <PasswordBox Grid.Row="1" Name="PasswordBox" Header=" "
                      PlaceholderText="Voer uw wachtwoord in"/> 
@@ -83,14 +83,12 @@
 
             <Rectangle Grid.RowSpan="2" Grid.Column="1" Fill="White"/>
 
-            <TextBox Name="RecoverMailTextBox" Grid.Row="0" Grid.Column="1" Margin="20" MaxLength="3"
-                     HorizontalAlignment="Stretch" PlaceholderText="Vul uw email in">
-                <TextBox.Header>
-                    <TextBlock Text="Wachtwoord opvragen" FontWeight="SemiBold"
-                                   HorizontalAlignment="Center"/>
-                </TextBox.Header>
-            </TextBox>
-
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="20">
+                <TextBlock FontWeight="SemiBold" Text="Wachtwoord vergeten?" FontSize="16"/>
+                <TextBlock TextWrapping="Wrap" Text="Weet u uw wachtwoord niet meer? Vul hieronder uw e-mailadres in en druk op verzenden. We sturen dan binnen enkele minuten een e-mail waarmee u uw wachtwoord kunt herstellen."/>
+                <TextBox Name="RecoverMailTextBox" Grid.Row="0" Grid.Column="1" Margin="0 10 0 0" MaxLength="50"
+                         HorizontalAlignment="Stretch" PlaceholderText="Vul uw email in" Header=" "/>
+            </StackPanel>
             <Grid Grid.Row="1" Grid.Column="1" Margin="0 0 0 30">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -104,6 +102,30 @@
                     Foreground="White" FontSize="17" Margin="7.5 0 15 0"
                     HorizontalAlignment="Stretch">Versturen</Button>
             </Grid>
+        </Grid>
+
+        <Grid Name="RememberPasswordMailSent" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center"
+              Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.Column="1" Fill="White"/>
+
+            <StackPanel Grid.Column="1" Margin="20">
+                <Image Source="ms-appx:///Assets/img_Checkmark.png"
+                   Height="100" Width="100"/>
+                <TextBlock Text="E-mail succesvol verzonden" FontWeight="SemiBold"
+                           FontSize="16" TextWrapping="Wrap" TextAlignment="Center"/>
+                <TextBlock Text="Controleer uw inbox voor verdere instructies om uw wachtwoord te herstellen"
+                           TextWrapping="Wrap" Margin="0 0 0 10" TextAlignment="Center"/>
+                <Button Background="#E84A4A" Click="RecoverPassword_Click"
+                    Foreground="White" FontSize="17"
+                    HorizontalAlignment="Stretch">Herstel wachtwoord</Button>
+            </StackPanel>
+            
         </Grid>
     </Grid>
 </Page>

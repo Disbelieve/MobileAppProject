@@ -72,7 +72,6 @@
             </Button>
         </Grid>
 
-
         <ListView Grid.Row="2" ItemsSource="{Binding diary}"
                   ItemClick="NavigateToDiaryEntryPage" IsItemClickEnabled="True">
             <ListView.ItemContainerStyle>
@@ -135,6 +134,16 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+
+        <StackPanel Name="EmptyDiaryPopup" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="30 0 30 0"
+                    Visibility="Collapsed">
+            <TextBlock Name="NewMeasureText" Text="U heeft nog geen metingen gedaan" TextAlignment="Center"
+                       TextWrapping="Wrap" Margin="20 0 20 0"/>
+            <Button Name="NewMeasureButton" Background="#E84A4A" Foreground="White" Click="StartMeasure_Click"
+                FontFamily="Segoe UI" FontSize="17" HorizontalAlignment="Stretch" 
+                Margin="20 20 20 0">Start nieuwe meting</Button>
+        </StackPanel>
 
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>

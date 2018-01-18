@@ -98,10 +98,12 @@
     <Compile Include="Helpers\BrushColorConverter.cs" />
     <Compile Include="Helpers\DateFormatConverter.cs" />
     <Compile Include="Helpers\GlobalClickMethods.cs" />
+    <Compile Include="Helpers\HashFunction.cs" />
     <Compile Include="Models\ApiData.cs" />
     <Compile Include="Models\Consultant.cs" />
     <Compile Include="Models\HealthIssue.cs" />
     <Compile Include="Models\QA.cs" />
+    <Compile Include="Models\RecoverPasswordTemplate.cs" />
     <Compile Include="Models\RegisterUser.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Measurement.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MeasurePageViewModel.cs" />
+    <Compile Include="ViewModels\RecoverPasswordPageViewModel.cs" />
     <Compile Include="ViewModels\RegisterPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="Views\ContactFinishedPage.xaml.cs">
@@ -148,6 +151,12 @@
     </Compile>
     <Compile Include="Views\NewMeasurementPage2.xaml.cs">
       <DependentUpon>NewMeasurementPage2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecoverPasswordFinishedPage.xaml.cs">
+      <DependentUpon>RecoverPasswordFinishedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecoverPasswordPage.xaml.cs">
+      <DependentUpon>RecoverPasswordPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
@@ -271,6 +280,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NewMeasurementPage2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecoverPasswordFinishedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecoverPasswordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

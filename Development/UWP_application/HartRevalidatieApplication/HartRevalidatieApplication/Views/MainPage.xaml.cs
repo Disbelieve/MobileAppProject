@@ -1,10 +1,13 @@
-﻿using HartRevalidatieApplication.ViewModels;
+﻿using HartRevalidatieApplication.Models;
+using HartRevalidatieApplication.ViewModels;
 using HartRevalidatieApplication.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -34,9 +37,41 @@ namespace HartRevalidatieApplication
                 showStatusbar();
             }
 
-            InitializeComponent();
             DataContext = MainPageViewModel.SingleInstance;
-            CheckIfLoggedIn();
+            InitializeComponent();
+            LoadData();
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(LoginPage));
+        }
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(RegisterPage));
+        }
+
+        async void LoadData()
+        {
+            try
+            {
+                if (NetworkInterface.GetIsNetworkAvailable())
+                {
+                    ApiData.SingleInstance.GetConsultants();
+                    ApiData.SingleInstance.GetHealthIssues();
+                    ApiData.SingleInstance.GetFAQ();
+                    await CheckIfLoggedIn();
+                }
+                else
+                {
+                    ErrorPopup.Visibility = Visibility.Visible;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                ErrorPopup.Visibility = Visibility.Visible;
+            }
         }
 
         private void showStatusbar()
@@ -46,20 +81,16 @@ namespace HartRevalidatieApplication
             statusBar.BackgroundOpacity = 1;
         }
 
-        public async void CheckIfLoggedIn()
+        public async Task<bool> CheckIfLoggedIn()
         {
-            if (await LoginPageViewModel.SingleInstance.IsAutomaticallyLoggedIn())
-                ((Frame)Window.Current.Content).Navigate(typeof(MeasurePage));
-        }
+            try
+            {
+                if (await LoginPageViewModel.SingleInstance.IsAutomaticallyLoggedIn())
+                    ((Frame)Window.Current.Content).Navigate(typeof(MeasurePage));
+            }
+            catch { }
 
-
-        private void Login_Click(object sender, RoutedEventArgs e)
-        {
-            ((Frame)Window.Current.Content).Navigate(typeof(LoginPage));
-        }
-        private void Register_Click(object sender, RoutedEventArgs e)
-        {
-            ((Frame)Window.Current.Content).Navigate(typeof(RegisterPage));
+            return true;
         }
     }
 }

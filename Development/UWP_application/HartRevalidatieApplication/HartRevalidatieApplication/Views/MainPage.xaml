@@ -36,5 +36,32 @@
                 Foreground="White" Grid.Row="2" Click="Register_Click"
                 FontFamily="Segoe UI" FontSize="17"
                 HorizontalAlignment="Stretch">Account aanmaken</Button>
+
+
+
+        <Grid Name="ErrorPopup" Grid.RowSpan="5" Grid.ColumnSpan="5" Visibility="Collapsed">
+            <Rectangle Fill="Black" Opacity="0.3"/>
+
+            <Grid VerticalAlignment="Center" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="9*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Rectangle Grid.RowSpan="3" Grid.Column="1" Fill="White"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"
+                       Margin="0 20 0 20"
+                       Text="Er kon geen worden gemaakt met de server. Heeft uw apparaat wel een internetverbinding?"
+                       TextWrapping="Wrap" TextAlignment="Center"/>
+
+            </Grid>
+        </Grid>
     </Grid>
+
 </Page>

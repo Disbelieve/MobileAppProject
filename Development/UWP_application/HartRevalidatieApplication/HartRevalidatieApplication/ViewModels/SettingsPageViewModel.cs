@@ -51,7 +51,7 @@ namespace HartRevalidatieApplication.ViewModels
                 user.length = length;
                 user.weight = weight;
                 OnPropertyChanged(nameof(user));
-                Settings.SetUserDataUpdateTime();
+                Settings.SetUserDataUpdateTime(user.emailAddress);
             }
 
             catch (Exception ex)

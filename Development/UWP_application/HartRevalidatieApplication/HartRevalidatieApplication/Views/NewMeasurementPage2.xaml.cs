@@ -1,4 +1,5 @@
 ﻿using HartRevalidatieApplication.Helpers;
+using HartRevalidatieApplication.Models;
 using HartRevalidatieApplication.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,8 @@ namespace HartRevalidatieApplication.Views
          
             await MeasurePageViewModel.SingleInstance.SendMeasurement();
 
-            MeasurePageViewModel.SingleInstance.SetNotification();
+            if ((bool)Settings.localSettings.Values["dailyReminders"])
+                MeasurePageViewModel.SingleInstance.SetNotification();
 
             MeasurePageViewModel.SingleInstance.ClearSelectedHealthIssues();
             ((Frame)Window.Current.Content).Navigate(typeof(NewMeasurementFinishedPage));

@@ -32,8 +32,14 @@ namespace HartRevalidatieApplication.Views
         {
             this.InitializeComponent();
             DataContext = DiaryPageViewModel.SingleInstance;
-            LoadData();
         }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            LoadData();
+            SetLayoutOfEmptyDiary();
+            base.OnNavigatedTo(e);
+        }
+
 
         private async void LoadData()
         {
@@ -43,6 +49,14 @@ namespace HartRevalidatieApplication.Views
                 WeekButton_Click(null, null);
             }
             catch { }
+        }
+
+        private void SetLayoutOfEmptyDiary()
+        {
+            if (DiaryPageViewModel.SingleInstance.diary == null || DiaryPageViewModel.SingleInstance.diary.Count == 0)
+                EmptyDiaryPopup.Visibility = Visibility.Visible;
+            else
+                EmptyDiaryPopup.Visibility = Visibility.Collapsed;
         }
 
         private void NavigateToDiaryEntryPage(object sender, ItemClickEventArgs e)
@@ -62,6 +76,11 @@ namespace HartRevalidatieApplication.Views
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             GlobalClickMethods.Settings_Click(sender, e);
+        }
+
+        private void StartMeasure_Click(object sender, RoutedEventArgs e)
+        {
+            ((Frame)Window.Current.Content).Navigate(typeof(NewMeasurementPage1));
         }
 
         private void WeekButton_Click(object sender, RoutedEventArgs e)

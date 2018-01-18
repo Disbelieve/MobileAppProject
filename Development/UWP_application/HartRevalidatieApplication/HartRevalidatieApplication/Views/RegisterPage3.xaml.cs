@@ -29,6 +29,7 @@ namespace HartRevalidatieApplication.Views
         {
             this.InitializeComponent();
             DataContext = RegisterPageViewModel.SingleInstance;
+            RegisterError.Visibility = Visibility.Collapsed;
         }
 
         private async void Register_Click(object sender, RoutedEventArgs e)
@@ -36,9 +37,10 @@ namespace HartRevalidatieApplication.Views
             if (Consultant_IsValidInput())
             {
                 RegisterPageViewModel.SingleInstance.SetThirdRegisterPageUserData(ConsultantTextBox.SelectedValue.ToString());
-                await RegisterPageViewModel.SingleInstance.Register();
-
-                ((Frame)Window.Current.Content).Navigate(typeof(RegisterPageFinished));
+                if (await RegisterPageViewModel.SingleInstance.Register())
+                    ((Frame)Window.Current.Content).Navigate(typeof(RegisterPageFinished));
+                else
+                    RegisterError.Visibility = Visibility.Visible;
             }
         }
 

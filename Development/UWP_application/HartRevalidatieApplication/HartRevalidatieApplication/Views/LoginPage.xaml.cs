@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -37,7 +38,7 @@ namespace HartRevalidatieApplication.Views
         {
             if (Email_IsValidInput() & Password_IsValidInput())
             {
-                if (await LoginPageViewModel.SingleInstance.Login(EmailTextBox.Text, PasswordBox.Password))
+                if (await LoginPageViewModel.SingleInstance.Login(EmailTextBox.Text, HashFunction.GetHash(PasswordBox.Password)))
                 {
                     Settings.SetAutomaticLogin(AutoLoginCheckBox.IsChecked.Value);
                     ((Frame)Window.Current.Content).Navigate(typeof(MeasurePage));
@@ -72,8 +73,17 @@ namespace HartRevalidatieApplication.Views
         }
         private async void RequestRecoveryMail_Click(object sender, RoutedEventArgs e)
         {
-            await LoginPageViewModel.SingleInstance.RequestRecoveryMail(RecoverMailTextBox.Text);
-            ChangePopUpStatus(RememberPasswordPopup);
+            if (RecoverEmail_IsValidInput())
+            {
+                await LoginPageViewModel.SingleInstance.RequestRecoveryMail(RecoverMailTextBox.Text);
+                RememberPasswordPopup.Visibility = Visibility.Collapsed;
+                RememberPasswordMailSent.Visibility = Visibility.Visible;
+            }
+        }
+        private void RecoverPassword_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePopUpStatus(RememberPasswordMailSent);
+            ((Frame)Window.Current.Content).Navigate(typeof(RecoverPasswordPage));
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -93,6 +103,15 @@ namespace HartRevalidatieApplication.Views
                 EmailTextBox.BorderThickness = new Thickness(1);
                 EmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
                 EmailTextBox.Header = "E-mail kan niet leeg zijn";
+
+                return false;
+            }
+
+            else if (!IsValidEmailAddress(EmailTextBox.Text))
+            {
+                EmailTextBox.BorderThickness = new Thickness(1);
+                EmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                EmailTextBox.Header = "Geen geldig e-mail adres";
 
                 return false;
             }
@@ -123,6 +142,47 @@ namespace HartRevalidatieApplication.Views
                 PasswordBox.Header = " ";
 
                 return true;
+            }
+        }
+
+        private bool RecoverEmail_IsValidInput()
+        {
+            if (string.IsNullOrWhiteSpace(RecoverMailTextBox.Text))
+            {
+                RecoverMailTextBox.BorderThickness = new Thickness(1);
+                RecoverMailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                RecoverMailTextBox.Header = "E-mail kan niet leeg zijn";
+
+                return false;
+            }
+
+            else if (!IsValidEmailAddress(RecoverMailTextBox.Text))
+            {
+                RecoverMailTextBox.BorderThickness = new Thickness(1);
+                RecoverMailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                RecoverMailTextBox.Header = "Geen geldig e-mail adres";
+
+                return false;
+            }
+
+            else
+            {
+                RecoverMailTextBox.BorderThickness = new Thickness(0);
+                RecoverMailTextBox.Header = " ";
+
+                return true;
+            }
+        }
+
+        private bool IsValidEmailAddress(string email)
+        {
+            try
+            {
+                return Regex.IsMatch(email, @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
+            }
+            catch
+            {
+                return false;
             }
         }
     }

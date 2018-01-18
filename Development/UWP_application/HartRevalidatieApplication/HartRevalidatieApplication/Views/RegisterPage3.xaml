@@ -32,6 +32,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Margin="0 10 0 0" FontSize="18"
@@ -58,6 +59,10 @@
             <Button Grid.Row="3" Margin="50 30 50 0" Background="#50D6CF" FontSize="17"
                 Foreground="White" Click="Register_Click" 
                 HorizontalAlignment="Stretch">Registreren</Button>
+
+            <TextBlock Name="RegisterError" Grid.Row="4" TextAlignment="Center" Foreground="Red"
+                       TextWrapping="Wrap" Visibility="Collapsed"
+                       Text="Er is iets mis gegaan met registreren"/>
         </Grid>
     </Grid>
 </Page>

@@ -163,7 +163,7 @@ namespace HartRevalidatieApplication.ViewModels
                 var str = await response.Content.ReadAsStringAsync();
 
                 if (newMeasurement.measurementDateTime.Date == DateTime.Now.Date)
-                    Settings.SetLastMeasurementUpdate(newMeasurement.measurementDateTime);
+                    Settings.SetLastMeasurementUpdate(newMeasurement.measurementDateTime, user.emailAddress);
                 return true;
             }
 
@@ -175,7 +175,7 @@ namespace HartRevalidatieApplication.ViewModels
 
         public bool UserDataUpdateRequired()
         {
-            DateTimeOffset? lastUpdate = (DateTimeOffset?)Settings.localSettings.Values["lastWeightAndLengthUpdate"];
+            DateTimeOffset? lastUpdate = (DateTimeOffset?)Settings.localSettings.Values["lastWeightAndLengthUpdate_" + user.emailAddress];
             if (lastUpdate == null || (DateTimeOffset.Now - (DateTimeOffset)lastUpdate).Days >= 21)
                 return true;
             else
@@ -185,7 +185,8 @@ namespace HartRevalidatieApplication.ViewModels
 
         public bool DailyMeasurementFinished()
         {
-            DateTimeOffset? lastUpdate = (DateTimeOffset?)Settings.localSettings.Values["lastMeasurementUpdate"];
+            DateTimeOffset? lastUpdate = (DateTimeOffset?)Settings.localSettings.Values["lastMeasurementUpdate_" + user.emailAddress];
+
             if (lastUpdate != null && (DateTimeOffset.Now.ToString("d") == lastUpdate.Value.ToString("d")))
                 return true;
             else

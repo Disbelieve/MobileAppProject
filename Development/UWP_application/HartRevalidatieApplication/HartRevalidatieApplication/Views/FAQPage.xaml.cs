@@ -46,7 +46,12 @@ namespace HartRevalidatieApplication.Views
         {
             GlobalClickMethods.Settings_Click(sender, e);
         }
-        
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalClickMethods.Back_Click(sender, e);
+        }
+
         private void Listview_ItemClicked(object sender, ItemClickEventArgs e)
         {
             ListView lv = sender as ListView;

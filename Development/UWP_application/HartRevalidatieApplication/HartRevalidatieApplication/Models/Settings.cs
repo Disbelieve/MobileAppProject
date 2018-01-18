@@ -44,14 +44,14 @@ namespace HartRevalidatieApplication.Models
             localSettings.Values["sendMeasurements"] = newValue;
         }
 
-        public static void SetUserDataUpdateTime()
+        public static void SetUserDataUpdateTime(string accountMail)
         {
-            localSettings.Values["lastWeightAndLengthUpdate"] = DateTimeOffset.Now;
+            localSettings.Values["lastWeightAndLengthUpdate_" + accountMail] = DateTimeOffset.Now;
         }
 
-        public static void SetLastMeasurementUpdate(DateTime measurementTime)
+        public static void SetLastMeasurementUpdate(DateTime measurementTime, string accountMail)
         {
-            localSettings.Values["lastMeasurementUpdate"] = (DateTimeOffset)measurementTime;            
+            localSettings.Values["lastMeasurementUpdate_" + accountMail] = (DateTimeOffset)measurementTime;
         }
     }
 }

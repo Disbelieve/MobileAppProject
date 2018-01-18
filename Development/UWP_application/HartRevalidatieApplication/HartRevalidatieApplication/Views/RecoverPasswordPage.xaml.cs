@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -24,21 +23,30 @@ namespace HartRevalidatieApplication.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RegisterPage2 : Page
+    public sealed partial class RecoverPasswordPage : Page
     {
-        public RegisterPage2()
+        public RecoverPasswordPage()
         {
             this.InitializeComponent();
-            DataContext = RegisterPageViewModel.SingleInstance;
+            DataContext = RecoverPasswordPageViewModel.SingleInstance;
+            RecoverCodeTextBox.BorderThickness = new Thickness(0);
+            RecoverCodeTextBox.Header = " ";
         }
 
-        private async void Next_Click(object sender, RoutedEventArgs e)
+        private async void RecoverPassword_Click(object sender, RoutedEventArgs e)
         {
-            if (Email_IsValidInput() & Password_IsValidInput() & RepeatPassword_IsValidInput())
+            if (RecoverCode_IsValidInput() & Password_IsValidInput() & RepeatPassword_IsValidInput())
             {
-                RegisterPageViewModel.SingleInstance.SetSecondRegisterPageUserData(EmailTextBox.Text, HashFunction.GetHash(PasswordBox.Password), RepeatPasswordBox.Password);
-                
-                ((Frame)Window.Current.Content).Navigate(typeof(RegisterPage3));
+                if (await RecoverPasswordPageViewModel.SingleInstance.RecoverPassword(RecoverCodeTextBox.Text,
+                     HashFunction.GetHash(PasswordBox.Password), HashFunction.GetHash(RepeatPasswordBox.Password)))
+                    ((Frame)Window.Current.Content).Navigate(typeof(RecoverPasswordFinishedPage));
+                else
+                {
+                    RecoverCodeTextBox.BorderThickness = new Thickness(1);
+                    RecoverCodeTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                    RecoverCodeTextBox.Header = "Ongeldige code";
+                }
+
             }
         }
 
@@ -47,44 +55,23 @@ namespace HartRevalidatieApplication.Views
             GlobalClickMethods.Back_Click(sender, e);
         }
 
-        private bool Email_IsValidInput()
+        private bool RecoverCode_IsValidInput()
         {
-            if (string.IsNullOrWhiteSpace(EmailTextBox.Text))
+            if (string.IsNullOrWhiteSpace(RecoverCodeTextBox.Text))
             {
-                EmailTextBox.BorderThickness = new Thickness(1);
-                EmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                EmailTextBox.Header = "E-mail kan niet leeg zijn";
-
-                return false;
-            }
-
-            else if (!IsValidEmailAddress(EmailTextBox.Text))
-            {
-                EmailTextBox.BorderThickness = new Thickness(1);
-                EmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                EmailTextBox.Header = "Geen geldig e-mail adres";
+                RecoverCodeTextBox.BorderThickness = new Thickness(1);
+                RecoverCodeTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                RecoverCodeTextBox.Header = "Herstelcode kan niet leeg zijn";
 
                 return false;
             }
 
             else
             {
-                EmailTextBox.BorderThickness = new Thickness(0);
-                EmailTextBox.Header = " ";
+                RecoverCodeTextBox.BorderThickness = new Thickness(0);
+                RecoverCodeTextBox.Header = " ";
 
                 return true;
-            }
-        }
-        
-        private bool IsValidEmailAddress(string email)
-        {
-            try
-            {
-                return Regex.IsMatch(email, @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
-            }
-            catch
-            {
-                return false;
             }
         }
 

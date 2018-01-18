@@ -70,9 +70,12 @@ namespace HartRevalidatieApplication.ViewModels
             {
                 string parameters = JsonConvert.SerializeObject(newUser);
                 var response = await APIconnection.ConnectToAPI(HttpMethod.Post, "Users/register/", parameters);
-                var str = await response.Content.ReadAsStringAsync();
 
-                return true;
+
+                if (response.StatusCode.ToString() == "OK")
+                    return true;
+                else
+                    return false;
             }
 
             catch (Exception ex)
