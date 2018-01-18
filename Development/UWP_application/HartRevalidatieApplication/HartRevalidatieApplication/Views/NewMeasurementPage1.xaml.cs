@@ -102,18 +102,73 @@ namespace HartRevalidatieApplication.Views
 
         private async void SaveSettings_Click(object sender, RoutedEventArgs e)
         {
-            int tempVar;
-            if (int.TryParse(LengthTextBox.Text, out tempVar) && int.TryParse(WeightTextBox.Text, out tempVar))
+            if (Length_IsValidInput() & Weight_IsValidInput())
             {
                 await SettingsPageViewModel.SingleInstance.UpdateUser(Convert.ToInt16(LengthTextBox.Text), Convert.ToInt16(WeightTextBox.Text));
                 ChangePopUpStatus(ChangeDataPopup);
             }
         }
 
-        private void CancelChangeData_Click(object sender, RoutedEventArgs e)
+        private bool Length_IsValidInput()
         {
-            GlobalClickMethods.Measure_Click(sender, e);
-            ChangePopUpStatus(ChangeDataPopup);
+            int tempVar;
+
+            if (string.IsNullOrWhiteSpace(LengthTextBox.Text) || !int.TryParse(LengthTextBox.Text, out tempVar))
+            {
+                LengthTextBox.BorderThickness = new Thickness(1);
+                LengthTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                LengthError.Text = "Lengte kan niet leeg zijn";
+
+                return false;
+            }
+
+            else if (Convert.ToInt32(LengthTextBox.Text) > 250 || Convert.ToInt32(LengthTextBox.Text) < 100)
+            {
+                LengthTextBox.BorderThickness = new Thickness(1);
+                LengthTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                LengthError.Text = "De gekozen lengte is niet toegestaan";
+
+                return false;
+            }
+
+            else
+            {
+                LengthTextBox.BorderThickness = new Thickness(0);
+                LengthError.Text = " ";
+
+                return true;
+            }
+        }
+
+        private bool Weight_IsValidInput()
+        {
+            int tempVar;
+
+            if (string.IsNullOrWhiteSpace(WeightTextBox.Text) || !int.TryParse(WeightTextBox.Text, out tempVar))
+            {
+                WeightTextBox.BorderThickness = new Thickness(1);
+                WeightTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                WeightError.Text = "Gewicht kan niet leeg zijn";
+
+                return false;
+            }
+
+            else if (Convert.ToInt32(WeightTextBox.Text) > 300 || Convert.ToInt32(WeightTextBox.Text) < 30)
+            {
+                WeightTextBox.BorderThickness = new Thickness(1);
+                WeightTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                WeightError.Text = "Het gekozen gewicht is niet toegestaan";
+
+                return false;
+            }
+
+            else
+            {
+                WeightTextBox.BorderThickness = new Thickness(0);
+                WeightError.Text = " ";
+
+                return true;
+            }
         }
 
         private bool UpperPressure_IsValidInput()

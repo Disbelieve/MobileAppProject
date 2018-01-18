@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
 namespace HartRevalidatieApplication.ViewModels
@@ -207,16 +208,18 @@ namespace HartRevalidatieApplication.ViewModels
         public void SetNotification()
         {
             ToastNotifier toastNotifier = ToastNotificationManager.CreateToastNotifier();
-            Windows.Data.Xml.Dom.XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText02);
-            Windows.Data.Xml.Dom.XmlNodeList toastNodeList = toastXml.GetElementsByTagName("text");
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText02);
+            XmlNodeList toastNodeList = toastXml.GetElementsByTagName("text");
             toastNodeList.Item(0).AppendChild(toastXml.CreateTextNode("Zorg voor uw hart"));
             toastNodeList.Item(1).AppendChild(toastXml.CreateTextNode("Het is weer tijd voor uw meting!"));
-            Windows.Data.Xml.Dom.IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
-            Windows.Data.Xml.Dom.XmlElement audio = toastXml.CreateElement("audio");
+            IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
+            XmlElement audio = toastXml.CreateElement("audio");
             audio.SetAttribute("src", "ms-winsoundevent:Notification.SMS");
 
             DateTime dayTomorrow = DateTime.Now.AddDays(1);
             DateTime notifierDateTime = new DateTime(dayTomorrow.Year, dayTomorrow.Month, dayTomorrow.Day, 20, 0, 0);
+
+            //DateTime t = DateTime.Now.AddSeconds(10);
 
             ScheduledToastNotification toast = new ScheduledToastNotification(toastXml, notifierDateTime);
             toastNotifier.AddToSchedule(toast);
