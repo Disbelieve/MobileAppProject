@@ -36,7 +36,6 @@ namespace HartRevalidatieApplication.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             LoadData();
-            SetLayoutOfEmptyDiary();
             base.OnNavigatedTo(e);
         }
 
@@ -47,13 +46,14 @@ namespace HartRevalidatieApplication.Views
             {
                 await DiaryPageViewModel.SingleInstance.LoadData();
                 WeekButton_Click(null, null);
+                SetLayoutOfEmptyDiary();
             }
             catch { }
         }
 
         private void SetLayoutOfEmptyDiary()
         {
-            if (DiaryPageViewModel.SingleInstance.diary == null || DiaryPageViewModel.SingleInstance.diary.Count == 0)
+            if (DiaryPageViewModel.SingleInstance.fullDiary == null || DiaryPageViewModel.SingleInstance.fullDiary.Count == 0)
                 EmptyDiaryPopup.Visibility = Visibility.Visible;
             else
                 EmptyDiaryPopup.Visibility = Visibility.Collapsed;
